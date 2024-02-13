@@ -1,28 +1,20 @@
 <%= content_for(:title, "Home") %>
 
-<div>
-  <h1 class="font-bold text-5xl">Pages#home</h1>
-  <p>Find me in app/views/pages/home.html.erb</p>
+<div class="space-y-12 <%= horizontal_padding %>">
+  <h1 class="font-bold text-5xl">Dashboard</h1>
+  <div class="space-y-2">
+    <h1 class="text-graphite font-semibold text-3xl">Graphite</h1>
+    <h1 class="text-ivory font-semibold text-3xl">Ivory</h1>
+    <h1 class="text-stone font-semibold text-3xl">Stone</h1>
+    <h1 class="text-coral font-semibold text-3xl">Coral</h1>
+    <h1 class="text-fern font-semibold text-3xl">Fern</h1>
+    <h1 class="text-gold font-semibold text-3xl">Gold</h1>
+    <h1 class="text-lightGraphite font-semibold text-3xl">Light Graphite</h1>
+    <h1 class="text-darkStone font-semibold text-3xl">Dark Stone</h1>
+    <h1 class="text-paleFern font-semibold text-3xl">Pale Fern</h1>
+    <h1 class="text-paleCoral font-semibold text-3xl">Pale Coral</h1>
+    <h1 class="text-paleGold font-semibold text-3xl">Pale Gold</h1>
+    <h1 class="text-offWhite font-semibold text-3xl">Off White</h1>
+  </div>
 </div>
 
-<% if current_user %>
-  <h2><%= current_user.email %></h2>
-  <%= link_to "Edit Account", edit_user_registration_path %>
-  <%= link_to "Logout", destroy_user_session_path, data: { turbo_method: :delete } %>
-<% else %>
-  <%= link_to "Login", new_user_session_path %>
-  <%= link_to "Create account", new_user_registration_path %>
-<% end %>
-
-<h1 class="text-graphite font-semibold text-3xl">graphite</h1>
-<h1 class="text-ivory font-semibold text-3xl">ivory</h1>
-<h1 class="text-stone font-semibold text-3xl">stone</h1>
-<h1 class="text-coral font-semibold text-3xl">coral</h1>
-<h1 class="text-fern font-semibold text-3xl">fern</h1>
-<h1 class="text-gold font-semibold text-3xl">gold</h1>
-<h1 class="text-lightGraphite font-semibold text-3xl">lightGraphite</h1>
-<h1 class="text-darkStone font-semibold text-3xl">darkStone</h1>
-<h1 class="text-paleFern font-semibold text-3xl">paleFern</h1>
-<h1 class="text-paleCoral font-semibold text-3xl">paleCoral</h1>
-<h1 class="text-paleGold font-semibold text-3xl">paleGold</h1>
-<h1 class="text-offWhite font-semibold text-3xl">offWhite</h1>
