@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org).
 
 ## [Unreleased]
 
+## [0.1.0] : 2024-14-02
+
+### Added
+
+- Layout of the LMS dashboard, user sign in/up & edit page
+- Added navbar toggle
+
 ## [0.1.0] : 2024-13-02
 
 ### Added
@@ -16,4 +23,5 @@ and this project adheres to [Semantic Versioning](https://semver.org).
 
 ## [Unreleased]
 [unreleased]: https://github.com/danrayfr/unified/branch/development#diff
+[0.2.0]: https://github.com/danrayfr/Ninja-Board/pull/2
 [0.1.0]: https://github.com/danrayfr/Ninja-Board/pull/1

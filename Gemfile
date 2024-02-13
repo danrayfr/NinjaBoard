@@ -9,6 +9,7 @@ gem 'devise', '~> 4.9'
 gem 'dotenv', groups: %i[development test]
 gem 'importmap-rails'
 gem 'jbuilder'
+gem 'name_of_person'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection'
