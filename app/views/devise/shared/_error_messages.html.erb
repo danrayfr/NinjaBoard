@@ -1,15 +1,27 @@
 <% if resource.errors.any? %>
-  <div id="error_explanation" data-turbo-cache="false">
-    <h2>
-      <%= I18n.t("errors.messages.not_saved",
+  <div class="flex flex-col w-full gap-2 mt-12 mb-2" id="error_explanation" data-turbo-cache="false">
+    <div class="ring-2 ring-inset ring-black text-black bg-white shadow-small rounded-xl p-8">
+      <div class="inline-flex items-center gap-4">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 icon icon-tabler icon-tabler-info-circle" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+          <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
+          <path d="M12 9h.01"></path>
+          <path d="M11 12h1v4h1"></path>
+        </svg>
+        <h3 class="text-lg lg:text-xl font-medium">
+          <%= I18n.t("errors.messages.not_saved",
                  count: resource.errors.count,
                  resource: resource.class.model_name.human.downcase)
-       %>
-    </h2>
-    <ul>
-      <% resource.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
+          %>
+        </h3>
+      </div>
+      <div class="mt-2 text-base lg:text-lg">
+        <ul role="list" class="pl-5 space-y-1 list-disc">
+          <% resource.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
   </div>
 <% end %>
