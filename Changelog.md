@@ -7,7 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org).
 
 ## [Unreleased]
 
-## [0.1.0] : 2024-14-02
+## [0.3.0] : 2024-14-02
+
+### Added
+
+- Added courses crud functionality, action text, & friendly gem
+
+
+## [0.2.0] : 2024-14-02
 
 ### Added
 
@@ -23,5 +30,6 @@ and this project adheres to [Semantic Versioning](https://semver.org).
 
 ## [Unreleased]
 [unreleased]: https://github.com/danrayfr/unified/branch/development#diff
+[0.3.0]: https://github.com/danrayfr/Ninja-Board/pull/3
 [0.2.0]: https://github.com/danrayfr/Ninja-Board/pull/2
 [0.1.0]: https://github.com/danrayfr/Ninja-Board/pull/1

@@ -8,6 +8,9 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: [:google_oauth2]
 
   has_person_name
+
+  has_many :courses, dependent: :destroy
+
   validates :email, presence: true, uniqueness: true
   validates :password, presence: true, length: { minimum: 8 },
                        format: { with: /\A(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+\z/,

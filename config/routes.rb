@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :courses
+
+  scope module: :courses, path: :courses, as: :course do
+    resources :publish, only: :update
+    resources :unpublish, only: :update
+  end
   root 'pages#home'
 
   devise_for :users, controllers: {

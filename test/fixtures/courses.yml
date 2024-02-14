@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+leadership:
+  title: "Leadership"
+  published: false
+  user: admin
+  slug: 'leadership'
+
+management:
+  title: "Management"
+  published: false
+  user: admin
+  slug: 'management'
