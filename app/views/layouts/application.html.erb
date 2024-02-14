@@ -12,6 +12,12 @@
   </head>
 
   <body class="<%= "h-full bg-gray-50" if devise_controller? || user_signed_in? %>">
+      <div aria-live="assertive" class="pointer-events-none fixed inset-0 flex items-end px-4 py-6 sm:items-start sm:p-6 z-50">
+        <%= turbo_frame_tag 'flash', class: "flex w-full flex-col items-center space-y-4 sm:items-end" do %>
+          <%= render 'layouts/flash' %>
+        <% end %>
+      </div>
+      
       <% if user_signed_in? %>
         <div>
           <%= render "layouts/sidenav" %>
