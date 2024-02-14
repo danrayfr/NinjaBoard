@@ -4,8 +4,10 @@ leadership:
   title: "Leadership"
   published: false
   user: admin
+  slug: 'leadership'
 
 management:
   title: "Management"
   published: false
   user: admin
+  slug: 'management'
