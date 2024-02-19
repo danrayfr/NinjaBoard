@@ -8,14 +8,14 @@
 ninja:
   username: 'ninja'
   email: 'user@agent.com'
-  roles: agent
+  role: agent
   
 moderator:
   username: 'moderator'
   email: 'user@moderator.com'
-  roles: moderator
+  role: moderator
 
 admin:
   username: 'admin'
   email: 'user@admin.com'
-  roles: admin
+  role: admin
