@@ -34,10 +34,17 @@ module Admin
       @course = Course.friendly.find(params[:id])
 
       if @course.update(course_params)
-        redirect_to edit_course_url(@course), notice: 'Course successfully updated.'
+        redirect_to edit_admin_course_url(@course), notice: 'Course successfully updated.'
       else
         render :edit, status: :unprocessable_entity
       end
+    end
+
+    def destroy
+      @course = Course.friendly.find(params[:id])
+
+      @course.destroy
+      redirect_to admin_courses_ur, notice: 'Course successfully deleted.'
     end
 
     private
