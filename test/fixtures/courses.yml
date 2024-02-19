@@ -1,13 +1,17 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 leadership:
-  title: "Leadership"
-  published: false
+  title: 'inspirational leadership'
+  author: 'John Doe'
+  url: 'https://ninjaboard.com/inspirational-leadership'
+  category: 'management'
+  impact: 0.5
   user: admin
-  slug: 'leadership'
 
-management:
-  title: "Management"
-  published: false
+unity:
+  title: 'Introduction to Unity'
+  author: 'John Doe'
+  url: 'https://ninjaboard.com/introduction-to-unity'
+  category: 'technical'
+  impact: 1.5
   user: admin
-  slug: 'management'

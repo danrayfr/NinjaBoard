@@ -20,7 +20,9 @@
             <tr>
               <th scope="col" class="py-3 pl-3.5 text-left text-sm font-semibold text-gray-900"><span class="sr-only">Thumbnail</span></th>
               <th scope="col" class="py-3 pl-3.5 text-left text-sm font-semibold text-gray-900">Title</th>
-              <th scope="col" class="py-3 pl-3.5 text-left text-sm font-semibold text-gray-900">Status</th>
+              <th scope="col" class="py-3 pl-3.5 text-left text-sm font-semibold text-gray-900">Category</th>
+              <th scope="col" class="py-3 pl-3.5 text-left text-sm font-semibold text-gray-900">Impact</th>
+              <!--th scope="col" class="py-3 pl-3.5 text-left text-sm font-semibold text-gray-900">Status</th-->
               <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-0">
                 <span class="sr-only">Edit</span>
               </th>
@@ -36,9 +38,12 @@
               </td>
               <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
                 <div class="font-medium text-gray-900"><%= course.title %></div>
-                <div class="mt-1 text-gray-500"><%= course_url(course) %></div>
+                <div class="mt-1 text-gray-500">by  <span class="font-semibold"><%= course.author%></span></div>
+                <div class="mt-1 text-gray-500"><%= course.url %></div>
               </td>
-              <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500"><%= course.published? ? 'Published' : 'Unpublished' %></td>
+              <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500 capitalize"><%= course.category %></td>
+              <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500"><%= course.impact %></td>
+              <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500"><%#= course.published? ? 'Published' : 'Unpublished' %></td>
               <td class="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
                 <%= link_to 'Edit', edit_course_path(course), class: "text-fern hover:text-lightFern" %>
               </td>
@@ -49,5 +54,4 @@
       </div>
     </div>
   </div>
-
 </div>

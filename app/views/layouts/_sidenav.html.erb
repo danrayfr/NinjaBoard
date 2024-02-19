@@ -66,7 +66,7 @@
             </svg>
           <% end %>
           <span class="flex-1 ml-3 text-left whitespace-nowrap">
-            <%= user_signed_in? ? current_user.username || current_user.name.familiar : "User" %>
+            <%= user_signed_in? && !current_user.name.blank? ? current_user.username : "User"  %>
           </span>
           <svg
             data-toggle-target="arrow"

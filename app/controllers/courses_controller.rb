@@ -35,6 +35,6 @@ class CoursesController < ApplicationController
   private
 
   def course_params
-    params.require(:course).permit(%i[title slug description])
+    params.require(:course).permit(%i[title slug description author url category impact])
   end
 end
