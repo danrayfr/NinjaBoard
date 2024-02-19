@@ -1,10 +1,16 @@
 Rails.application.routes.draw do
-  resources :courses
+  # Routes for regular users
+  resources :courses, only: %i[index show]
 
-  scope module: :courses, path: :courses, as: :course do
-    resources :publish, only: :update
-    resources :unpublish, only: :update
+  namespace :admin do
+    resources :courses, except: %i[show]
   end
+
+  # scope module: :courses, path: :courses, as: :course do
+  #   resources :publish, only: :update
+  #   resources :unpublish, only: :update
+  # end
+
   root 'pages#home'
 
   devise_for :users, controllers: {

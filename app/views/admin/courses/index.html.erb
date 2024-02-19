@@ -1,0 +1,61 @@
+<%= content_for(:title, "Courses") %>
+
+<% if user_signed_in? && current_user.admin? %>
+<div class="px-4 sm:px-6 lg:px-8">
+  <div class="sm:flex sm:items-center">
+    <div class="sm:flex-auto">
+      <h1 class="text-base font-semibold leading-6 text-gray-900">Courses</h1>
+      <p class="mt-2 text-sm text-gray-700">A list of all courses</p>
+    </div>
+    <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
+      <%= link_to "Add new course", new_admin_course_path, class: "cursor-pointer rounded-md bg-paleFern px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-graphite focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+      focus-visible:outline-indigo-600" %>
+    </div>
+  </div>
+
+  <div class="mt-8 flow-root">
+    <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+      <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead>
+            <tr>
+              <th scope="col" class="py-3 pl-3.5 text-left text-sm font-semibold text-gray-900"><span class="sr-only">Thumbnail</span></th>
+              <th scope="col" class="py-3 pl-3.5 text-left text-sm font-semibold text-gray-900">Title</th>
+              <th scope="col" class="py-3 pl-3.5 text-left text-sm font-semibold text-gray-900">Category</th>
+              <th scope="col" class="py-3 pl-3.5 text-left text-sm font-semibold text-gray-900">Impact</th>
+              <!--th scope="col" class="py-3 pl-3.5 text-left text-sm font-semibold text-gray-900">Status</th-->
+              <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-0">
+                <span class="sr-only">Edit</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200 bg-white">
+            <% @courses.each do |course| %>
+            <tr>
+              <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500 w-0">
+                <div class="h-11 w-11 flex-shrink-0">
+                  <!-- image tag here -->
+                </div>
+              </td>
+              <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
+                <div class="font-medium text-gray-900"><%= course.title %></div>
+                <div class="mt-1 text-gray-500">by  <span class="font-semibold"><%= course.author%></span></div>
+                <div class="mt-1 text-gray-500"><%= course.url %></div>
+              </td>
+              <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500 capitalize"><%= course.category %></td>
+              <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500"><%= course.impact %></td>
+              <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500"><%#= course.published? ? 'Published' : 'Unpublished' %></td>
+              <td class="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
+                <%= link_to 'Edit', edit_admin_course_path(course), class: "text-fern hover:text-lightFern" %>
+              </td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<% else %>
+  User only page...
+<% end %>
