@@ -1,6 +1,6 @@
 <%= content_for(:title, "Edit #{@course.title}")%>
 
-<%= form_with(model: @course) do |form| %>
+<%= form_with(model: @course, url: admin_course_path(@course), method: :patch) do |form| %>
 
   <div class="sticky top-0 py-12 bg-gray-50 border-b border-black <%= horizontal_padding %> z-20">
     <div class="flex justify-between">

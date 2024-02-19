@@ -8,7 +8,7 @@
         <p class="mt-1 text-sm leading-6 text-gray-600">Make some selections, fill in some boxes, and go live in minutes.</p>
       </div>
 
-      <%= form_with(model: @course, data: { turbo: false }, class: "bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2") do |form| %>
+      <%= form_with(model: @course, url: admin_courses_path, method: :post, data: { turbo: false }, class: "bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2") do |form| %>
         <div class="px-4 py-6 sm:p-8">
           <div class="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-8">
 
@@ -29,7 +29,7 @@
           </div>
 
           <div class="flex items-center justify-end gap-x-6 border-t border-gray-900/10 px-4 py-4 sm:px-8 mt-4">
-          <%= link_to "Cancel", courses_path, class: "text-sm font-semibold leading-6 text-graphite hover:text-lightGraphite" %>
+          <%= link_to "Cancel", admin_courses_path, class: "text-sm font-semibold leading-6 text-graphite hover:text-lightGraphite" %>
 
           <%= form.submit "Save", class: "rounded-md bg-paleFern px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-graphite focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-paleFern" %>
         </div>

@@ -7,8 +7,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: [:google_oauth2]
 
+  before_save :sanitize_email
   has_person_name
-
   has_many :courses, dependent: :destroy
 
   validates :email, presence: true, uniqueness: true
@@ -17,6 +17,7 @@ class User < ApplicationRecord
                                  message: 'Must contain at least one uppercase letter,
                        one lowercase letter, one special character, and one number' },
                        if: :password_required?
+  enum role: %i[ninja admin]
 
   def password_required?
     password.present? || new_record?
@@ -33,5 +34,9 @@ class User < ApplicationRecord
       # uncomment the line below to skip the confirmation emails.
       # user.skip_confirmation!
     end
+  end
+
+  def sanitize_email
+    email.strip.downcase
   end
 end
