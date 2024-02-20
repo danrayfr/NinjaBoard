@@ -1,0 +1,16 @@
+<%= content_for(:title, "Progress Board") %>
+
+<!-- Component Start -->
+<div class="container px-6 py-10 mx-auto flex flex-col text-gray-700 bg-ivory" >
+  <div class="px-10 mt-6">
+    <h1 class="text-2xl font-bold">Progress Board</h1>
+  </div>
+  <div data-controller="sortable" class="flex flex-grow px-10 mt-4 space-x-6 overflow-auto">
+    <% @progresses.each do |progress| %>
+      <div class="flex flex-col flex-shrink-0 w-72" data-sortable-update-url="<%= sort_progress_path(progress) %>">
+        <%= render "progress", progress: progress %>
+      </div>
+    <% end %>
+    <div class="flex-shrink-0 w-6"></div>
+  </div>
+</div>

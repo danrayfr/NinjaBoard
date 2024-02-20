@@ -1,6 +1,17 @@
 Rails.application.routes.draw do
   # Routes for regular users
-  resources :assigned_courses
+  resources :progresses, path: 'progress', only: %i[index] do
+    member do
+      put :sort
+    end
+  end
+
+  resources :assigned_courses do
+    member do
+      put :sort
+    end
+  end
+
   resources :courses, only: %i[index show]
 
   authenticated :user, ->(user) { user.admin? } do
