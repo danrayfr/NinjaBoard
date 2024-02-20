@@ -2,8 +2,10 @@ Rails.application.routes.draw do
   # Routes for regular users
   resources :courses, only: %i[index show]
 
-  namespace :admin do
-    resources :courses, except: %i[show]
+  authenticated :user, ->(user) { user.admin? } do
+    namespace :admin do
+      resources :courses, except: %i[show]
+    end
   end
 
   # scope module: :courses, path: :courses, as: :course do

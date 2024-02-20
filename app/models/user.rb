@@ -10,6 +10,7 @@ class User < ApplicationRecord
   before_save :sanitize_email
   has_person_name
   has_many :courses, dependent: :destroy
+  has_many :assigned_courses, dependent: :destroy
 
   validates :email, presence: true, uniqueness: true
   validates :password, presence: true, length: { minimum: 8 },
