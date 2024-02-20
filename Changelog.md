@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org).
 
 ## [Unreleased]
 
+## [0.6.0] : 2024-21-02
+
+### Added
+
+- Assigned Courses, users can assigned courses to themselves and track the assign course on progress board
+- Progress Board, user can move/sort the assigned courses in the kanban board(Todo, Daily, In Progress, Completed)
+
 ## [0.5.0] : 2024-20-02
 
 ### Added

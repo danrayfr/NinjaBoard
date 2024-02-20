@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  pass: false
+  assessment_score: 0
+  date_completed: 2024-02-20 06:18:40
+  progress: 1
+  user: ninja
+  course: unity
+
+two:
+  pass: false
+  assessment_score: 0
+  date_completed: 2024-02-20 06:18:40
+  progress: 1
+  user: ninja
+  course: leadership

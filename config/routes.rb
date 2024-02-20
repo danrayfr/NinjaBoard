@@ -1,9 +1,23 @@
 Rails.application.routes.draw do
   # Routes for regular users
+  resources :progresses, path: 'progress', only: %i[index] do
+    member do
+      put :sort
+    end
+  end
+
+  resources :assigned_courses do
+    member do
+      put :sort
+    end
+  end
+
   resources :courses, only: %i[index show]
 
-  namespace :admin do
-    resources :courses, except: %i[show]
+  authenticated :user, ->(user) { user.admin? } do
+    namespace :admin do
+      resources :courses, except: %i[show]
+    end
   end
 
   # scope module: :courses, path: :courses, as: :course do
@@ -16,7 +30,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     sessions: 'users/sessions',
-    omniauth_callbacks: 'users/omniauth_callbacks'
+    omniauth_callbacks: 'users/omniauth_callbacks#google_oauth2'
   }
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

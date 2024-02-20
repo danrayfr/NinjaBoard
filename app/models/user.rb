@@ -10,6 +10,7 @@ class User < ApplicationRecord
   before_save :sanitize_email
   has_person_name
   has_many :courses, dependent: :destroy
+  has_many :assigned_courses, dependent: :destroy
 
   validates :email, presence: true, uniqueness: true
   validates :password, presence: true, length: { minimum: 8 },
@@ -27,7 +28,9 @@ class User < ApplicationRecord
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email
       user.password = Devise.friendly_token[0, 20]
-      user.name = auth.info.name
+      user.username = auth.info.name
+      user.first_name = auth.info.first_name
+      user.last_name = auth.info.last_name
       user.avatar_url = auth.info.image
 
       # if you are using confirmable and the provider(s) you use validate emails,

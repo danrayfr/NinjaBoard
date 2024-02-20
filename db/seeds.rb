@@ -8,6 +8,11 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-User.create(email: 'danrayrollan98@gmail.com', password: '!MM3rs!v3', password_confirmation: '!MM3rs!v3', role: 'admin')
+# User.create(email: 'danrayrollan98@gmail.com', password: '!MM3rs!v3', password_confirmation: '!MM3rs!v3', role: 'admin')
 
-User.create(email: 'ninjaboard-admin@supportninja.com', password: 'P@ssword12345!', password_confirmation: 'P@ssword12345!', role: 'admin')
+# User.create(email: 'ninjaboard-admin@supportninja.com', password: 'P@ssword12345!', password_confirmation: 'P@ssword12345!', role: 'admin')
+
+Progress.create(name: 'Todo')
+Progress.create(name: 'Daily')
+Progress.create(name: 'In Progress')
+Progress.create(name: 'Completed')
