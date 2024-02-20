@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   authenticated :user, ->(user) { user.admin? } do
     namespace :admin do
       resources :courses, except: %i[show]
+      resources :role_skill_maps, path: 'role-skill-mapping'
     end
   end
 

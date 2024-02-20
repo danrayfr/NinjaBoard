@@ -1,0 +1,24 @@
+<%= content_for(:title, "Role Skill Map") %>
+
+<div class="px-4 sm:px-6 lg:px-8">
+  <div class="sm:flex sm:items-center">
+    <div class="sm:flex-auto">
+      <h1 class="text-base font-semibold leading-6 text-gray-900">Role skills mapping</h1>
+      <p class="mt-2 text-sm text-gray-700">List of available roles and their respective skills requirements</p>
+    </div>
+    <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
+      <%= link_to "Add new mapping", new_admin_role_skill_map_path, class: "cursor-pointer rounded-md bg-paleFern px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-graphite focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+      focus-visible:outline-indigo-600" %>
+    </div>
+  </div>
+
+<div class="flex flex-wrap justify-center mt-10">
+
+  <% @role_skill_maps.each do |role_skill_map| %>
+    <%= render role_skill_map %>
+  <% end %>
+
+</div>
+
+</div>
+</div>
