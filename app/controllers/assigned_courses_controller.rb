@@ -14,10 +14,15 @@ class AssignedCoursesController < ApplicationController
     head :no_content
   end
 
+  def new; end
+
   def create
     @course = Course.find(params[:course_id])
-    progress = progress
-    @assigned_course = AssignedCourse.new(user: current_user, course: @course, progress: progress)
+
+    # Default progress is todo when getting the course by user itself.
+    default_progress = Progress.find_by(name: 'Todo')
+
+    @assigned_course = AssignedCourse.new(user: current_user, course: @course, progress: default_progress)
 
     if @assigned_course.valid?
       @assigned_course.save
