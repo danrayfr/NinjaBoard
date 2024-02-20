@@ -1,3 +1,5 @@
+<%= content_for(:title, @course.title)%>
+
 <div class="py-12">
   <div class="mx-auto max-w-7xl border-2 border-black">
     <%# if @product.cover.attached? %>
@@ -25,7 +27,13 @@
       </div>
       <div class="col-span-1 px-8 py-4">
         <div class="mb-8">
-          <%= button_tag "Get", class: "rounded-sm bg-black px-3.5 py-2.5 text-sm border-2 border-black font-semibold text-white shadow-sm hover:bg-white hover:text-black hover:border-2 hover:border-black w-full" %>
+          <% if AssignedCourse.exists?(user: current_user, course_id: @course.id) %>
+            <p class="text-md font-semibold">You have already enrolled in this course.</p>
+          <% else %>
+            <%= form_tag assigned_courses_path(course_id: @course.id), method: :post, class: "inline-form", data: { turbo_frame: "course-form" } do %>
+              <%= button_tag "Get Course", type: :submit, class: "rounded-sm bg-black px-3.5 py-2.5 text-sm border-2 border-black font-semibold text-white shadow-sm hover:bg-white hover:text-black hover:border-2 hover:border-black w-full" %>
+            <% end %>
+          <% end %>
         </div>
         <div>
           <ul class="divide-y-2 divide-black overflow-hidden bg-white shadow-sm ring-2 ring-black sm:rounded-sm">

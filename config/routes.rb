@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   # Routes for regular users
+  resources :assigned_courses
   resources :courses, only: %i[index show]
 
   authenticated :user, ->(user) { user.admin? } do
@@ -18,7 +19,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     sessions: 'users/sessions',
-    omniauth_callbacks: 'users/omniauth_callbacks'
+    omniauth_callbacks: 'users/omniauth_callbacks#google_oauth2'
   }
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
