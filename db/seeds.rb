@@ -12,7 +12,7 @@
 
 # User.create(email: 'ninjaboard-admin@supportninja.com', password: 'P@ssword12345!', password_confirmation: 'P@ssword12345!', role: 'admin')
 
-Progress.create(name: 'TODO')
+Progress.create(name: 'Todo')
 Progress.create(name: 'Daily')
 Progress.create(name: 'In Progress')
 Progress.create(name: 'Completed')
