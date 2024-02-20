@@ -1,4 +1,5 @@
 class ProgressesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_progress, only: %i[show edit update destroy]
 
   # GET /progresses or /progresses.json
