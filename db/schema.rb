@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_20_070657) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_20_213214) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -87,6 +87,21 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_20_070657) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "row_order"
+  end
+
+  create_table "role_skill_maps", force: :cascade do |t|
+    t.string "title"
+    t.string "description"
+    t.float "management_skill", default: 0.0
+    t.float "technical_skill", default: 0.0
+    t.float "communication_skill", default: 0.0
+    t.float "financial_skill", default: 0.0
+    t.float "analytical_skill", default: 0.0
+    t.float "work_ethics", default: 0.0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "slug"
+    t.index ["slug"], name: "index_role_skill_maps_on_slug", unique: true
   end
 
   create_table "users", force: :cascade do |t|

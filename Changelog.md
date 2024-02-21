@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org).
 
 ## [Unreleased]
 
+## [0.7.0] : 2024-21-02
+
+### Added
+
+- Role skill map, CRUD functionality except show
+
 ## [0.6.0] : 2024-21-02
 
 ### Added
@@ -51,6 +57,8 @@ and this project adheres to [Semantic Versioning](https://semver.org).
 
 ## [Unreleased]
 [unreleased]: https://github.com/danrayfr/unified/branch/development#diff
+[0.7.0]: https://github.com/ninjadanray/Ninja-Board/pull/7
+[0.6.0]: https://github.com/ninjadanray/Ninja-Board/pull/6
 [0.5.0]: https://github.com/ninjadanray/Ninja-Board/pull/5
 [0.4.0]: https://github.com/danrayfr/Ninja-Board/pull/4
 [0.3.0]: https://github.com/danrayfr/Ninja-Board/pull/3

@@ -4,7 +4,7 @@ one:
   pass: false
   assessment_score: 0
   date_completed: 2024-02-20 06:18:40
-  progress: 1
+  progress_status: 1
   user: ninja
   course: unity
 
@@ -12,6 +12,6 @@ two:
   pass: false
   assessment_score: 0
   date_completed: 2024-02-20 06:18:40
-  progress: 1
+  progress_status: 1
   user: ninja
   course: leadership
