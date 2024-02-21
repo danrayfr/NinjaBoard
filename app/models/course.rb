@@ -7,7 +7,7 @@ class Course < ApplicationRecord
   has_rich_text :description
 
   validates :title, presence: true, uniqueness: true, length: { maximum: 50 }
-  validates :impact, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100, allow_float: true }
+  validates :impact, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 10, allow_float: true }
   enum category: %i[management technical communication financial analytical work_ethics]
 
   def draft?

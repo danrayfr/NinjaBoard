@@ -42,7 +42,7 @@ export default class extends Controller {
         },
         {
           label: 'Role Skill Maps',
-          data: [25, 25, 50, 30, 50, 100],
+          data: [10, 10, 10, 10, 10, 10],
           backgroundColor: 'rgba(3, 138, 255, 0.2)',
           borderColor: 'rgba(3, 138, 255, 1)',
           borderWidth: 2
@@ -56,6 +56,15 @@ export default class extends Controller {
                 datasets: datasets,
             },
             options: {
+              scales: {
+                r: {
+                    angleLines: {
+                        display: true
+                    },
+                    suggestedMin: 0,
+                    suggestedMax: 10
+                }
+            }
             }
         });
     }
