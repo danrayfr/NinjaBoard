@@ -58,7 +58,7 @@ export default class extends Controller {
                 angleLines: {
                     display: true
                 },
-                suggestedMin: 0,
+                suggestedMin: -1,
                 suggestedMax: 10
             }
         }
