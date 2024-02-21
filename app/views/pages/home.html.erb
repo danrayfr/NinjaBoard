@@ -165,3 +165,95 @@
   </div>
 </div>
 <% end %>
+
+<div class="container mx-auto py-12">
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+    <!-- Left Column -->
+    <div>
+      <!-- User Info Card -->
+      <div class="bg-white shadow-md rounded-lg p-6 mb-4">
+        <h2 class="text-lg font-bold mb-4">User Info</h2>
+        <div class="flex items-center mb-4">
+          <div class="w-12 h-12 bg-gray-300 rounded-full"></div>
+          <!-- Placeholder for avatar -->
+          <div class="ml-4">
+            <p class="font-semibold"><%= current_user.name || current_user.email %></p>
+            <p class="text-sm text-gray-500 capitalize"><%= current_user.role %></p>
+          </div>
+        </div>
+      </div>
+      <!-- Dropdown Button -->
+      <div class="bg-white shadow-md rounded-lg p-6 mb-4">
+        <h2 class="text-lg font-bold mb-4">Dropdown</h2>
+        <div class="relative inline-block text-left">
+          <button
+            type="button"
+            class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500"
+            id="options-menu"
+            aria-expanded="true"
+            aria-haspopup="true"
+          >
+            Options
+            <!-- Heroicon name: solid/chevron-down -->
+            <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M10 12a1 1 0 01-.707-.293l-4-4a1 1 0 111.414-1.414L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-.707.293z" clip-rule="evenodd" />
+            </svg>
+          </button>
+          <div class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+            <div class="py-1" role="none">
+              <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="menu-item-0">Settings</a>
+              <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="menu-item-1">Help</a>
+              <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="menu-item-2">Sign out</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Radar Chart Card -->
+      <div class="bg-white shadow-md rounded-lg p-6 mb-4">
+        <h2 class="text-lg font-bold mb-4">Radar Chart</h2>
+        <div class="bg-gray-200 w-full h-64 rounded-lg"></div>
+      </div>
+    </div>
+    <!-- Right Column -->
+    <div>
+      <!-- Completed Tasks Table -->
+      <div class="bg-white shadow-md rounded-lg p-6 mb-4 h-full overflow-y-auto">
+        <h2 class="text-3xl font-bold mb-4">Completed Courses</h2>
+        <div class="max-h-96">
+          <table class="w-full">
+            <thead class="bg-gray-200">
+              <tr>
+                <th class="py-2 px-4">Course title</th>
+                <th class="py-2 px-4">Course Impact</th>
+                <th class="py-2 px-4">Course category</th>
+                <th class="py-2 px-4">Result</th>
+                <th class="py-2 px-4">Assessment Score</th>
+                <th class="py-2 px-4">Date Completed</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Your table rows go here -->
+              <% current_user.assigned_courses.where(progress_status: 'completed').each do |assigned_course|%>
+              <tr>
+                <td class="py-2 px-4"><%= assigned_course.course.title %></td>
+                <td class="py-2 px-4"><%= assigned_course.course.impact %></td>
+                <td class="py-2 px-4 text-sm capitalize"><%= assigned_course.course.category %></td>
+                <td class="py-2 px-4"><%= !assigned_course.pass? ? "Pass" : "Fail" %></td>
+                <td class="py-2 px-4"><%= assigned_course.assessment_score %></td>
+                <td class="py-2 px-4"><%= time_tag(assigned_course.date_completed, "data-local": "time-ago") %></td>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- User Avatar -->
+      <div class="hidden xl:block">
+        <img
+          src="https://png.pngtree.com/png-vector/20230914/ourmid/pngtree-stylized-3d-character-doing-endorsement-pose-png-image_9236431.png"
+          class="absolute bottom-0 right-0 -mr-4 mb-12 w-auto max-h-96 h-full z-50 sm:block pointer-events-none xl:-mr-8 xl:mb-20"
+        />
+      </div>
+    </div>
+  </div>
+</div>
