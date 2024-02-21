@@ -281,7 +281,11 @@
                 <td class="py-2 px-4 text-sm capitalize"><%= assigned_course.course.category %></td>
                 <td class="py-2 px-4"><%= !assigned_course.pass? ? "Pass" : "Fail" %></td>
                 <td class="py-2 px-4"><%= assigned_course.assessment_score %></td>
-                <td class="py-2 px-4"><%= time_tag(assigned_course.date_completed, "data-local": "time-ago") %></td>
+                <td class="py-2 px-4">
+                  <% unless assigned_course.nil? %>
+                    <%= time_tag(assigned_course.date_completed, "data-local": "time-ago") %>
+                  <% end %>
+                </td>
               </tr>
               <% end %>
             </tbody>
