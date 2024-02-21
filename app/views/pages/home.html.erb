@@ -184,7 +184,7 @@
       </div>
       <!-- Dropdown Button -->
       <div class="bg-white shadow-md rounded-lg p-6 mb-4">
-        <h2 class="text-lg font-bold mb-4">Dropdown</h2>
+        <h2 class="text-lg font-bold mb-4">Roles Skill Maps</h2>
         <div class="relative inline-block text-left">
           <button
             type="button"
@@ -209,9 +209,25 @@
         </div>
       </div>
       <!-- Radar Chart Card -->
-      <div class="bg-white shadow-md rounded-lg p-6 mb-4">
+      <div class="bg-white shadow-md rounded-lg p-6 mb-4" data-controller="radar-chart">
         <h2 class="text-lg font-bold mb-4">Radar Chart</h2>
-        <div class="bg-gray-200 w-full h-64 rounded-lg"></div>
+        <div class="bg-offWhite w-full h-1/2 rounded-lg">
+          <canvas
+            id="bar-chart"
+            data-radar-chart-target="myChart"
+            class="w-full h-full"
+          ></canvas>
+          <span 
+            data-radar-chart-target="userMap"
+            data-management-skill="<%= current_user.user_skill_map.management_skill %>"
+            data-technical-skill="<%= current_user.user_skill_map.technical_skill %>"
+            data-communication-skill="<%= current_user.user_skill_map.communication_skill %>"
+            data-financial-skill="<%= current_user.user_skill_map.financial_skill %>"
+            data-analytical-skill="<%= current_user.user_skill_map.analytical_skill %>"
+            data-work-ethics="<%= current_user.user_skill_map.work_ethics %>"
+            >
+          </span>
+        </div>
       </div>
     </div>
     <!-- Right Column -->

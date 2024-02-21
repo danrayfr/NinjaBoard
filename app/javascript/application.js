@@ -8,3 +8,5 @@ import "@rails/request.js"
 
 import LocalTime from "local-time"
 LocalTime.start()
+
+import "chart.js"
