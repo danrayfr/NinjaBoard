@@ -3,38 +3,57 @@
   <%= link_to root_path do %>
       <%= image_tag "https://assets-global.website-files.com/64149f79022d0c5fc8ce46e8/64149f79022d0cd45cce4719_Support%20Ninja%20%7C%20Full%20Logo.svg", class: "h-8", alt: "supportninja" %>
   <% end %>
-  <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-      <button type="button" class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom" data-action="click->dropdown#toggleAvatarDropdown">
-        <span class="sr-only">Open user menu</span>
-        <%= image_tag "svg/avatar.svg", class: "w-8 h-8 rounded-full", alt: "user photo" %>
+  <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse z-50">
+    <div @click.away="open = false" class="relative" x-data="{ open: false }">
+      <button @click="open = !open" class="duration-300 ease-in-out focus:outline-none focus:shadow-none focus:text-orange/90 hover:text-lila-900 md:my-0 px-4 py-2 transform transition inline-flex items-center gap-3" data-action="click->dropdown#toggleAvatarDropdown">
+          <span class="sr-only">Open user menu</span>
+          <%= image_tag "svg/avatar.svg", class: "w-8 h-8 rounded-full", alt: "user photo" %>
+          <span class="sm:block hidden"><%= current_user.username || current_user.email %></span>
+          <svg
+              :class="{'rotate-180': open, 'rotate-0': !open}"
+              xmlns="http://www.w3.org/2000/svg"
+              class="inline h-4 transition-transform duration-200 transform icon icon-tabler icon-tabler-chevron-down rotate-0"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              data-dropdown-target="chevron"
+          >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+              <path d="M6 9l6 6l6 -6"></path>
+          </svg>
       </button>
-      <!-- Dropdown menu -->
-      <div class="z-50 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow absolute top-0 mt-12 right-0" id="user-dropdown" data-dropdown-target="avatar">
-        <div class="px-4 py-3">
-          <span class="block text-sm text-gray-900">Bonnie Green</span>
-          <span class="block text-sm  text-gray-500 truncate">name@flowbite.com</span>
-        </div>
-        <ul class="py-2" aria-labelledby="user-menu-button">
-          <li>
-            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Dashboard</a>
-          </li>
-          <li>
-            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</a>
-          </li>
-          <li>
-            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Earnings</a>
-          </li>
-          <li>
-            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Sign out</a>
-          </li>
-        </ul>
+      <div
+          x-show="open"
+          x-transition:enter="transition ease-out duration-100"
+          x-transition:enter-start="transform opacity-0 scale-95"
+          x-transition:enter-end="transform opacity-100 scale-100"
+          x-transition:leave="transition ease-in duration-75"
+          x-transition:leave-start="transform opacity-100 scale-100"
+          x-transition:leave-end="transform opacity-0 scale-95"
+          class="absolute right-0 z-10 w-auto mt-2 origin-top-right rounded-lg bg-white ring-2 ring-black focus:outline-none"
+          role="menu"
+          aria-orientation="vertical"
+          aria-labelledby="menu-button"
+          tabindex="-1"
+          style="display: none;"
+          data-dropdown-target="avatarMenu"
+      >
+          <div class="py-1 bg-white rounded-xl divide-y divide-black" role="none">
+              <%= link_to "Admin", admin_courses_path, class: "block text-left px-4 py-2 text-sm text-black hover:text-lila-800 w-full" if current_user.admin? %>
+              <%= link_to "Edit Profile", edit_user_registration_path, class: "block text-left px-4 py-2 text-sm text-black hover:text-lila-800 w-full" %>
+              <%= link_to "Sign out", destroy_user_session_path, data: { turbo_method: :delete }, class: "block text-left px-4 py-2 text-sm text-black hover:text-lila-800 w-full" %>
+          </div>
       </div>
+  </div>
       
-      <button data-collapse-toggle="navbar-user" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200" aria-controls="navbar-user" aria-expanded="false" data-action="dropdown#toggle click@window->dropdown#hide">
-        <span class="sr-only">Open main menu</span>
-        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
-        </svg>
+    <button data-collapse-toggle="navbar-user" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200" aria-controls="navbar-user" aria-expanded="false" data-action="dropdown#toggle click@window->dropdown#hide">
+      <span class="sr-only">Open main menu</span>
+      <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+      </svg>
     </button>
   </div>
   <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-user" data-dropdown-target="menu">
