@@ -17,6 +17,6 @@
 # Progress.create(name: 'In Progress')
 # Progress.create(name: 'Completed')
 
-# User.find_each do |user|
-#   user.build_user_skill_map_if_missing
-# end
+User.find_each do |user|
+  user.build_user_skill_map_if_missing
+end

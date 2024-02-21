@@ -67,5 +67,10 @@ class AssignedCourse < ApplicationRecord
     when 'work_ethics'
       user.user_skill_map.increment!(:work_ethics, course.impact)
     end
+
+    # Update date_completed if progress status is completed
+    return unless progress_status == 'completed'
+
+    update(date_completed: Time.now)
   end
 end

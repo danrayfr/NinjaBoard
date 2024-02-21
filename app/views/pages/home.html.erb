@@ -165,3 +165,140 @@
   </div>
 </div>
 <% end %>
+
+<div class="container mx-auto py-12" data-controller="radar-chart">
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+    <!-- Left Column -->
+    <div>
+      <!-- User Info Card -->
+      <div class="bg-white shadow-md rounded-lg p-6 mb-4">
+        <h2 class="text-lg font-bold mb-4">User Info</h2>
+        <div class="flex items-center mb-4">
+          <div class="relative h-24 w-24">
+            <!-- Circular avatar container -->
+            <div class="relative rounded-full overflow-hidden h-24 w-24">
+              <!-- User profile image -->
+              <%= image_tag "svg/avatar.svg", class: "h-full w-full object-cover" %>
+
+              <!-- Medal -->
+              <div class="absolute bottom-0 left-8 transform translate-y-1/4 w-8">
+                <%= image_tag "svg/medal-icon.svg"%>
+              </div>
+            </div>
+          </div>
+          <div class="ml-4">
+            <p class="font-semibold"><%= current_user.name || current_user.email %></p>
+            <p class="text-sm text-gray-500 capitalize"><%= current_user.role %></p>
+          </div>
+        </div>
+      </div>
+      <!-- Dropdown Button -->
+      <div class="bg-white shadow-md rounded-lg p-6 mb-4">
+        <h2 class="text-lg font-bold mb-4">Roles Skill Maps</h2>
+        <div class="relative inline-block w-full" data-controller="dropdown" data-radar-chart-outlet=".role-data">
+          <button
+            type="button"
+            class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500"
+            id="options-menu"
+            aria-expanded="true"
+            aria-haspopup="true"
+            data-action="dropdown#toggle click@window->dropdown#hide"
+            data-dropdown-target="selectedRole"
+          >
+            <span data-radar-chart-target='currentSelection'>Roles</span>
+            <!-- Heroicon name: solid/chevron-down -->
+            <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M10 12a1 1 0 01-.707-.293l-4-4a1 1 0 111.414-1.414L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-.707.293z" clip-rule="evenodd" />
+            </svg>
+          </button>
+          <div class="origin-top-right absolute right-0 mt-2 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden w-full" role="menu" aria-orientation="vertical" aria-labelledby="options-menu" data-dropdown-target="menu">
+            <div class="py-1" role="none">
+              <% @role_skill_maps.each do |role| %>
+                <button
+                class="block px-4 py-2 text-sm text-gray-700"
+                role="menuitem" data-action="dropdown#toggle radar-chart#selectRole"
+                data-role-id="<%= role.id %>"
+                data-title="<%= role.title %>"
+                data-management-skill="<%= role.management_skill %>"
+                data-technical-skill="<%= role.technical_skill %>"
+                data-communication-skill="<%= role.communication_skill %>"
+                data-financial-skill="<%= role.financial_skill %>"
+                data-analytical-skill="<%= role.analytical_skill %>"
+                data-work-ethics="<%= role.work_ethics %>"
+                >
+                  <%= role.title %>
+                </button>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Radar Chart Card -->
+      <div class="bg-white shadow-md rounded-lg p-6 mb-4">
+        <h2 class="text-lg font-bold mb-4">Skills Radar</h2>
+        <div class="bg-offWhite w-full h-1/2 rounded-lg">
+          <canvas
+            id="bar-chart"
+            data-radar-chart-target="myChart"
+            class="w-full h-full"
+          ></canvas>
+          <span 
+            data-radar-chart-target="userMap"
+            data-management-skill="<%= current_user.user_skill_map.management_skill %>"
+            data-technical-skill="<%= current_user.user_skill_map.technical_skill %>"
+            data-communication-skill="<%= current_user.user_skill_map.communication_skill %>"
+            data-financial-skill="<%= current_user.user_skill_map.financial_skill %>"
+            data-analytical-skill="<%= current_user.user_skill_map.analytical_skill %>"
+            data-work-ethics="<%= current_user.user_skill_map.work_ethics %>"
+            >
+          </span>
+        </div>
+      </div>
+    </div>
+    <!-- Right Column -->
+    <div>
+      <!-- Completed Tasks Table -->
+      <div class="bg-white shadow-md rounded-lg p-6 mb-4 h-full overflow-y-auto">
+        <h2 class="text-3xl font-bold mb-4">Completed Courses</h2>
+        <div class="max-h-96">
+          <table class="w-full">
+            <thead class="bg-gray-200">
+              <tr>
+                <th class="py-2 px-4">Course title</th>
+                <th class="py-2 px-4">Course Impact</th>
+                <th class="py-2 px-4">Course category</th>
+                <th class="py-2 px-4">Result</th>
+                <th class="py-2 px-4">Assessment Score</th>
+                <th class="py-2 px-4">Date Completed</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Your table rows go here -->
+              <% current_user.assigned_courses.where(progress_status: 'completed').each do |assigned_course|%>
+              <tr>
+                <td class="py-2 px-4"><%= assigned_course.course.title %></td>
+                <td class="py-2 px-4"><%= assigned_course.course.impact %></td>
+                <td class="py-2 px-4 text-sm capitalize"><%= assigned_course.course.category %></td>
+                <td class="py-2 px-4"><%= !assigned_course.pass? ? "Pass" : "Fail" %></td>
+                <td class="py-2 px-4"><%= assigned_course.assessment_score %></td>
+                <td class="py-2 px-4">
+                  <% unless assigned_course.nil? %>
+                    <%= time_tag(assigned_course.date_completed, "data-local": "time-ago") %>
+                  <% end %>
+                </td>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- User Avatar -->
+      <div class="hidden xl:block">
+        <img
+          src="https://png.pngtree.com/png-vector/20230914/ourmid/pngtree-stylized-3d-character-doing-endorsement-pose-png-image_9236431.png"
+          class="absolute bottom-0 right-0 -mr-4 mb-12 w-auto max-h-96 h-full z-50 sm:block pointer-events-none xl:-mr-8 xl:mb-20"
+        />
+      </div>
+    </div>
+  </div>
+</div>

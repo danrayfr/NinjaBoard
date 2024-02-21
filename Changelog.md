@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org).
 
 ## [Unreleased]
 
+## [0.9.0] : 2024-22-02
+
+### Added
+
+- Dynamic User and Role Radar chart, completed courses table
+- Home page layout and navbar responsive dropdown
+
 ## [0.8.0] : 2024-21-02
 
 ### Added
@@ -63,6 +70,7 @@ and this project adheres to [Semantic Versioning](https://semver.org).
 
 ## [Unreleased]
 [unreleased]: https://github.com/danrayfr/unified/branch/development#diff
+[0.9.0]: https://github.com/ninjadanray/Ninja-Board/pull/9
 [0.8.0]: https://github.com/ninjadanray/Ninja-Board/pull/8
 [0.7.0]: https://github.com/ninjadanray/Ninja-Board/pull/7
 [0.6.0]: https://github.com/ninjadanray/Ninja-Board/pull/6
