@@ -2,6 +2,7 @@
 
 class AssignedCoursesController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_assigned_course, only: [:sort]
 
   def index
     @assigned_courses = current_user.assigned_courses.rank(:row_order)
