@@ -12,7 +12,11 @@
 
 # User.create(email: 'ninjaboard-admin@supportninja.com', password: 'P@ssword12345!', password_confirmation: 'P@ssword12345!', role: 'admin')
 
-Progress.create(name: 'Todo')
-Progress.create(name: 'Daily')
-Progress.create(name: 'In Progress')
-Progress.create(name: 'Completed')
+# Progress.create(name: 'Todo')
+# Progress.create(name: 'Daily')
+# Progress.create(name: 'In Progress')
+# Progress.create(name: 'Completed')
+
+# User.find_each do |user|
+#   user.build_user_skill_map_if_missing
+# end

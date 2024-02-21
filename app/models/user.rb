@@ -11,6 +11,7 @@ class User < ApplicationRecord
   has_person_name
   has_many :courses, dependent: :destroy
   has_many :assigned_courses, dependent: :destroy
+  has_one :user_skill_map
 
   validates :email, presence: true, uniqueness: true
   validates :password, presence: true, length: { minimum: 8 },
@@ -19,6 +20,15 @@ class User < ApplicationRecord
                        one lowercase letter, one special character, and one number' },
                        if: :password_required?
   enum role: %i[ninja admin]
+
+  after_create :build_user_skill_map_if_missing
+
+  def build_user_skill_map_if_missing
+    return if user_skill_map.present?
+
+    # Create a new user skill map for the user
+    build_user_skill_map.save
+  end
 
   def password_required?
     password.present? || new_record?

@@ -16,7 +16,7 @@
     data-sortable-progress-id="<%= progress.id %>"
     class="flex flex-col pb-2 overflow-auto p-4 mb-6 space-y-6 bg-offWhite rounded-xl"
     >
-    <% progress.assigned_courses.rank(:row_order).each do |assigned_course| %>
+    <% progress.assigned_courses.where(user_id: current_user.id).rank(:row_order).each do |assigned_course| %>
       <div
         data-sortable-id="<%= assigned_course.id %>"
         data-sortable-update-url="<%= sort_assigned_course_path(assigned_course) %>"
