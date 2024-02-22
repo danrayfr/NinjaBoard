@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org).
 
 ## [Unreleased]
 
+## [0.10.0] : 2024-22-02
+
+### Added
+
+- Basic Leaderboard page and query
+
 ## [0.9.0] : 2024-22-02
 
 ### Added
@@ -70,6 +76,7 @@ and this project adheres to [Semantic Versioning](https://semver.org).
 
 ## [Unreleased]
 [unreleased]: https://github.com/danrayfr/unified/branch/development#diff
+[0.10.0]: https://github.com/ninjadanray/Ninja-Board/pull/10
 [0.9.0]: https://github.com/ninjadanray/Ninja-Board/pull/9
 [0.8.0]: https://github.com/ninjadanray/Ninja-Board/pull/8
 [0.7.0]: https://github.com/ninjadanray/Ninja-Board/pull/7
