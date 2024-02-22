@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  assigned_course: one
+  user_skill_map: one
+
+two:
+  assigned_course: two
+  user_skill_map: two
