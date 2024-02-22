@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   # Routes for regular users
+
+  resources :leaderboards, only: %i[index]
   resources :progresses, path: 'progress', only: %i[index] do
     member do
       put :sort
