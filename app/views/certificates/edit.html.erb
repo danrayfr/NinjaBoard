@@ -1,4 +1,4 @@
-<%= content_for(:title, "New certificate") %>
+<%= content_for(:title, "Edit #{@certificate.title}") %>
 
 <section>
   <div class="relative items-center w-full mx-auto 2xl:max-w-7xl">
@@ -37,7 +37,7 @@
               <div class="col-span-full">
                 <%= form.label :file, "Upload your certificate", class: "block mb-2 text-sm font-medium text-gray-900" %>
                 <div class="mt-2 space-y-2">
-                  <%= form.file_field :file, class: "block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none" %>
+                  <%= form.file_field :file, class: "block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none", value: @certificate.file.attached? ? nil : @certificate.file %>
                   <span class="text-sm text-gray-500">Images(JPEG/PNG) & PDF are the allowed file format.</span>
                 </div>
               </div>

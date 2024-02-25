@@ -3,8 +3,10 @@ require 'test_helper'
 class CertificateTest < ActiveSupport::TestCase
   def setup
     @user = users(:ninja)
+    file = Rails.root.join('app', 'assets', 'images', 'sample_certificate.png')
 
     @certificate = @user.certificates.build(title: 'The Ninja Way', date_awarded: Time.now)
+    @certificate.file = file
   end
 
   test 'Certificate should be valid' do

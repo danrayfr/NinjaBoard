@@ -1,1 +1,18 @@
 <%= content_for(:title, 'Seiko') %>
+
+<% @certificates.each do |certificate| %>
+
+  <div>
+    <p><%= certificate.title %></p>
+    <p><%= certificate.source %></p>
+    <% if certificate.file.image? %>
+    <%= image_tag certificate.file %>
+    <% elsif certificate.file.content_type == 'application/pdf' %>
+       <div id="pdf-viewer-container">
+        <iframe id="pdf-viewer" src="<%= url_for(certificate.file) %>" width="100%" height="600px"></iframe>
+      </div>
+    <% end %>
+    <%= link_to "Edit", edit_certificate_path(certificate) %>
+    <%= link_to "Delete", certificate, data: { turbo_method: :delete } %>
+  </div>
+<% end %>

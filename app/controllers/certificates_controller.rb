@@ -2,9 +2,11 @@
 
 class CertificatesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_certificate, only: %i[edit destroy]
+  before_action :set_certificate, only: %i[edit update destroy]
 
-  def index; end
+  def index
+    @certificates = current_user.certificates
+  end
 
   def new
     @certificate = current_user.certificates.build
@@ -22,9 +24,20 @@ class CertificatesController < ApplicationController
 
   def edit; end
 
-  def update; end
+  def update
+    if @certificate.update(certificate_params)
+      redirect_to certificates_path, notice: 'Certificate successfully updated.'
+    else
+      render :edit, status: :unprocessable_entity
 
-  def destroy; end
+    end
+  end
+
+  def destroy
+    if @certificate.destroy
+      redirect_to certificates_path, notice: 'Certificate successfully deleted.'
+    end
+  end
 
   private
 
@@ -33,6 +46,6 @@ class CertificatesController < ApplicationController
   end
 
   def certificate_params
-    params.require(:certificate).permit(%i[title source date_awarded user_id])
+    params.require(:certificate).permit(%i[title source date_awarded user_id file])
   end
 end
