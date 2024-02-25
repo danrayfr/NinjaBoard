@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  source: 1
+  date_awarded: 2024-02-26 02:30:54
+  user: ninja
+
+two:
+  title: MyString
+  source: 1
+  date_awarded: 2024-02-26 02:30:54
+  user: ninja

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_21_010359) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_25_183054) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -68,6 +68,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_21_010359) do
     t.index ["user_id"], name: "index_assigned_courses_on_user_id"
   end
 
+  create_table "certificates", force: :cascade do |t|
+    t.string "title"
+    t.integer "source", default: 0, null: false
+    t.datetime "date_awarded"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_certificates_on_user_id"
+  end
+
   create_table "courses", force: :cascade do |t|
     t.string "title"
     t.bigint "user_id", null: false
@@ -80,6 +90,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_21_010359) do
     t.float "impact", default: 0.0
     t.index ["slug"], name: "index_courses_on_slug", unique: true
     t.index ["user_id"], name: "index_courses_on_user_id"
+  end
+
+  create_table "leaderboards", force: :cascade do |t|
+    t.bigint "assigned_course_id", null: false
+    t.bigint "user_skill_map_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["assigned_course_id"], name: "index_leaderboards_on_assigned_course_id"
+    t.index ["user_skill_map_id"], name: "index_leaderboards_on_user_skill_map_id"
   end
 
   create_table "progresses", force: :cascade do |t|
@@ -141,6 +160,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_21_010359) do
   add_foreign_key "assigned_courses", "courses"
   add_foreign_key "assigned_courses", "progresses"
   add_foreign_key "assigned_courses", "users"
+  add_foreign_key "certificates", "users"
   add_foreign_key "courses", "users"
+  add_foreign_key "leaderboards", "assigned_courses"
+  add_foreign_key "leaderboards", "user_skill_maps"
   add_foreign_key "user_skill_maps", "users"
 end
