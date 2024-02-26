@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_26_143418) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_26_171832) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -111,7 +111,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_26_143418) do
 
   create_table "levels", force: :cascade do |t|
     t.integer "lvl", default: 1
-    t.float "points", default: 0.0
+    t.integer "points", default: 0
     t.string "levelable_type", null: false
     t.bigint "levelable_id", null: false
     t.datetime "created_at", null: false

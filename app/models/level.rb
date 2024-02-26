@@ -7,6 +7,16 @@ class Level < ApplicationRecord
     level_up if updated_points >= next_level_threshold
   end
 
+  def next_level_threshold
+    100 * lvl
+  end
+
+  def remaining_points
+    return 0 if points.zero?
+
+    next_level_threshold - points
+  end
+
   private
 
   def level_up
@@ -19,9 +29,5 @@ class Level < ApplicationRecord
       update(points: remaining_points)
       points_required = next_level_threshold
     end
-  end
-
-  def next_level_threshold
-    100 * lvl
   end
 end

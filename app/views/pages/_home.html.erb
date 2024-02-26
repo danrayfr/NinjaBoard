@@ -32,8 +32,8 @@
             <p class="font-semibold"><%= current_user.name || current_user.email %></p>
             <p class="text-sm text-gray-500 capitalize"><%= current_user.role %></p>
             <p class="text-md text-gray-500 capitalize font-bold">LVL <%= current_user.badge.level.lvl %>(<%= current_user.badge.rank %>)</p>
+            <p class="text-md text-indigo-600 capitalize font-bold"><%= current_user.badge.level.remaining_points %> / <%= current_user.badge.level.next_level_threshold %></p>
           </div>
-          
         </div>
       </div>
       <!-- Dropdown Button -->
