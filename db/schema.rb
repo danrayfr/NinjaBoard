@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_25_183054) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_26_143418) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -68,6 +68,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_25_183054) do
     t.index ["user_id"], name: "index_assigned_courses_on_user_id"
   end
 
+  create_table "badges", force: :cascade do |t|
+    t.integer "rank", default: 0
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_badges_on_user_id"
+  end
+
   create_table "certificates", force: :cascade do |t|
     t.string "title"
     t.integer "source", default: 0, null: false
@@ -99,6 +107,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_25_183054) do
     t.datetime "updated_at", null: false
     t.index ["assigned_course_id"], name: "index_leaderboards_on_assigned_course_id"
     t.index ["user_skill_map_id"], name: "index_leaderboards_on_user_skill_map_id"
+  end
+
+  create_table "levels", force: :cascade do |t|
+    t.integer "lvl", default: 1
+    t.float "points", default: 0.0
+    t.string "levelable_type", null: false
+    t.bigint "levelable_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["levelable_type", "levelable_id"], name: "index_levels_on_levelable"
   end
 
   create_table "progresses", force: :cascade do |t|
@@ -160,6 +178,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_25_183054) do
   add_foreign_key "assigned_courses", "courses"
   add_foreign_key "assigned_courses", "progresses"
   add_foreign_key "assigned_courses", "users"
+  add_foreign_key "badges", "users"
   add_foreign_key "certificates", "users"
   add_foreign_key "courses", "users"
   add_foreign_key "leaderboards", "assigned_courses"
