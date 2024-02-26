@@ -56,21 +56,35 @@ class AssignedCourse < ApplicationRecord
     case course.category
     when 'management'
       user.user_skill_map.increment!(:management_skill, course.impact)
+      user.user_skill_map.trophies.find_by(name: 'management_skill').level.increment_points(50)
     when 'technical'
       user.user_skill_map.increment!(:technical_skill, course.impact)
+      user.user_skill_map.trophies.find_by(name: 'technical_skill').level.increment_points(50)
     when 'communication'
       user.user_skill_map.increment!(:communication_skill, course.impact)
+      user.user_skill_map.trophies.find_by(name: 'communication_skill').level.increment_points(50)
     when 'financial'
       user.user_skill_map.increment!(:financial_skill, course.impact)
+      user.user_skill_map.trophies.find_by(name: 'financial_skill').level.increment_points(50)
     when 'analytical'
       user.user_skill_map.increment!(:analytical_skill, course.impact)
+      user.user_skill_map.trophies.find_by(name: 'analytical_skill').level.increment_points(50)
     when 'work_ethics'
       user.user_skill_map.increment!(:work_ethics, course.impact)
+      user.user_skill_map.trophies.find_by(name: 'work_ethics').level.increment_points(50)
     end
 
     # Update date_completed if progress status is completed
     return unless progress_status == 'completed'
 
+    user.badge.level.increment_points(50)
+
     update(date_completed: Time.now)
+  end
+
+  def increment_and_update_trophy(skill)
+    user_skill_map.increment!(skill, course.impact)
+    trophy = user_skill_map.trophies.find_by(name: skill.to_s)
+    trophy&.level&.increment_points(50)
   end
 end
