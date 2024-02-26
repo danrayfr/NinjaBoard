@@ -14,3 +14,9 @@
 
 */
 @import 'actiontext.css';
+
+@layer components {
+  .active {
+    @apply w-full rounded-lg bg-white border-2 shadow h-16 border-black;
+  }
+}

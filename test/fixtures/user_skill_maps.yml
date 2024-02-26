@@ -1,7 +1,19 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  user: one
+  user: ninja
+  management_skill: 0.0
+  technical_skill: 0.0
+  communication_skill: 0.0
+  financial_skill: 0.0
+  analytical_skill: 0.0
+  work_ethics: 0.0
 
 two:
-  user: two
+  user: admin
+  management_skill: 0.0
+  technical_skill: 0.0
+  communication_skill: 0.0
+  financial_skill: 0.0
+  analytical_skill: 0.0
+  work_ethics: 0.0

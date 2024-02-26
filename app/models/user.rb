@@ -11,6 +11,7 @@ class User < ApplicationRecord
   has_person_name
   has_many :courses, dependent: :destroy
   has_many :assigned_courses, dependent: :destroy
+  has_many :certificates, dependent: :destroy
   has_one :user_skill_map
 
   validates :email, presence: true, uniqueness: true
