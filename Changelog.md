@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org).
 
 ## [Unreleased]
 
+## [0.11.0] : 2024-26-02
+
+### Added
+
+- Certificate Board with model and controll testing
+
 ## [0.10.0] : 2024-22-02
 
 ### Added
@@ -76,6 +82,7 @@ and this project adheres to [Semantic Versioning](https://semver.org).
 
 ## [Unreleased]
 [unreleased]: https://github.com/danrayfr/unified/branch/development#diff
+[0.11.0]: https://github.com/ninjadanray/Ninja-Board/pull/11
 [0.10.0]: https://github.com/ninjadanray/Ninja-Board/pull/10
 [0.9.0]: https://github.com/ninjadanray/Ninja-Board/pull/9
 [0.8.0]: https://github.com/ninjadanray/Ninja-Board/pull/8
