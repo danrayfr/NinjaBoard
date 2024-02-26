@@ -12,6 +12,7 @@ class User < ApplicationRecord
   has_many :courses, dependent: :destroy
   has_many :assigned_courses, dependent: :destroy
   has_many :certificates, dependent: :destroy
+  has_one :badge
   has_one :user_skill_map
 
   validates :email, presence: true, uniqueness: true
@@ -23,12 +24,20 @@ class User < ApplicationRecord
   enum role: %i[ninja admin]
 
   after_create :build_user_skill_map_if_missing
+  after_create :build_user_badge_if_missing
 
   def build_user_skill_map_if_missing
     return if user_skill_map.present?
 
     # Create a new user skill map for the user
     build_user_skill_map.save
+  end
+
+  def build_user_badge_if_missing
+    return if badge.present?
+
+    # Create a new user badge for the user
+    build_badge.save
   end
 
   def password_required?

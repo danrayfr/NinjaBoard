@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org).
 
 ## [Unreleased]
 
+## [0.11.0] : 2024-27-02
+
+### Added
+
+- Rank and Badges
+- Levels and Points
+
+
 ## [0.11.0] : 2024-26-02
 
 ### Added
@@ -82,6 +90,7 @@ and this project adheres to [Semantic Versioning](https://semver.org).
 
 ## [Unreleased]
 [unreleased]: https://github.com/danrayfr/unified/branch/development#diff
+[0.12.0]: https://github.com/ninjadanray/Ninja-Board/pull/12
 [0.11.0]: https://github.com/ninjadanray/Ninja-Board/pull/11
 [0.10.0]: https://github.com/ninjadanray/Ninja-Board/pull/10
 [0.9.0]: https://github.com/ninjadanray/Ninja-Board/pull/9

@@ -3,14 +3,24 @@
     <!-- Left Column -->
     <div>
       <!-- User Info Card -->
-      <div class="bg-white shadow-md rounded-lg p-6 mb-4">
+      <div class="bg-white shadow-md rounded-lg p-12 mb-4 spacing">
         <h2 class="text-lg font-bold mb-4">User Info</h2>
+        
         <div class="flex items-center mb-4">
           <div class="relative h-24 w-24">
             <!-- Circular avatar container -->
-            <div class="relative rounded-full overflow-hidden h-24 w-24">
+            <div class="relative overflow-hidden h-24 w-24">
               <!-- User profile image -->
-              <%= image_tag "svg/avatar.svg", class: "h-full w-full object-cover" %>
+              <%= image_tag "profile/ninja.jpeg", class: "h-full w-full object-cover" %>
+
+              <!-- Medal -->
+              <div class="absolute bottom-0 left-8 transform translate-y-1/4 w-8">
+                <%= image_tag "svg/medal-icon.svg"%>
+              </div>
+            </div>
+            <div class="relative overflow-hidden h-8 w-8 mt-2">
+              <!-- User profile image -->
+              <%= image_tag current_user.badge.badges, class: "h-full w-full object-cover" %>
 
               <!-- Medal -->
               <div class="absolute bottom-0 left-8 transform translate-y-1/4 w-8">
@@ -21,6 +31,8 @@
           <div class="ml-4">
             <p class="font-semibold"><%= current_user.name || current_user.email %></p>
             <p class="text-sm text-gray-500 capitalize"><%= current_user.role %></p>
+            <p class="text-md text-gray-500 capitalize font-bold">LVL <%= current_user.badge.level.lvl %>(<%= current_user.badge.rank %>)</p>
+            <p class="text-md text-indigo-600 capitalize font-bold"><%= current_user.badge.level.remaining_points %> / <%= current_user.badge.level.next_level_threshold %></p>
           </div>
         </div>
       </div>
