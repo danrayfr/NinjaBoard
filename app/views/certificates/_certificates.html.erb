@@ -1,0 +1,19 @@
+<% @certificates.each do |certificate| %>
+  <div title="<%= certificate.title %>" class="duration-200 border-2 border-black shadow-large focus:translate-y-1 focus:shadow-none shadow-black rounded-2xl overflow-hidden">
+    <div class="flex flex-col h-full divide-y-2 divide-black">
+      <%= image_tag certificate.file, alt: certificate.title, class: "w-full lg:h-96 object-cover" %>
+      <div class="flex flex-1 flex-col justify-between p-8 bg-white">
+        <div class="flex-1">
+          <div class="flex space-x-1 text-sm text-black"><time datetime=""><%= certificate.date_awarded.strftime("%B %d %Y")%></time> <span aria-hidden="true">·</span> <span class="uppercase"><%= certificate.source %></span></div>
+          <div class="mt-2 block">
+            <p class="text-xl lg:text-4xl text-black font-medium"><%= certificate.title %></p>
+          </div>
+          <p class="inline-flex gap-4 mt-6 text-2xl items-center">
+            <%= link_to "Edit here", edit_certificate_path(certificate) if certificate.user == current_user %>
+            <%= link_to "Delete", certificate, data: { turbo_method: :delete } if user_signed_in? && current_user.admin? %>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

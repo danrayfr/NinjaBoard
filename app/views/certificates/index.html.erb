@@ -1,18 +1,20 @@
 <%= content_for(:title, 'Seiko') %>
 
-<% @certificates.each do |certificate| %>
-
-  <div>
-    <p><%= certificate.title %></p>
-    <p><%= certificate.source %></p>
-    <% if certificate.file.image? %>
-    <%= image_tag certificate.file %>
-    <% elsif certificate.file.content_type == 'application/pdf' %>
-       <div id="pdf-viewer-container">
-        <iframe id="pdf-viewer" src="<%= url_for(certificate.file) %>" width="100%" height="600px"></iframe>
-      </div>
-    <% end %>
-    <%= link_to "Edit", edit_certificate_path(certificate) %>
-    <%= link_to "Delete", certificate, data: { turbo_method: :delete } %>
+<section>
+  <div class="relative items-center w-full mx-auto bg-ivory p-8 lg:p-20 lg:py-32 2xl:border-x-2 border-b-2 border-black">
+    <div class="max-w-3xl">
+      <h2 class="text-3xl lg:text-8xl tracking-tight font-medium text-black mx-auto">
+        Seiko Board
+      </h2>
+      <p class="xl:text-2xl tracking-wide text-black mt-4">
+        You can input all of your certificates in here.
+      </p>
+      <%= link_to "Add certificate", new_certificate_path, class: "mt-2 text-offWhite items-center shadow shadow-graphite text-lg font-semibold inline-flex px-6 focus:outline-none justify-center text-center bg-graphite focus:bg-paleFern border-graphite duration-300 outline-none focus:shadow-none border-2 sm:w-auto py-3 rounded-lg h-16 tracking-wide focus:translate-y-1 w-full hover:bg-paleFern" %>
+    </div>
   </div>
-<% end %>
+  <div
+    class="grid grid-cols-1 md:grid-cols-2 p-8 lg:p-20 lg:grid-cols-2 gap-8 mx-auto 2xl:max-w-7xl 2xl:border-x-2 border-black [&amp;>*:nth-child(1)]:bg-red-400 [&amp;>*:nth-child(2)]:bg-green-400 [&amp;>*:nth-child(3)]:bg-violet-300 [&amp;>*:nth-child(4)]:bg-yellow-400"
+  >
+    <%= render "certificates" %>
+  </div>
+</section>
