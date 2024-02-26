@@ -1,4 +1,5 @@
 class Badge < ApplicationRecord
+  include BuildAssociation
   belongs_to :user
   has_one :level, as: :levelable
 
@@ -14,9 +15,7 @@ class Badge < ApplicationRecord
   }.freeze
 
   def create_level
-    return if level.present?
-
-    build_level.save
+    build_association_if_missing(:level)
   end
 
   def badges

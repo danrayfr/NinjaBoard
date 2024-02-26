@@ -21,6 +21,12 @@
 #   user.build_user_skill_map_if_missing
 # end
 
+User.find_each(&:build_user_skill_map_if_missing)
+
 User.find_each(&:build_user_badge_if_missing)
 
 Badge.find_each(&:create_level)
+
+UserSkillMap.find_each(&:create_trophies_for_skills)
+
+Trophy.find_each(&:create_level)
