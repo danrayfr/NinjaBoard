@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  include BuildAssociation
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -27,10 +28,7 @@ class User < ApplicationRecord
   after_create :build_user_badge_if_missing
 
   def build_user_skill_map_if_missing
-    return if user_skill_map.present?
-
-    # Create a new user skill map for the user
-    build_user_skill_map.save
+    build_association_if_missing(:user_skill_map)
   end
 
   def build_user_badge_if_missing
