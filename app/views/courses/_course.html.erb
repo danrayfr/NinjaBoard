@@ -1,0 +1,31 @@
+<div class="flex flex-col lg:flex-row lg:items-center justify-between border-2 h-full bg-gold rounded-2xl shadow-large gap-12 border-graphite p-8">
+    <div class="mt-8">
+        <span class="text-graphite uppercase">
+            <span class="inline-flex items-center board-tag-badge font-medium py-1 px-3 bg-paleFern text-offWhite rounded"><%= course.category %></span>
+            <span>&#8226;</span>
+            <%= pluralize course.impact, "Impact" %>
+        </span>
+        <%= link_to course_path(course) do %>
+        <h1 class="mt-4 text-2xl font-medium text-graphite font-sister tracking-widest">
+            <%= course.title %>
+        </h1>
+        <% end %>
+        <p class="mt-2 text-graphite">
+            <%= course.description.to_plain_text.truncate(50) %>
+        </p>
+        <div class="flex items-center justify-between mt-4">
+            <div>
+                <a href="#" class="text-lg font-medium text-gray-700 hover:underline hover:text-gray-500 font-sister">
+                    by <%= course.author %>
+                </a>
+                <p class="text-sm text-lightGraphite"><%= course.url %></p>
+            </div>
+        </div>
+        <div class="mt-12">
+            <% if AssignedCourse.exists?(user: current_user, course_id: course.id) %>
+            <p class="text-sm font-medium">You have already enrolled in this course.</p>
+            <% else %> <%= link_to "Enroll", course_path(course), class: "items-center inline-flex w-full focus:outline-disc bg-paleFern duration-500 focus:ring-2 focus:ring-paleFern focus:ring-offset-2 font-medium lg:w-auto h-12
+            hover:bg-graphite justify-center px-6 py-1 rounded text-offWhite border-2text-center text-sm" %> <% end %>
+        </div>
+    </div>
+</div>

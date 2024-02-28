@@ -16,10 +16,10 @@ module ProgressesHelper
   end
 
   def completed_card_color(param)
-    unless param.date_completed.nil?
-      'border-2 hover:border-dashed border-transparent hover:border-indigo-600 bg-paleFern text-offWhite'
-    else
+    if param.date_completed.nil?
       'border-2 hover:border-dashed border-transparent hover:border-gold border-coral border-dashed'
+    else
+      'border-2 hover:border-dashed border-transparent hover:border-indigo-600 bg-paleFern text-offWhite'
     end
   end
 end
