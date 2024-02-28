@@ -1,212 +1,54 @@
 <%= content_for(:title, "Home") %>
 
-
-
-<% if current_user.admin? %>
-<div class="sticky top-0 py-12 bg-gray-50 border-b border-black <%= horizontal_padding %> z-30">
-  <div class="flex justify-between">
-    <div class="text-5xl tracking-wide">Welcome to Ninjaboard</div>
-  </div>
-</div>
-
-<div class="flex flex-wrap justify-center mt-10">
-  <div class="p-4 max-w-sm">
-    <div class="flex rounded-lg h-full bg-graphite p-8 flex-col">
-      <div class="flex items-center mb-3">
-        <h2 class="text-white text-lg font-medium">Graphite</h2>
+<div data-controller="tabs" data-tabs-default-tab-value="profile">
+  <div class="relative overflow-hidden h-full bg-cover bg-no-repeat bg-center p-12 text-center" style="background-image: url('/assets/svg/blob.svg');">
+    <div class="container mx-auto relative flex flex-row items-center gap-4 w-full h-8 mx-auto text-black select-none" x-ref="tabButtons">
+      <div class="hidden sm:block">
+        <div class="inline-flex rounded-md shadow-sm" role="group">
+          <button id="profile" data-tabs-target="btn" data-action="click->tabs#select" type="button" class="px-4 py-2 text-sm font-medium text-gray-900 bg-transparent border border-gray-900 rounded-s-lg hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white active">
+            Profile
+          </button>
+          <button id="certificates" data-tabs-target="btn" data-action="click->tabs#select" type="button" class="px-4 py-2 text-sm font-medium text-gray-900 bg-transparent border-t border-b border-gray-900 hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white active">
+            Certificates
+          </button>
+          <button id="trophies" data-tabs-target="btn" data-action="click->tabs#select" type="button" class="px-4 py-2 text-sm font-medium text-gray-900 bg-transparent border border-gray-900 rounded-e-lg hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white active">
+            Trophies
+          </button>
+        </div>
       </div>
-      <div class="flex flex-col justify-between flex-grow">
-        <p class="leading-relaxed text-base text-white">
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
-        </p>
+      <div class="sm:hidden">
+        <div class="px-4 py-2 inline-flex" data-controller="dropdown" data-tabs-default-tab-value="profile">
+          <button
+            class="text-white bg-graphite hover:bg-paleFern focus:ring-4 focus:outline-none focus:ring-blue-300 font-normal tracking-wide rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center font-sister w-42"
+            type="button"
+            data-action="dropdown#toggle click@window->dropdown#hide"
+          >
+              Select View
+              <svg class="w-2.5 h-2.5 ms-12" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
+              </svg>
+          </button>
+
+          <!-- Dropdown menu -->
+          <div id="dropdownHover" class="absolute z-10 w-auto mt-2 origin-top-right rounded-lg bg-white ring-2 ring-black focus:outline-none" data-dropdown-target="menu">
+              <ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdownDividerButton">
+                  <li>
+                      <button id="profile" data-tabs-target="btn" data-action="click->tabs#select dropdown#toggle" class="block px-4 py-2 hover:bg-gray-100 capitalize hover:font-medium">Profile</button>
+                  </li>
+                  <li>
+                      <button id="certificates" data-tabs-target="btn" data-action="click->tabs#select dropdown#toggle" class="block px-4 py-2 hover:bg-gray-100 capitalize hover:font-medium">Certificates</button>
+                  </li>
+                  <li>
+                      <button id="trophies" data-tabs-target="btn" data-action="click->tabs#select dropdown#toggle" class="block px-4 py-2 hover:bg-gray-100 capitalize hover:font-medium">Trophies</button>
+                  </li>
+              </ul>
+          </div>
+        </div> 
       </div>
     </div>
-  </div>
 
-  <div class="p-4 max-w-sm">
-    <div class="flex rounded-lg h-full bg-ivory p-8 flex-col">
-      <div class="flex items-center mb-3">
-        <h2 class="text-dark text-lg font-medium">Ivory</h2>
-      </div>
-      <div class="flex flex-col justify-between flex-grow">
-        <p class="leading-relaxed text-base text-dark">
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
-        </p>
-      </div>
-    </div>
-  </div>
-
-  <div class="p-4 max-w-sm">
-    <div class="flex rounded-lg h-full bg-stone p-8 flex-col">
-      <div class="flex items-center mb-3">
-        <h2 class="text-dark text-lg font-medium">Stone</h2>
-      </div>
-      <div class="flex flex-col justify-between flex-grow">
-        <p class="leading-relaxed text-base text-dark">
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
-        </p>
-      </div>
-    </div>
-  </div>
-
-  <div class="p-4 max-w-sm">
-    <div class="flex rounded-lg h-full bg-coral p-8 flex-col">
-      <div class="flex items-center mb-3">
-        <h2 class="text-dark text-lg font-medium">Coral</h2>
-      </div>
-      <div class="flex flex-col justify-between flex-grow">
-        <p class="leading-relaxed text-base text-dark">
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
-        </p>
-      </div>
-    </div>
-  </div>
-
-  <div class="p-4 max-w-sm">
-    <div class="flex rounded-lg h-full bg-fern p-8 flex-col">
-      <div class="flex items-center mb-3">
-        <h2 class="text-white text-lg font-medium">Fern</h2>
-      </div>
-      <div class="flex flex-col justify-between flex-grow">
-        <p class="leading-relaxed text-base text-white">
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
-        </p>
-      </div>
-    </div>
-  </div>
-
-  <div class="p-4 max-w-sm">
-    <div class="flex rounded-lg h-full bg-gold p-8 flex-col">
-      <div class="flex items-center mb-3">
-        <h2 class="text-dark text-lg font-medium">Gold</h2>
-      </div>
-      <div class="flex flex-col justify-between flex-grow">
-        <p class="leading-relaxed text-base text-dark">
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
-        </p>
-      </div>
-    </div>
-  </div>
-
-  <div class="p-4 max-w-sm">
-    <div class="flex rounded-lg h-full bg-lightGraphite p-8 flex-col">
-      <div class="flex items-center mb-3">
-        <h2 class="text-white text-lg font-medium">Light Graphite</h2>
-      </div>
-      <div class="flex flex-col justify-between flex-grow">
-        <p class="leading-relaxed text-base text-white">
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
-        </p>
-      </div>
-    </div>
-  </div>
-
-  <div class="p-4 max-w-sm">
-    <div class="flex rounded-lg h-full bg-darkStone p-8 flex-col">
-      <div class="flex items-center mb-3">
-        <h2 class="text-white text-lg font-medium">Dark Stone</h2>
-      </div>
-      <div class="flex flex-col justify-between flex-grow">
-        <p class="leading-relaxed text-base text-white">
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
-        </p>
-      </div>
-    </div>
-  </div>
-
-  <div class="p-4 max-w-sm">
-    <div class="flex rounded-lg h-full bg-paleFern p-8 flex-col">
-      <div class="flex items-center mb-3">
-        <h2 class="text-dark text-lg font-medium">Pale Fern</h2>
-      </div>
-      <div class="flex flex-col justify-between flex-grow">
-        <p class="leading-relaxed text-base text-dark">
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
-        </p>
-      </div>
-    </div>
-  </div>
-
-  <div class="p-4 max-w-sm">
-    <div class="flex rounded-lg h-full bg-paleCoral p-8 flex-col">
-      <div class="flex items-center mb-3">
-        <h2 class="text-dark text-lg font-medium">Pale Coral</h2>
-      </div>
-      <div class="flex flex-col justify-between flex-grow">
-        <p class="leading-relaxed text-base text-dark">
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
-        </p>
-      </div>
-    </div>
-  </div>
-
-  <div class="p-4 max-w-sm">
-    <div class="flex rounded-lg h-full bg-paleGold p-8 flex-col">
-      <div class="flex items-center mb-3">
-        <h2 class="text-dark text-lg font-medium">Pale Gold</h2>
-      </div>
-      <div class="flex flex-col justify-between flex-grow">
-        <p class="leading-relaxed text-base text-dark">
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
-        </p>
-      </div>
-    </div>
-  </div>
-
-  <div class="p-4 max-w-sm">
-    <div class="flex rounded-lg h-full bg-offWhite p-8 flex-col">
-      <div class="flex items-center mb-3">
-        <h2 class="text-dark text-lg font-medium">Off White</h2>
-      </div>
-      <div class="flex flex-col justify-between flex-grow">
-        <p class="leading-relaxed text-base text-dark">
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
-<% end %>
-
-<div class="p-8 lg:p-20" data-controller="tabs" data-tabs-default-tab-value="home">
-  <div class="relative mt-10">
-    <div class="relative flex flex-row items-center gap-4 w-full h-8 mx-auto text-black select-none" x-ref="tabButtons">
-      <button id="home" data-tabs-target="btn" data-action="click->tabs#select" class="relative z-20 inline-flex items-center gap-2 w-auto text-sm py-3 px-6 font-medium cursor-pointer transition-all whitespace-nowrap">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 icon icon-tabler icon-tabler-components" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-          <path d="M3 12l3 3l3 -3l-3 -3z"></path>
-          <path d="M15 12l3 3l3 -3l-3 -3z"></path>
-          <path d="M9 6l3 3l3 -3l-3 -3z"></path>
-          <path d="M9 18l3 3l3 -3l-3 -3z"></path>
-        </svg>
-        Home
-      </button>
-
-      <button id="certificates" data-tabs-target="btn" data-action="click->tabs#select" class="relative z-20 inline-flex items-center gap-2 w-auto text-sm py-3 px-6 font-medium cursor-pointer transition-all whitespace-nowrap">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 icon icon-tabler icon-tabler-components" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-          <path d="M3 12l3 3l3 -3l-3 -3z"></path>
-          <path d="M15 12l3 3l3 -3l-3 -3z"></path>
-          <path d="M9 6l3 3l3 -3l-3 -3z"></path>
-          <path d="M9 18l3 3l3 -3l-3 -3z"></path>
-        </svg>
-        Certificates
-      </button>
-
-      <button id="trophies" data-tabs-target="btn" data-action="click->tabs#select" class="relative z-20 inline-flex items-center gap-2 w-auto text-sm py-3 px-6 font-medium cursor-pointer transition-all whitespace-nowrap">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 icon icon-tabler icon-tabler-components" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-          <path d="M3 12l3 3l3 -3l-3 -3z"></path>
-          <path d="M15 12l3 3l3 -3l-3 -3z"></path>
-          <path d="M9 6l3 3l3 -3l-3 -3z"></path>
-          <path d="M9 18l3 3l3 -3l-3 -3z"></path>
-        </svg>
-        Trophies
-      </button>
-    
-    </div>
     <div>
-      <div data-tabs-target="tab" id="home">
+      <div data-tabs-target="tab" id="profile">
         <%= render "home" %>
       </div>
       <div data-tabs-target="tab" id="certificates">
@@ -241,3 +83,6 @@
     </div>
   </div>
 </div>
+
+
+
