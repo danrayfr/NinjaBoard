@@ -7,7 +7,7 @@
     <div @click.away="open = false" class="relative" x-data="{ open: false }">
       <button @click="open = !open" class="duration-300 ease-in-out focus:outline-none focus:shadow-none focus:text-orange/90 hover:text-lila-900 md:my-0 px-4 py-2 transform transition inline-flex items-center gap-3" data-action="click->dropdown#toggleAvatarDropdown">
           <span class="sr-only">Open user menu</span>
-          <%= image_tag "svg/avatar.svg", class: "w-8 h-8 rounded-full", alt: "user photo" %>
+          <%= image_tag "profile/ninja.jpeg", class: "w-8 h-8 rounded-full", alt: "user photo" %>
           <span class="sm:block hidden font-normal"><%= current_user.username || current_user.email %></span>
           <svg
               :class="{'rotate-180': open, 'rotate-0': !open}"
