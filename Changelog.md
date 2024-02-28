@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org).
 
 ## [Unreleased]
 
+## [0.14.0] : 2024-28-02
+
+### Added
+
+- Update design layout of pages and features.
+
 ## [0.13.0] : 2024-27-02
 
 ### Added
