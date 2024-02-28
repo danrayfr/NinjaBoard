@@ -62,11 +62,13 @@
         </div>
 
         <% @courses_by_category.each do |category, courses| %>
-        <div data-tabs-target="tab" id="<%= category %>">
-            <div class="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
-                <% courses.each do |course| %> <%= render "course", course: course %> <% end %>
+            <div data-tabs-target="tab" id="<%= category %>">
+                <div class="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
+                    <% courses.each do |course| %> 
+                        <%= render "course", course: course %>
+                    <% end %>
+                </div>
             </div>
-        </div>
         <% end %>
     </div>
 </section>

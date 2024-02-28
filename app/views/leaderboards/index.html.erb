@@ -1,370 +1,80 @@
 <%= content_for(:title, "Leaderboards") %>
 
-<div class="container mx-auto px-12">
-
-<div class="flex flex-wrap -mx-3 mb-5">
-  <div class="w-full max-w-full px-3 mb-6 mx-auto">
-    <div class="relative flex-[1_auto] flex flex-col break-words min-w-0 bg-clip-border rounded-[.95rem] bg-gradient-to-r from-purple-500 to-pink-500 m-5">
-      <div class="relative flex flex-col min-w-0 break-words border border-dashed bg-clip-border rounded-2xl border-stone-200 bg-light/30">
-        <!-- card header -->
-        <div class="px-9 pt-5 flex justify-between items-stretch flex-wrap min-h-[70px] pb-0 bg-transparent">
-          <h3 class="flex flex-col items-start justify-center m-2 ml-0 font-medium text-xl/tight text-dark">
-            <span class="mr-3 font-semibold text-white text-5xl">Leaderboards by skill map total</span>
-            <span class="mt-1 font-medium text-offWhite text-lg/normal">Total of all category in the user skill map</span>
-          </h3>
-        </div>
-        <!-- end card header -->
-        <!-- card body  -->
-        <div class="flex-auto block py-8 pt-6 px-9">
-          <div class="overflow-x-auto">
-            <table class="w-full my-0 align-middle text-dark border-separate border-spacing-x-12 border-spacing-y-4 p-12">
-              <colgroup>
-                <col style="width: 10%;" />
-                <col style="width: 50%;" />
-                <col style="width: 20%;" />
-              </colgroup>
-              <thead></thead>
-              <tbody>
-                <% count = 0 %>
-                <% @skill_total_rankings.each  do |rank| %>
-                <% count += 1 %>
-                <tr>
-                  <td class="border-2 text-offWhite border-white p-4 text-4xl text-center font-bold">#<%= count %></td>
-                  <td class="border-2 text-offWhite border-white p-4 text-4xl flex items-center">
-                    <%= image_tag "svg/avatar.svg", class: "w-12 h-12 mr-4" %>
-                    <span class="text-center flex-grow font-semibold capitalize"><%= rank.name %></span>
-                  </td>
-                  <td class="border-2 text-offWhite border-white p-4 text-4xl text-center font-medium"><%= rank.total_skill_score %></td>
-                </tr>
-                <% end %>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
+<section>
+  <div class="w-full mx-auto px-8 p-24 text-left md:text-center bg-ivory">
+    <p class="text-4xl lg:text-7xl tracking-tighter text-graphite font-medium">
+      <span></span>
+      <span class="underlined font-sister uppercase hover:text-coral hover:font-medium tracking-normal hover:tracking-widest hover:-rotate-2 active:-rotate-3d ">Leaderboard</span>
+      <span class="font-sister"></span>
+      <span class="lg:block"></span>
+    </p>
+    <p class="md:mt-4 tracking-wide text-graphite font-normal">
+      Our Ninja
+      <span class="font-sister tracking-wide text-xl text-graphite">Leaders</span>
+    </p>
   </div>
-</div>
+</section>
 
-<div class="flex flex-wrap -mx-3 mb-5">
-  <div class="w-full max-w-full px-3 mb-6 mx-auto">
-    <div class="relative flex-[1_auto] flex flex-col break-words min-w-0 bg-clip-border rounded-[.95rem] bg-gradient-to-r from-purple-500 to-pink-500 m-5">
-      <div class="relative flex flex-col min-w-0 break-words border border-dashed bg-clip-border rounded-2xl border-stone-200 bg-light/30">
-        <!-- card header -->
-        <div class="px-9 pt-5 flex justify-between items-stretch flex-wrap min-h-[70px] pb-0 bg-transparent">
-          <h3 class="flex flex-col items-start justify-center m-2 ml-0 font-medium text-xl/tight text-dark">
-            <span class="mr-3 font-semibold text-white text-5xl">Leaderboards by completed courses course impact total</span>
-            <span class="mt-1 font-medium text-offWhite text-lg/normal">Total of all category in the user skill map</span>
-          </h3>
-        </div>
-        <!-- end card header -->
-        <!-- card body  -->
-        <div class="flex-auto block py-8 pt-6 px-9">
-          <div class="overflow-x-auto">
-            <table class="w-full my-0 align-middle text-dark border-separate border-spacing-x-12 border-spacing-y-4 p-12">
-              <colgroup>
-                <col style="width: 10%;" />
-                <col style="width: 50%;" />
-                <col style="width: 20%;" />
-              </colgroup>
-              <thead></thead>
-              <tbody>
-                <% count = 0 %>
-                <% @total_impact_rankings.each  do |rank| %>
-                <% count += 1 %>
-                <tr>
-                  <td class="border-2 text-offWhite border-white p-4 text-4xl text-center font-bold">#<%= count %></td>
-                  <td class="border-2 text-offWhite border-white p-4 text-4xl flex items-center">
-                    <%= image_tag "svg/avatar.svg", class: "w-12 h-12 mr-4" %>
-                    <span class="text-center flex-grow font-semibold capitalize"><%= rank.name %></span>
-                  </td>
-                  <td class="border-2 text-offWhite border-white p-4 text-4xl text-center font-medium"><%= rank.total_impact %></td>
-                </tr>
-                <% end %>
-              </tbody>
-            </table>
+<div class="relative px-4" data-controller="tabs dropdown" data-tabs-default-tab-value="default">
+  <div class="mt-24 mx-auto space-y-4 relative z-10 max-w-screen-2xl">
+    <div class="flex items-center justify-between">
+      <div class="space-y-6">
+          <button
+              class="text-white bg-graphite hover:bg-paleFern focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center"
+              type="button"
+              data-action="dropdown#toggle click@window->dropdown#hide"
+          >
+              Filter by category
+              <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
+              </svg>
+          </button>
+
+          <!-- Dropdown menu -->
+          <div id="dropdownHover" class="absolute z-10 w-auto mt-2 origin-top-right rounded-lg bg-white ring-2 ring-black focus:outline-none" data-dropdown-target="menu">
+              <ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdownDividerButton">
+                  <% @skill_rankings_by_category.each do |category, rankings| %>
+                  <li>
+                      <button id="<%= category %>" data-tabs-target="btn" data-action="click->tabs#select dropdown#toggle" class="block px-4 py-2 hover:bg-gray-100 capitalize hover:font-medium"><%= category.to_s.gsub(/_skill$/, '').split('_').map(&:capitalize).join(' ') %></button>
+                  </li>
+                  <% end %>
+              </ul>
+              <div class="py-2">
+                  <button id="default" data-tabs-target="btn" data-action="click->tabs#select dropdown#toggle" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Default</button>
+              </div>
           </div>
-        </div>
       </div>
-    </div>
+      <button class="focus:outline-none">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600 transition-colors duration-300 transform hover:text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+      </button>
   </div>
-</div>
+    
+    <div data-tabs-target="tab" id="default">
+      <h3 class="flex flex-col items-start justify-center m-2 ml-0 font-medium text-xl/tight text-dark">
+        <span class="mr-3 font-normal text-graphite text-5xl font-sister tracking-tight">Rankings by skill map total</span>
+        <span class="mt-1 font-medium text-stone text-sm/normal uppercase">The total user skill map in all category</span>
+      </h3>
+      <% @skill_total_rankings.each_with_index do |rank, index| %>
+        <% unless rank.total_skill_score <= 0 %>
+          <%= render "leaderboard", rank: rank, index: index, category: 'total_skill' %>
+        <% end %>
+      <% end %>
+    </div>
 
-<div class="flex flex-wrap -mx-3 mb-5">
-  <div class="w-full max-w-full px-3 mb-6 mx-auto">
-    <div class="relative flex-[1_auto] flex flex-col break-words min-w-0 bg-clip-border rounded-[.95rem] bg-gradient-to-r from-purple-500 to-pink-500 m-5">
-      <div class="relative flex flex-col min-w-0 break-words border border-dashed bg-clip-border rounded-2xl border-stone-200 bg-light/30">
-        <!-- card header -->
-        <div class="px-9 pt-5 flex justify-between items-stretch flex-wrap min-h-[70px] pb-0 bg-transparent">
-          <h3 class="flex flex-col items-start justify-center m-2 ml-0 font-medium text-xl/tight text-dark">
-            <span class="mr-3 font-semibold text-white text-5xl">Leaderboards by management skill</span>
-            <span class="mt-1 font-medium text-offWhite text-lg/normal">Total of management category in the user skill map</span>
-          </h3>
-        </div>
-        <!-- end card header -->
-        <!-- card body  -->
-        <div class="flex-auto block py-8 pt-6 px-9">
-          <div class="overflow-x-auto">
-            <table class="w-full my-0 align-middle text-dark border-separate border-spacing-x-12 border-spacing-y-4 p-12">
-              <colgroup>
-                <col style="width: 10%;" />
-                <col style="width: 50%;" />
-                <col style="width: 20%;" />
-              </colgroup>
-              <thead></thead>
-              <tbody>
-                <% count = 0 %>
-                <% @skill_per_management.each  do |rank| %>
-                <% count += 1 %>
-                <% unless rank.management_skill_score <= 0 %>
-                <tr>
-                  <td class="border-2 text-offWhite border-white p-4 text-4xl text-center font-bold">#<%= count %></td>
-                  <td class="border-2 text-offWhite border-white p-4 text-4xl flex items-center">
-                    <%= image_tag "svg/avatar.svg", class: "w-12 h-12 mr-4" %>
-                    <span class="text-center flex-grow font-semibold capitalize"><%= rank.name %></span>
-                  </td>
-                  <td class="border-2 text-offWhite border-white p-4 text-4xl text-center font-medium"><%= rank.management_skill_score %></td>
-                </tr>
-                <% end %>
-                <% end %>
-              </tbody>
-            </table>
-          </div>
-        </div>
+    <% @skill_rankings_by_category.each do |category, rankings| %>
+      <div data-tabs-target="tab" id="<%= category %>">
+        <h3 class="flex flex-col items-start justify-center m-2 ml-0 font-medium text-xl/tight text-dark">
+          <span class="mr-3 font-normal text-graphite text-5xl font-sister tracking-tight">Rankings by <%= category.to_s.gsub(/_skill$/, '').split('_').map(&:capitalize).join(' ') %></span>
+          <span class="mt-1 font-medium text-stone text-sm/normal uppercase">The user skill map in <%= category.to_s.gsub(/_skill$/, '').split('_').map(&:capitalize).join(' ') %> category</span>
+        </h3>
+        <% rankings.each_with_index do |rank, index| %>
+          <% unless rank.send("#{category}_score") <= 0 %>
+            <%= render "leaderboard", rank: rank, index: index, category: category %>
+          <% end %>
+        <% end %>
       </div>
-    </div>
+    <% end %>
   </div>
-</div>
-
-
-<div class="flex flex-wrap -mx-3 mb-5">
-  <div class="w-full max-w-full px-3 mb-6 mx-auto">
-    <div class="relative flex-[1_auto] flex flex-col break-words min-w-0 bg-clip-border rounded-[.95rem] bg-gradient-to-r from-purple-500 to-pink-500 m-5">
-      <div class="relative flex flex-col min-w-0 break-words border border-dashed bg-clip-border rounded-2xl border-stone-200 bg-light/30">
-        <!-- card header -->
-        <div class="px-9 pt-5 flex justify-between items-stretch flex-wrap min-h-[70px] pb-0 bg-transparent">
-          <h3 class="flex flex-col items-start justify-center m-2 ml-0 font-medium text-xl/tight text-dark">
-            <span class="mr-3 font-semibold text-white text-5xl">Leaderboards by communication skill</span>
-            <span class="mt-1 font-medium text-offWhite text-lg/normal">Total of communication category in the user skill map</span>
-          </h3>
-        </div>
-        <!-- end card header -->
-        <!-- card body  -->
-        <div class="flex-auto block py-8 pt-6 px-9">
-          <div class="overflow-x-auto">
-            <table class="w-full my-0 align-middle text-dark border-separate border-spacing-x-12 border-spacing-y-4 p-12">
-              <colgroup>
-                <col style="width: 10%;" />
-                <col style="width: 50%;" />
-                <col style="width: 20%;" />
-              </colgroup>
-              <thead></thead>
-              <tbody>
-                <% count = 0 %>
-                <% @skill_per_communication.each  do |rank| %>
-                <% count += 1 %>
-                <% unless rank.communication_skill_score <= 0 %>
-                <tr>
-                  <td class="border-2 text-offWhite border-white p-4 text-4xl text-center font-bold">#<%= count %></td>
-                  <td class="border-2 text-offWhite border-white p-4 text-4xl flex items-center">
-                    <%= image_tag "svg/avatar.svg", class: "w-12 h-12 mr-4" %>
-                    <span class="text-center flex-grow font-semibold capitalize"><%= rank.name %></span>
-                  </td>
-                  <td class="border-2 text-offWhite border-white p-4 text-4xl text-center font-medium"><%= rank.communication_skill_score %></td>
-                </tr>
-                <% end %>
-                <% end %>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="flex flex-wrap -mx-3 mb-5">
-  <div class="w-full max-w-full px-3 mb-6 mx-auto">
-    <div class="relative flex-[1_auto] flex flex-col break-words min-w-0 bg-clip-border rounded-[.95rem] bg-gradient-to-r from-purple-500 to-pink-500 m-5">
-      <div class="relative flex flex-col min-w-0 break-words border border-dashed bg-clip-border rounded-2xl border-stone-200 bg-light/30">
-        <!-- card header -->
-        <div class="px-9 pt-5 flex justify-between items-stretch flex-wrap min-h-[70px] pb-0 bg-transparent">
-          <h3 class="flex flex-col items-start justify-center m-2 ml-0 font-medium text-xl/tight text-dark">
-            <span class="mr-3 font-semibold text-white text-5xl">Leaderboards by Technical skill</span>
-            <span class="mt-1 font-medium text-offWhite text-lg/normal">Total of technical category in the user skill map</span>
-          </h3>
-        </div>
-        <!-- end card header -->
-        <!-- card body  -->
-        <div class="flex-auto block py-8 pt-6 px-9">
-          <div class="overflow-x-auto">
-            <table class="w-full my-0 align-middle text-dark border-separate border-spacing-x-12 border-spacing-y-4 p-12">
-              <colgroup>
-                <col style="width: 10%;" />
-                <col style="width: 50%;" />
-                <col style="width: 20%;" />
-              </colgroup>
-              <thead></thead>
-              <tbody>
-                <% count = 0 %>
-                <% @skill_per_technical.each  do |rank| %>
-                <% count += 1 %>
-                <% unless rank.technical_skill_score <= 0 %>
-                <tr>
-                  <td class="border-2 text-offWhite border-white p-4 text-4xl text-center font-bold">#<%= count %></td>
-                  <td class="border-2 text-offWhite border-white p-4 text-4xl flex items-center">
-                    <%= image_tag "svg/avatar.svg", class: "w-12 h-12 mr-4" %>
-                    <span class="text-center flex-grow font-semibold capitalize"><%= rank.name %></span>
-                  </td>
-                  <td class="border-2 text-offWhite border-white p-4 text-4xl text-center font-medium"><%= rank.technical_skill_score %></td>
-                </tr>
-                <% end %>
-                <% end %>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="flex flex-wrap -mx-3 mb-5">
-  <div class="w-full max-w-full px-3 mb-6 mx-auto">
-    <div class="relative flex-[1_auto] flex flex-col break-words min-w-0 bg-clip-border rounded-[.95rem] bg-gradient-to-r from-purple-500 to-pink-500 m-5">
-      <div class="relative flex flex-col min-w-0 break-words border border-dashed bg-clip-border rounded-2xl border-stone-200 bg-light/30">
-        <!-- card header -->
-        <div class="px-9 pt-5 flex justify-between items-stretch flex-wrap min-h-[70px] pb-0 bg-transparent">
-          <h3 class="flex flex-col items-start justify-center m-2 ml-0 font-medium text-xl/tight text-dark">
-            <span class="mr-3 font-semibold text-white text-5xl">Leaderboards by Financial skill</span>
-            <span class="mt-1 font-medium text-offWhite text-lg/normal">Total of financial category in the user skill map</span>
-          </h3>
-        </div>
-        <!-- end card header -->
-        <!-- card body  -->
-        <div class="flex-auto block py-8 pt-6 px-9">
-          <div class="overflow-x-auto">
-            <table class="w-full my-0 align-middle text-dark border-separate border-spacing-x-12 border-spacing-y-4 p-12">
-              <colgroup>
-                <col style="width: 10%;" />
-                <col style="width: 50%;" />
-                <col style="width: 20%;" />
-              </colgroup>
-              <thead></thead>
-              <tbody>
-                <% count = 0 %>
-                <% @skill_per_financial.each  do |rank| %>
-                <% count += 1 %>
-                <% unless rank.financial_skill_score <= 0 %>
-                <tr>
-                  <td class="border-2 text-offWhite border-white p-4 text-4xl text-center font-bold">#<%= count %></td>
-                  <td class="border-2 text-offWhite border-white p-4 text-4xl flex items-center">
-                    <%= image_tag "svg/avatar.svg", class: "w-12 h-12 mr-4" %>
-                    <span class="text-center flex-grow font-semibold capitalize"><%= rank.name %></span>
-                  </td>
-                  <td class="border-2 text-offWhite border-white p-4 text-4xl text-center font-medium"><%= rank.financial_skill_score %></td>
-                </tr>
-                <% end %>
-                <% end %>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="flex flex-wrap -mx-3 mb-5">
-  <div class="w-full max-w-full px-3 mb-6 mx-auto">
-    <div class="relative flex-[1_auto] flex flex-col break-words min-w-0 bg-clip-border rounded-[.95rem] bg-gradient-to-r from-purple-500 to-pink-500 m-5">
-      <div class="relative flex flex-col min-w-0 break-words border border-dashed bg-clip-border rounded-2xl border-stone-200 bg-light/30">
-        <!-- card header -->
-        <div class="px-9 pt-5 flex justify-between items-stretch flex-wrap min-h-[70px] pb-0 bg-transparent">
-          <h3 class="flex flex-col items-start justify-center m-2 ml-0 font-medium text-xl/tight text-dark">
-            <span class="mr-3 font-semibold text-white text-5xl">Leaderboards by Analytical skill</span>
-            <span class="mt-1 font-medium text-offWhite text-lg/normal">Total of analytical category in the user skill map</span>
-          </h3>
-        </div>
-        <!-- end card header -->
-        <!-- card body  -->
-        <div class="flex-auto block py-8 pt-6 px-9">
-          <div class="overflow-x-auto">
-            <table class="w-full my-0 align-middle text-dark border-separate border-spacing-x-12 border-spacing-y-4 p-12">
-              <colgroup>
-                <col style="width: 10%;" />
-                <col style="width: 50%;" />
-                <col style="width: 20%;" />
-              </colgroup>
-              <thead></thead>
-              <tbody>
-                <% count = 0 %>
-                <% @skill_per_analytical.each  do |rank| %>
-                <% count += 1 %>
-                <% unless rank.analytical_skill_score <= 0 %>
-                <tr>
-                  <td class="border-2 text-offWhite border-white p-4 text-4xl text-center font-bold">#<%= count %></td>
-                  <td class="border-2 text-offWhite border-white p-4 text-4xl flex items-center">
-                    <%= image_tag "svg/avatar.svg", class: "w-12 h-12 mr-4" %>
-                    <span class="text-center flex-grow font-semibold capitalize"><%= rank.name %></span>
-                  </td>
-                  <td class="border-2 text-offWhite border-white p-4 text-4xl text-center font-medium"><%= rank.analytical_skill_score %></td>
-                </tr>
-                <% end %>
-                <% end %>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="flex flex-wrap -mx-3 mb-5">
-  <div class="w-full max-w-full px-3 mb-6 mx-auto">
-    <div class="relative flex-[1_auto] flex flex-col break-words min-w-0 bg-clip-border rounded-[.95rem] bg-gradient-to-r from-purple-500 to-pink-500 m-5">
-      <div class="relative flex flex-col min-w-0 break-words border border-dashed bg-clip-border rounded-2xl border-stone-200 bg-light/30">
-        <!-- card header -->
-        <div class="px-9 pt-5 flex justify-between items-stretch flex-wrap min-h-[70px] pb-0 bg-transparent">
-          <h3 class="flex flex-col items-start justify-center m-2 ml-0 font-medium text-xl/tight text-dark">
-            <span class="mr-3 font-semibold text-white text-5xl">Leaderboards by Work Ethics skill</span>
-            <span class="mt-1 font-medium text-offWhite text-lg/normal">Total of work ethics category in the user skill map</span>
-          </h3>
-        </div>
-        <!-- end card header -->
-        <!-- card body  -->
-        <div class="flex-auto block py-8 pt-6 px-9">
-          <div class="overflow-x-auto">
-            <table class="w-full my-0 align-middle text-dark border-separate border-spacing-x-12 border-spacing-y-4 p-12">
-              <colgroup>
-                <col style="width: 10%;" />
-                <col style="width: 50%;" />
-                <col style="width: 20%;" />
-              </colgroup>
-              <thead></thead>
-              <tbody>
-                <% count = 0 %>
-                <% @skill_per_work_ethics.each  do |rank| %>
-                <% count += 1 %>
-                <% unless rank.work_ethics_score <= 0 %>
-                <tr>
-                  <td class="border-2 text-offWhite border-white p-4 text-4xl text-center font-bold">#<%= count %></td>
-                  <td class="border-2 text-offWhite border-white p-4 text-4xl flex items-center">
-                    <%= image_tag "svg/avatar.svg", class: "w-12 h-12 mr-4" %>
-                    <span class="text-center flex-grow font-semibold capitalize"><%= rank.name %></span>
-                  </td>
-                  <td class="border-2 text-offWhite border-white p-4 text-4xl text-center font-medium"><%= rank.work_ethics_score %></td>
-                </tr>
-                <% end %>
-                <% end %>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
 </div>
