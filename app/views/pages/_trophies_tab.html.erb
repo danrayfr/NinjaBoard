@@ -23,7 +23,7 @@
         <%= image_tag "trophy/management.png", class: "w-full md:w-72 block rounded" %>
       </div>
     </div>
-    <div class="p-5">
+    <div class="p-5 group-hover:scale-110 transition-transform">
       <h3 class="text-white text-xl lg:text-2xl uppercase font-sister tracking-widest"><%= trophy.name.gsub('_skill', '') %></h3>
       <p class="text-offWhite uppercase">Level <%= trophy.level.lvl %></p>
       <p class="text-offWhite font-sister"><%= trophy.level.points %>/ <span class="text-paleFern "><%= trophy.level.next_level_threshold %></span> TP</p>
