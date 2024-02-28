@@ -11,7 +11,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        grotesque: ['Bricolage Grotesque'],
+        sister: ['Love Ya Like A Sister','ui-sans-serif','system-ui,sans-serif',"Apple Color Emoji","Segoe UI Emoji",'Segoe UI Symbol',"Noto Color Emoji"],
+        outfit: ['Outfit,ui-sans-serif,system-ui,sans-serif,"Apple Color Emoji","Segoe UI Emoji",Segoe UI Symbol,"Noto Color Emoji"']
       },
       colors: {
         transparent: 'transparent',

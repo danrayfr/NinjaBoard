@@ -1,44 +1,34 @@
 <div class="container mx-auto py-12" data-controller="radar-chart">
-  <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 text-left">
     <!-- Left Column -->
     <div>
       <!-- User Info Card -->
-      <div class="bg-white shadow-md rounded-lg p-12 mb-4 spacing">
-        <h2 class="text-lg font-bold mb-4">User Info</h2>
-        
-        <div class="flex items-center mb-4">
-          <div class="relative h-24 w-24">
-            <!-- Circular avatar container -->
-            <div class="relative overflow-hidden h-24 w-24">
-              <!-- User profile image -->
-              <%= image_tag "profile/ninja.jpeg", class: "h-full w-full object-cover" %>
-
-              <!-- Medal -->
-              <div class="absolute bottom-0 left-8 transform translate-y-1/4 w-8">
-                <%= image_tag "svg/medal-icon.svg"%>
-              </div>
-            </div>
-            <div class="relative overflow-hidden h-8 w-8 mt-2">
-              <!-- User profile image -->
-              <%= image_tag current_user.badge.badges, class: "h-full w-full object-cover" %>
-
-              <!-- Medal -->
-              <div class="absolute bottom-0 left-8 transform translate-y-1/4 w-8">
-                <%= image_tag "svg/medal-icon.svg"%>
-              </div>
-            </div>
+      <div class="bg-offWhite opacity-85 shadow-md rounded-lg p-6 mb-4 spacing">
+        <h2 class="text-3xl font-medium mb-4 font-sister tracking-tight uppercase">User Information</h2>
+      
+        <div class="member flex w-full items-center space-x-4 px-4 py-6 lg:px-8 rounded-sm bg-gray-50 hover:bg-paleFern hover:bg-opacity-80">
+          <div class="relative">
+            <%= image_tag "profile/ninja.jpeg", class: "rounded-md shadow-lg w-28 h-28 object-cover" %>
           </div>
-          <div class="ml-4">
-            <p class="font-semibold"><%= current_user.name || current_user.email %></p>
-            <p class="text-sm text-gray-500 capitalize"><%= current_user.role %></p>
-            <p class="text-md text-gray-500 capitalize font-bold">LVL <%= current_user.badge.level.lvl %>(<%= current_user.badge.rank %>)</p>
-            <p class="text-md text-indigo-600 capitalize font-bold"><%= current_user.badge.level.points %> / <%= current_user.badge.level.next_level_threshold %></p>
+          <div class="lg:flex lg:flex-grow lg:items-center lg:justify-between group">
+            <div class="ml-4 group group-hover:text-white">
+              <p class="font-semibold font-sister text-xl tracking-widest"><%= current_user.name || current_user.email %></p>
+              <p class="text-md uppercase"><%= current_user.role %></p>
+              <p class="text-md capitalize font-bold">LVL <%= current_user.badge.level.lvl %>(<%= current_user.badge.rank %>)</p>
+              <p class="text-md text-indigo-600 capitalize font-bold"><%= current_user.badge.level.points %> / <%= current_user.badge.level.next_level_threshold %> TP</p>
+            </div>
+            <div class="mt-1 flex items-center space-x-2 lg:space-x-4">
+              <span class="h-12 w-12 md:h-20 md:w-20 lg:h-36 lg:w-36">
+                <%= image_tag current_user.badge.badges %>
+              </span>
+            </div>
           </div>
         </div>
       </div>
+
       <!-- Dropdown Button -->
-      <div class="bg-white shadow-md rounded-lg p-6 mb-4">
-        <h2 class="text-lg font-bold mb-4">Roles Skill Maps</h2>
+      <div class="bg-offWhite shadow-md rounded-lg p-6 mb-4 z-50">
+        <h2 class="text-3xl font-medium mb-4 font-sister tracking-tight uppercase">Roles Skill Maps</h2>
         <div class="relative inline-block w-full" data-controller="dropdown" data-radar-chart-outlet=".role-data">
           <button
             type="button"
@@ -79,8 +69,8 @@
       </div>
       <!-- Radar Chart Card -->
       <div class="bg-white shadow-md rounded-lg p-6 mb-4">
-        <h2 class="text-lg font-bold mb-4">Skills Radar</h2>
-        <div class="bg-offWhite w-full h-1/2 rounded-lg">
+        <h2 class="text-3xl font-medium mb-4 font-sister tracking-tight uppercase">Skills Radar</h2>
+        <div class="bg-offWhite opacity-90 w-full h-1/2 rounded-lg">
           <canvas
             id="bar-chart"
             data-radar-chart-target="myChart"
@@ -102,8 +92,8 @@
     <!-- Right Column -->
     <div>
       <!-- Completed Tasks Table -->
-      <div class="bg-white shadow-md rounded-lg p-6 mb-4 h-full overflow-y-auto">
-        <h2 class="text-3xl font-bold mb-4">Completed Courses</h2>
+      <div class="bg-offWhite opacity-85 shadow-md rounded-lg p-6 mb-4 h-full overflow-y-auto">
+        <h2 class="text-3xl font-medium mb-4 font-sister tracking-tight uppercase">Completed Courses</h2>
         <div class="max-h-96">
           <table class="w-full">
             <thead class="bg-gray-200">

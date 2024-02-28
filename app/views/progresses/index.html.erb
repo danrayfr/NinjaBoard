@@ -1,16 +1,45 @@
 <%= content_for(:title, "Progress Board") %>
 
-<!-- Component Start -->
-<div class="container px-6 py-10 mx-auto flex flex-col text-gray-700 bg-ivory" >
-  <div class="px-10 mt-6">
-    <h1 class="text-2xl font-bold">Progress Board</h1>
+<section>
+  <div class="w-full mx-auto px-8 p-24 text-left md:text-center bg-ivory">
+    <p class="text-4xl lg:text-7xl tracking-tighter text-graphite font-medium">
+      <span>We</span>
+      <span class="underlined font-sister uppercase hover:text-coral hover:font-medium tracking-normal hover:tracking-widest hover:-rotate-2 active:-rotate-3d ">Improve</span>
+      <span class="font-sister">Daily</span>
+      <span class="lg:block"></span>
+    </p>
+    <p class="md:mt-4 tracking-wide text-graphite font-normal">
+      <span class="font-sister tracking-wide text-xl text-graphite">Kanban</span>
+      your assigned courses
+    </p>
   </div>
-  <div data-controller="sortable" class="flex flex-grow px-10 mt-4 space-x-6 overflow-auto">
-    <% @progresses.each do |progress| %>
-      <div class="flex flex-col flex-shrink-0 w-72" data-sortable-update-url="<%= sort_progress_path(progress) %>">
-        <%= render "progress", progress: progress %>
+</section>
+
+<div class="relative min-h-screen flex flex-col bg-offWhite bg-opacity-90 shadow-inner lg:overflow-hidden -mt-12">
+  <div class="flex-grow w-full mx-auto flex overflow-auto lg:overflow-hidden">
+    <div class="flex-1 min-w-0 flex">
+      <div class="flex flex-col lg:flex-row w-full h-full overflow-auto">
+        <div class="min-w-0 flex-1 mb-10 lg:mb-0">
+          <div class="h-full">
+            <!-- Start main area-->
+            <div class="relative h-full">
+              <div class="absolute inset-0 rounded-lg">
+                <div class="grid grid-cols-1 gap-px w-full md:grid-cols-2 lg:grid-cols-4 h-full gap-1 relative md:overflow-hidden shadow-inner flex-grow lg:gap-x-2 md:gap-x-4 md:gap-y-4 gap-y-6" data-controller="sortable">
+                  <% @progresses.each do |progress| %>
+                    <div
+                      class="flex flex-col flex-wrap w-full md:flex-col border-2 h-full border-dashed border-graphite"
+                      data-sortable-update-url="<%= sort_progress_path(progress) %>"
+                      >
+                      <%= render "progress", progress: progress %>
+                    </div>
+                  <% end %>
+                </div>
+                <!-- End main area -->
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    <% end %>
-    <div class="flex-shrink-0 w-6"></div>
+    </div>
   </div>
 </div>

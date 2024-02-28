@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Love+Ya+Like+A+Sister&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -17,6 +19,22 @@
 
 @layer components {
   .active {
-    @apply w-full rounded-lg bg-white border-2 shadow h-16 border-black;
+    @apply font-bold;
   }
+}
+
+.underlined {
+  position: relative;
+  margin-right: 1rem;
+}
+.underlined:after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  height: 10px;
+  width: 100%;
+  border: solid 2px #F05754;
+  border-color: #F05754 transparent transparent transparent;
+  border-radius: 40%;
 }
