@@ -1,20 +1,26 @@
 <%= content_for(:title, 'Seiko') %>
 
 <section>
-  <div class="relative items-center w-full mx-auto bg-ivory p-8 lg:p-20 lg:py-32 2xl:border-x-2 border-b-2 border-black">
-    <div class="max-w-3xl">
-      <h2 class="text-3xl lg:text-8xl tracking-tight font-medium text-black mx-auto">
-        Seiko Board
-      </h2>
-      <p class="xl:text-2xl tracking-wide text-black mt-4">
-        You can input all of your certificates in here.
-      </p>
-      <%= link_to "Add certificate", new_certificate_path, class: "mt-2 text-offWhite items-center shadow shadow-graphite text-lg font-semibold inline-flex px-6 focus:outline-none justify-center text-center bg-graphite focus:bg-paleFern border-graphite duration-300 outline-none focus:shadow-none border-2 sm:w-auto py-3 rounded-lg h-16 tracking-wide focus:translate-y-1 w-full hover:bg-paleFern" %>
-    </div>
+  <div class="w-full mx-auto px-8 p-24 text-left md:text-center bg-ivory">
+    <p class="text-4xl lg:text-7xl tracking-tighter text-graphite font-medium">
+      <span>The</span>
+      <span class="underlined font-sister uppercase hover:text-coral hover:font-medium tracking-normal hover:tracking-widest hover:-rotate-2 active:-rotate-3d ">Seiko</span>
+      <span class="font-sister">Board</span>
+      <span class="lg:block"></span>
+    </p>
+    <p class="md:mt-4 tracking-wide text-graphite font-normal">
+      Your
+      <span class="font-sister tracking-wide text-xl text-graphite">success</span>
+      should be recorded.
+    </p>
+    <%= link_to "Add certificate", new_certificate_path, class: "mt-2 text-offWhite items-center shadow shadow-graphite text-lg font-medium inline-flex px-6 focus:outline-none justify-center text-center bg-graphite focus:bg-coral duration-300 outline-none focus:shadow-none sm:w-auto py-3 rounded-lg h-16 tracking-wide focus:translate-y-1 w-full hover:bg-coral font-sister hover:text-graphite" if user_signed_in? %>
   </div>
-  <div
-    class="grid grid-cols-1 md:grid-cols-2 p-8 lg:p-20 lg:grid-cols-2 gap-8 mx-auto 2xl:max-w-7xl 2xl:border-x-2 border-black [&amp;>*:nth-child(1)]:bg-red-400 [&amp;>*:nth-child(2)]:bg-green-400 [&amp;>*:nth-child(3)]:bg-violet-300 [&amp;>*:nth-child(4)]:bg-yellow-400"
-  >
-    <%= render "certificates" %>
+</section>
+
+<section x-data="{ open: false }">
+  <div class="w-full mx-auto max-w-screen-2xl px-8 py-12">
+    <div class="grid grid-cols-1 gap-x-4 gap-y-12 lg:gap-y-24 sm:grid-cols-2 lg:grid-cols-3 mt-6 mx-auto">
+      <%= render "certificates" %>
+    </div>
   </div>
 </section>

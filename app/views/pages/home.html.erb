@@ -49,36 +49,13 @@
 
     <div>
       <div data-tabs-target="tab" id="profile">
-        <%= render "home" %>
+        <%= render "profile_tab" %>
       </div>
       <div data-tabs-target="tab" id="certificates">
-        <div
-          class="grid grid-cols-1 md:grid-cols-2 p-8 lg:p-20 lg:grid-cols-2 gap-8 mx-auto 2xl:max-w-7xl 2xl:border-x-2 border-black [&amp;>*:nth-child(1)]:bg-red-400 [&amp;>*:nth-child(2)]:bg-green-400 [&amp;>*:nth-child(3)]:bg-violet-300 [&amp;>*:nth-child(4)]:bg-yellow-400"
-        >
-          <%= render partial: 'certificates/certificates', locals: { certificates: @certificates } %>
-        </div>
+        <%= render "certificate_tab" %>
       </div>
       <div data-tabs-target="tab" id="trophies">
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
-          <% @trophies.each do |trophy| %>
-          <div class="flex-shrink-0 m-6 relative overflow-hidden bg-orange-500 rounded-lg max-w-xs shadow-lg group">
-            <svg class="absolute bottom-0 left-0 mb-8 scale-150 group-hover:scale-[1.65] transition-transform" viewBox="0 0 375 283" fill="none" style="opacity: 0.1;">
-              <rect x="159.52" y="175" width="152" height="152" rx="8" transform="rotate(-45 159.52 175)" fill="white" />
-              <rect y="107.48" width="152" height="152" rx="8" transform="rotate(-45 0 107.48)" fill="white" />
-            </svg>
-          <div class="relative pt-10 px-10 flex items-center justify-center group-hover:scale-110 transition-transform">
-            <div class="block absolute w-48 h-48 bottom-0 left-0 -mb-24 ml-3" style="background: radial-gradient(black, transparent 60%); transform: rotate3d(0, 0, 1, 20deg) scale3d(1, 0.6, 1); opacity: 0.2;"></div>
-            <%= image_tag "trophy/management.png", class: "relative w-40" %>
-          </div>
-          <div class="relative text-white px-6 pb-6 mt-6">
-            <span class="block opacity-75 -mb-1"><Indoor><%= trophy.level.points %> TP</span>
-            <div class="flex justify-between">
-              <span class="block font-semibold text-xl uppercase"><%= trophy.name.gsub('_skill', '') %></span>
-              <span class="block bg-white rounded-full text-orange-500 text-xs font-bold px-3 py-2 leading-none flex items-center">LVL <%= trophy.level.lvl %></span>
-            </div>
-          </div>
-        </div>
-        <% end %>
+        <%= render "trophies_tab" %>
       </div>
     </div>
   </div>

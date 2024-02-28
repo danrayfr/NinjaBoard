@@ -1,0 +1,23 @@
+<section>
+  <div class="w-full mx-auto px-8 p-24 text-left md:text-center">
+    <p class="text-4xl lg:text-7xl tracking-tighter text-graphite font-medium">
+      <span>The</span>
+      <span class="underlined font-sister uppercase hover:text-coral hover:font-medium tracking-normal hover:tracking-widest hover:-rotate-2 active:-rotate-3d">Seiko</span>
+      <span class="font-sister">Board</span>
+      <span class="lg:block"></span>
+    </p>
+    <p class="md:mt-4 tracking-wide text-graphite font-normal">
+      Your
+      <span class="font-sister tracking-wide text-xl text-graphite">success</span>
+      should be recorded.
+    </p>
+  </div>
+</section>
+
+<section x-data="{ open: false }">
+  <div class="w-full mx-auto max-w-screen-2xl px-8">
+    <div class="grid grid-cols-1 gap-x-4 gap-y-12 lg:gap-y-24 sm:grid-cols-2 lg:grid-cols-3 mt-6 mx-auto">
+      <%= render partial: 'certificates/certificates', locals: { certificates: @certificates } %>
+    </div>
+  </div>
+</section>
