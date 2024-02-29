@@ -10,3 +10,9 @@ import LocalTime from "local-time"
 LocalTime.start()
 
 import "chart.js"
+import "@kurkle/color"
+import "el-transition"
+import "sortablejs"
+import "stimulus-dropdown"
+import "hotkeys-js"
+import "stimulus-use"

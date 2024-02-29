@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org).
 
 ## [Unreleased]
 
+## [0.14.1] : 2024-28-02
+
+### Update
+
+- Import packages on importmap to application.js
+- Remove course url on course card
+
 ## [0.14.0] : 2024-28-02
 
 ### Added
@@ -103,6 +110,8 @@ and this project adheres to [Semantic Versioning](https://semver.org).
 
 ## [Unreleased]
 [unreleased]: https://github.com/danrayfr/unified/branch/development#diff
+[0.14.1]: https://github.com/ninjadanray/Ninja-Board/pull/15
+[0.14.0]: https://github.com/ninjadanray/Ninja-Board/pull/14
 [0.13.0]: https://github.com/ninjadanray/Ninja-Board/pull/13
 [0.12.0]: https://github.com/ninjadanray/Ninja-Board/pull/12
 [0.11.0]: https://github.com/ninjadanray/Ninja-Board/pull/11

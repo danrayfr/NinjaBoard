@@ -6,11 +6,11 @@
             <%= pluralize course.impact, "Impact" %>
         </span>
         <%= link_to course_path(course) do %>
-        <h1 class="mt-4 text-2xl font-medium text-graphite font-sister tracking-widest">
+        <h1 class="mt-4 text-2xl font-medium text-graphite font-sister tracking-widest text-wrap">
             <%= course.title %>
         </h1>
         <% end %>
-        <p class="mt-2 text-graphite">
+        <p class="mt-2 text-graphite text-wrap">
             <%= course.description.to_plain_text.truncate(50) %>
         </p>
         <div class="flex items-center justify-between mt-4">
@@ -18,7 +18,7 @@
                 <a href="#" class="text-lg font-medium text-gray-700 hover:underline hover:text-gray-500 font-sister">
                     by <%= course.author %>
                 </a>
-                <p class="text-sm text-lightGraphite"><%= course.url %></p>
+                <p class="text-sm text-lightGraphite text-wrap"><%#= course.url %></p>
             </div>
         </div>
         <div class="mt-12">
