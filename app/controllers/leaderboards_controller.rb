@@ -10,7 +10,7 @@ class LeaderboardsController < ApplicationController
     @category = 'total_skill'
   end
 
-  private 
+  private
 
   def calculate_skill_rankings_by_category
     # Define an array of skill categories

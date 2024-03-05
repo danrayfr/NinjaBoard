@@ -9,11 +9,10 @@ export default class extends Controller {
   canvasContext() {
       return this.myChartTarget.getContext('2d');
   }
-
+  
   connect() {
     this.renderChart();
   }
-
   
   renderChart() {
 

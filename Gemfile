@@ -7,6 +7,7 @@ ruby '3.3.0'
 gem 'bootsnap', require: false
 gem 'devise', '~> 4.9'
 gem 'dotenv', groups: %i[development test]
+gem 'faker'
 gem 'friendly_id', '~> 5.5'
 gem 'image_processing', '~> 1.2'
 gem 'importmap-rails'

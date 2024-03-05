@@ -1,5 +1,24 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: courses
+#
+# id                          :bigint                         not null, primary key
+# assigned_course_id          :bigint                         not null
+# user_skill_map_id           :bigint                         not null
+#
+# Indexes
+#
+# index_leaderboards_on_assigned_course_id                    (assigned_course_id)
+# index_leaderboards_on_user_skill_map_id                     (user_skill_map_id)
+#
+# Foreign keys
+#
+# fk_rails ... (assign_course_id => assigned_course.id)
+# fk_rails ... (user_skill_map_id => user_skill_map.id)
+#
+
 class Leaderboard < ApplicationRecord
   has_many :assigned_courses
   has_many :assessments, through: :user_assigned_courses

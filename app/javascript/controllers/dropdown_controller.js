@@ -17,14 +17,9 @@ export default class extends Dropdown {
   }
 
   toggleAvatarDropdown() {
-    if (this.avatarMenuTarget.style.display === 'none') {
-      this.avatarMenuTarget.style.display = 'block';
-      this.chevronTarget.classList.remove('rotate-0');
-      this.chevronTarget.classList.add('rotate-180');
-    } else {
-      this.avatarMenuTarget.style.display = 'none';
-      this.chevronTarget.classList.remove('rotate-180');
-      this.chevronTarget.classList.add('rotate-0');
-    }
+    const isMenuVisible = this.avatarMenuTarget.style.display !== 'none'
+    this.avatarMenuTarget.style.display = isMenuVisible ? 'none' : 'block'
+    this.chevronTarget.classList.toggle('rotate-0', !isMenuVisible)
+    this.chevronTarget.classList.toggle('rotate-180', isMenuVisible)
   }
 }

@@ -1,3 +1,20 @@
+# frozen_string_literal: true
+
+# == Schema Information
+#
+# Table name: levels
+#
+# id                          :bigint                         not null, primary key
+# lvl                         :integer                        default(1)
+# points                      :integer                        default(0)
+# levelable_type              :string                         not null
+# levelable_id                :bigint                         not null
+#
+# Indexes
+#
+# index_levels_on_levelable  :polymorphic                     (levelable_type, levelable_type)
+#
+
 class Level < ApplicationRecord
   belongs_to :levelable, polymorphic: true
 
