@@ -1,5 +1,26 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: users
+#
+# id                          :bigint                         not null, primary key
+# email                       :string                         not null, default('')
+# encrypted_password          :string                         not null, default('')
+# username                    :string
+# first_name                  :string
+# last_name                   :string
+# role                        :integer                        default(0)
+# uid                         :string
+# avatar_url                  :string
+# provider                    :string
+#
+# Indexes
+#
+# index_users_on_email                                        (email)
+# index_users_on_reset_password_token                         (reset_password_token)
+#
+
 class User < ApplicationRecord
   include BuildAssociation
   # Include default devise modules. Others available are:
@@ -21,7 +42,8 @@ class User < ApplicationRecord
                        format: { with: /\A(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+\z/,
                                  message: 'Must contain at least one uppercase letter,
                        one lowercase letter, one special character, and one number' },
-                       if: :password_required?
+                       if: :password_required? && :not_omniauth_login?
+                        
   enum role: %i[ninja admin]
 
   after_create :build_user_skill_map_if_missing
@@ -57,7 +79,25 @@ class User < ApplicationRecord
     end
   end
 
+  def link_google_account(auth)
+    if self.provider.nil? || self.uid.nil?
+      self.provider = auth.provider
+      self.uid = auth.uid
+      self.save!
+    end
+  end
+
   def sanitize_email
     email.strip.downcase
+  end
+
+  private
+
+  def omniauth_login?
+    provider.present? && uid.present?
+  end
+
+  def not_omniauth_login?
+    !omniauth_login?
   end
 end

@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org).
 
 ## [Unreleased]
 
+## [0.15.0] : 2024-05-03
+
+### Update
+
+- Refactor and added documentation on models & supportninja logo favicon
+- Fix the google omniauth
+
 ## [0.14.1] : 2024-28-02
 
 ### Update
@@ -110,6 +117,7 @@ and this project adheres to [Semantic Versioning](https://semver.org).
 
 ## [Unreleased]
 [unreleased]: https://github.com/danrayfr/unified/branch/development#diff
+[0.15.0]: https://github.com/ninjadanray/Ninja-Board/pull/16
 [0.14.1]: https://github.com/ninjadanray/Ninja-Board/pull/15
 [0.14.0]: https://github.com/ninjadanray/Ninja-Board/pull/14
 [0.13.0]: https://github.com/ninjadanray/Ninja-Board/pull/13

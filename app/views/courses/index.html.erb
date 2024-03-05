@@ -37,7 +37,9 @@
                     <ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdownDividerButton">
                         <% @courses_by_category.each do |category, courses| %>
                         <li>
-                            <button id="<%= category %>" data-tabs-target="btn" data-action="click->tabs#select dropdown#toggle" class="block px-4 py-2 hover:bg-gray-100 capitalize hover:font-medium"><%= category %></button>
+                            <button id="<%= category %>" data-tabs-target="btn" data-action="click->tabs#select dropdown#toggle" class="block px-4 py-2 hover:bg-gray-100 capitalize hover:font-medium">
+                                <%= category %>
+                            </button>
                         </li>
                         <% end %>
                     </ul>
@@ -57,7 +59,9 @@
 
         <div data-tabs-target="tab" id="all">
             <div class="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
-                <% @courses.each do |course| %> <%= render "course", course: course %> <% end %>
+                <% @courses.each do |course| %>
+                    <%= render "course", course: course %>
+                <% end %>
             </div>
         </div>
 

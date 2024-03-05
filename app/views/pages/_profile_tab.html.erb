@@ -8,7 +8,11 @@
       
         <div class="member flex w-full items-center space-x-4 px-4 py-6 lg:px-8 rounded-sm bg-gray-50 hover:bg-paleFern hover:bg-opacity-80">
           <div class="relative">
-            <%= image_tag "profile/ninja.jpeg", class: "rounded-md shadow-lg w-28 h-28 object-cover" %>
+            <% if current_user.avatar_url.nil? %>
+              <%= image_tag "profile/ninja.jpeg", class: "rounded-md shadow-lg w-28 h-28 object-cover" %>
+            <% else %>
+              <%= image_tag current_user.avatar_url, class: "rounded-md shadow-lg w-28 h-28 object-cover", alt: "user photo" %>
+            <% end %>
           </div>
           <div class="lg:flex lg:flex-grow lg:items-center lg:justify-between group">
             <div class="ml-4 group group-hover:text-white">

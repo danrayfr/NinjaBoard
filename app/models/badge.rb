@@ -1,3 +1,21 @@
+# frozen_string_literal: true
+
+# == Schema Information
+#
+# Table name: badges
+#
+# id                          :bigint                         not null, primary key
+# rank                        :integer                        default(0)
+#
+# Indexes
+#
+# index_badges_on_user_id                                     (user_id)
+#
+# Foreign key
+#
+# fk_rails ... (user_id => user.id)
+#
+
 class Badge < ApplicationRecord
   include BuildAssociation
   belongs_to :user

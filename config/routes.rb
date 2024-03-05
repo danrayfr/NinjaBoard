@@ -34,7 +34,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     sessions: 'users/sessions',
-    omniauth_callbacks: 'users/omniauth_callbacks#google_oauth2'
+    omniauth_callbacks: 'users/omniauth_callbacks'
   }
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

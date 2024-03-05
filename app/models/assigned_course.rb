@@ -1,5 +1,28 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: assigned_courses
+#
+# id                          :bigint                         not null, primary key
+# pass                        :boolean                        null false, default(false)
+# assesssment_score           :float
+# progress_status             :integer                        default(0)
+# date_completed              :datetime
+#
+# Indexes
+#
+# index_assigned_courses_on_course_id                         (course_id)
+# index_assigned_courses_on_progress_id                       (progress_id)
+# index_assigned_courses_on_user_id                           (user_id)
+#
+# Foreign Keys
+#
+# fk_rails ... (course_id => course.id)
+# fk_rails ... (progress_id => progress.id)
+# fk_rails ... (user_id => user.id)
+#
+
 class AssignedCourse < ApplicationRecord
   belongs_to :user
   belongs_to :course
@@ -33,16 +56,14 @@ class AssignedCourse < ApplicationRecord
   private
 
   def update_progress_status
-    self.progress_status = case progress_id
-                           when 1
-                             :todo
-                           when 2
-                             :daily
-                           when 3
-                             :in_progress
-                           when 4
-                             :completed
-                           end
+    status_mapping = {
+      1 => :todo,
+      2 => :daily,
+      3 => :in_progress,
+      4 => :completed
+    }
+    status = status_mapping[progress_id]
+    self.progress_status = status if status
     save if progress_status_changed?
   end
 

@@ -1,10 +1,28 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: certificates
+#
+# id                          :bigint                         not null, primary key
+# title                       :string
+# source                      :integer                        not null, default(0)
+# date_awarded                :datetime
+#
+# Indexes
+#
+# index_certificates_on_user_id                               (user_id)
+#
+# Foreign key
+#
+# fk_rails ... (user_id => user.id)
+#
+
 class Certificate < ApplicationRecord
   belongs_to :user
 
-  validates :title, presence: true, length: { maximum: 100 }
-  enum source: %i[default linkedin udemy coursera]
+  validates :title, presence: true, length: { maximum: 100 }, uniqueness: { scope: :user_id }
+  enum source: %i[default linkedin udemy other]
   validates :date_awarded, presence: true
 
   has_one_attached :file
