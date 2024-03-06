@@ -8,11 +8,11 @@ require_relative 'seeds/progress'
 require_relative 'seeds/role_skill_map'
 require_relative 'seeds/user'
 
-create_users
-generate_progresses
-generate_role_maps
-generate_courses
-update_courses
+# create_users
+# generate_progresses
+# generate_role_maps
+# generate_courses
+# update_courses
 
 User.find_each(&:build_user_skill_map_if_missing)
 
