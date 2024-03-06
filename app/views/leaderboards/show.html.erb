@@ -8,22 +8,24 @@
       
         <div class="member flex w-full items-center space-x-4 px-4 py-6 lg:px-8 rounded-sm bg-gray-50 hover:bg-paleFern hover:bg-opacity-80">
           <div class="relative">
-            <% if current_user.avatar_url.nil? %>
+            <% if @user.avatar_url.nil? %>
               <%= image_tag "profile/ninja.jpeg", class: "rounded-md shadow-lg w-28 h-28 object-cover" %>
             <% else %>
-              <%= image_tag current_user.avatar_url, class: "rounded-md shadow-lg w-28 h-28 object-cover", alt: "user photo" %>
+              <%= image_tag @user.avatar_url, class: "rounded-md shadow-lg w-28 h-28 object-cover", alt: "user photo" %>
             <% end %>
           </div>
           <div class="lg:flex lg:flex-grow lg:items-center lg:justify-between group">
             <div class="ml-4 group group-hover:text-white">
-              <p class="font-semibold font-sister text-xl tracking-widest"><%= current_user.name || current_user.email %></p>
-              <p class="text-md uppercase"><%= current_user.role %></p>
-              <p class="text-md capitalize font-bold">LVL <%= current_user.badge.level.lvl %>(<%= current_user.badge.rank %>)</p>
-              <p class="text-md text-indigo-600 capitalize font-bold"><%= current_user.badge.level.points %> / <%= current_user.badge.level.next_level_threshold %> TP</p>
+              <p class="font-semibold font-sister text-xl tracking-widest">
+                <%= @user.name || @user.email %>
+              </p>
+              <p class="text-md uppercase"><%= @user.role %></p>
+              <p class="text-md capitalize font-bold">LVL <%= @user.badge.level.lvl %>(<%= @user.badge.rank %>)</p>
+              <p class="text-md text-indigo-600 capitalize font-bold"><%= @user.badge.level.points %> / <%= @user.badge.level.next_level_threshold %> TP</p>
             </div>
             <div class="mt-1 flex items-center space-x-2 lg:space-x-4">
               <span class="h-12 w-12 md:h-20 md:w-20 lg:h-36 lg:w-36">
-                <%= image_tag current_user.badge.badges %>
+                <%= image_tag @user.badge.badges %>
               </span>
             </div>
           </div>
@@ -51,7 +53,7 @@
           </button>
           <div class="origin-top-right absolute right-0 mt-2 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden w-full" role="menu" aria-orientation="vertical" aria-labelledby="options-menu" data-dropdown-target="menu">
             <div class="py-1" role="none">
-              <% @role_skill_maps.each do |role| %>
+              <% RoleSkillMap.all.each do |role| %>
                 <button
                 class="block px-4 py-2 text-sm text-gray-700"
                 role="menuitem" data-action="dropdown#toggle radar-chart#selectRole"
@@ -67,6 +69,21 @@
                   <%= role.title %>
                 </button>
               <% end %>
+                <button
+                class="block px-4 py-2 text-sm text-gray-700"
+                role="menuitem" data-action="dropdown#toggle radar-chart#selectRole"
+                data-role-id="<%= current_user.user_skill_map.id %>"
+                data-title="<%#= role.title %>"
+                data-management-skill="<%= current_user.user_skill_map.management_skill %>"
+                data-technical-skill="<%= current_user.user_skill_map.technical_skill %>"
+                data-communication-skill="<%= current_user.user_skill_map.communication_skill %>"
+                data-financial-skill="<%= current_user.user_skill_map.financial_skill %>"
+                data-analytical-skill="<%= current_user.user_skill_map.analytical_skill %>"
+                data-work-ethics="<%= current_user.user_skill_map.work_ethics %>"
+                >
+                  <%#= role.title %>
+                  Compare my Skill Map
+                </button>
             </div>
           </div>
         </div>
@@ -74,7 +91,7 @@
       <!-- Radar Chart Card -->
       <div class="bg-white shadow-md rounded-lg p-6 mb-4">
         <h2 class="text-3xl font-medium mb-4 font-sister tracking-tight uppercase">Skills Radar</h2>
-        <div class="bg-offWhite opacity-90 w-full h-1/2 rounded-lg">
+        <div class="bg-offWhite w-full h-1/2 rounded-lg">
           <canvas
             id="bar-chart"
             data-radar-chart-target="myChart"
@@ -82,12 +99,12 @@
           ></canvas>
           <span 
             data-radar-chart-target="userMap"
-            data-management-skill="<%= current_user.user_skill_map.management_skill %>"
-            data-technical-skill="<%= current_user.user_skill_map.technical_skill %>"
-            data-communication-skill="<%= current_user.user_skill_map.communication_skill %>"
-            data-financial-skill="<%= current_user.user_skill_map.financial_skill %>"
-            data-analytical-skill="<%= current_user.user_skill_map.analytical_skill %>"
-            data-work-ethics="<%= current_user.user_skill_map.work_ethics %>"
+            data-management-skill="<%= @user.user_skill_map.management_skill %>"
+            data-technical-skill="<%= @user.user_skill_map.technical_skill %>"
+            data-communication-skill="<%= @user.user_skill_map.communication_skill %>"
+            data-financial-skill="<%= @user.user_skill_map.financial_skill %>"
+            data-analytical-skill="<%= @user.user_skill_map.analytical_skill %>"
+            data-work-ethics="<%= @user.user_skill_map.work_ethics %>"
             >
           </span>
         </div>
@@ -112,7 +129,7 @@
             </thead>
             <tbody>
               <!-- Your table rows go here -->
-              <% current_user.assigned_courses.where(progress_status: 'completed').each do |assigned_course|%>
+              <% @user.assigned_courses.where(progress_status: 'completed').each do |assigned_course|%>
               <tr>
                 <td class="py-2 px-4"><%= assigned_course.course.title %></td>
                 <td class="py-2 px-4"><%= assigned_course.course.impact %></td>
@@ -132,7 +149,7 @@
       </div>
       <!-- User Avatar -->
       <div class="hidden xl:block relative">
-        <%= image_tag current_user.badge.avatars, class: "absolute bottom-0 right-0 w-auto z-50 sm:block pointer-events-none" %>
+        <%= image_tag @user.badge.avatars, class: "absolute bottom-0 right-0 w-auto z-50 sm:block pointer-events-none" %>
       </div>
     </div>
   </div>

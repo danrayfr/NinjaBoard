@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org).
 
 ## [Unreleased]
 
+## [0.15.0] : 2024-06-03
+
+### Added
+
+- Added draft avatar images
+- Added leaderboard show page
+
 ## [0.15.0] : 2024-05-03
 
 ### Update
@@ -117,6 +124,7 @@ and this project adheres to [Semantic Versioning](https://semver.org).
 
 ## [Unreleased]
 [unreleased]: https://github.com/danrayfr/unified/branch/development#diff
+[0.15.1]: https://github.com/ninjadanray/Ninja-Board/pull/17
 [0.15.0]: https://github.com/ninjadanray/Ninja-Board/pull/16
 [0.14.1]: https://github.com/ninjadanray/Ninja-Board/pull/15
 [0.14.0]: https://github.com/ninjadanray/Ninja-Board/pull/14
