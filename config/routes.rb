@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   # Routes for regular users
 
-  resources :leaderboards, only: %i[index]
+  resources :leaderboards, only: %i[index show]
   resources :certificates, except: %i[show]
   resources :progresses, path: 'progress', only: %i[index] do
     member do
