@@ -32,6 +32,13 @@ class Badge < ApplicationRecord
     legend: 'badges/legend.png'
   }.freeze
 
+  AVATARS = {
+    ninja: 'avatars/ninja.png',
+    master: 'avatars/master.png',
+    sensei: 'avatars/sensei.png',
+    legend: 'avatars/legend.png'
+  }.freeze
+
   def create_level
     build_association_if_missing(:level)
   end
@@ -39,6 +46,11 @@ class Badge < ApplicationRecord
   def badges
     rank = user.badge.rank
     BADGES[rank.to_sym]
+  end
+
+  def avatars
+    rank = user.badge.rank
+    AVATARS[rank.to_sym]
   end
 
   def set_rank
@@ -56,6 +68,22 @@ class Badge < ApplicationRecord
     when 41..50
       :legend
     end
+  end
+
+  def ninja?
+    rank == 'ninja'
+  end
+
+  def master?
+    rank == 'master'
+  end
+
+  def sensei?
+    rank == 'sensei'
+  end
+
+  def legend?
+    rank == 'legend'
   end
 
   private

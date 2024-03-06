@@ -10,6 +10,10 @@ class LeaderboardsController < ApplicationController
     @category = 'total_skill'
   end
 
+  def show
+    @user = User.find(params[:id])
+  end
+
   private
 
   def calculate_skill_rankings_by_category
