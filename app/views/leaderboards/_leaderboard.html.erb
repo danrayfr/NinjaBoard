@@ -31,7 +31,7 @@
       </svg>
 
       <span class="text-graphite text-opacity-80 text- lg:text-xl">
-        <%= rank.send("#{category}_score") %>
+        <%= rank.send("#{category}_score").round(2) %>
       </span>
     </div>
 
