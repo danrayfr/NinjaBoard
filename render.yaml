@@ -1,0 +1,23 @@
+databases:
+  - name: ninjaboard
+    ipAllowList: []
+    databaseName: ninjaboard
+    user: ninjaboard
+    region: singapore
+    plan: free
+
+services:
+  - type: web
+    name: ninjaboard
+    runtime: ruby
+    region: singapore
+    plan: free
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec puma -C config/puma.rb"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: ninjaboard
+          property: connectionString
+      - key: RAILS_MASTER_KEY
+        sync: false

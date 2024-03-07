@@ -38,11 +38,13 @@ class User < ApplicationRecord
   has_one :user_skill_map
 
   validates :email, presence: true, uniqueness: true
-  validates :password, presence: true, length: { minimum: 8 },
-                       format: { with: /\A(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+\z/,
-                                 message: 'Must contain at least one uppercase letter,
-                       one lowercase letter, one special character, and one number' },
-                       if: :password_required? && :not_omniauth_login?
+
+  # Commented password validation for demo and pitch purpose
+  # validates :password, presence: true, length: { minimum: 8 },
+  #                      format: { with: /\A(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]) [A-Za-z\d@$!%*?&]+\z/,
+  #                                message: 'Must contain at least one uppercase letter,
+  #                      one lowercase letter, one special character, and one number' },
+  #                      if: :password_required? && :not_omniauth_login?
                         
   enum role: %i[ninja admin]
 
