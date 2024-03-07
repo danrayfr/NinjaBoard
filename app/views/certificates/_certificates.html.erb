@@ -8,7 +8,7 @@
     <div class="flex flex-col mt-2 text-center">
       <p class="text-graphite text-md font-sister capitalize"><%= certificate.title %></p>
       <p class="text-lightGraphite text-xs mt-1 uppercase">
-        <%= certificate.date_awarded.strftime("%B %d, %Y")%>
+        <%= certificate.date_awarded.strftime("%B %d, %Y") %> &#x2022; <%= certificate.source %>
       </p>
       <p class="text-graphite text-xs uppercase hover:tracking-wide hover:text-paleFern">
         <%= link_to "Edit here", edit_certificate_path(certificate) if certificate.user == current_user && current_page?(certificates_path) %>
