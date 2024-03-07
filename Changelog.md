@@ -7,7 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org).
 
 ## [Unreleased]
 
-## [0.15.0] : 2024-06-03
+## [0.15.3] : 2024-07-03
+
+### Update
+
+- Round the score on leaderboard rankings
+
+## [0.15.2] : 2024-07-03
+
+### Update
+
+- Remove password validation for demo
+- Display certificate source"
+
+## [0.15.1] : 2024-06-03
 
 ### Added
 
@@ -124,6 +137,8 @@ and this project adheres to [Semantic Versioning](https://semver.org).
 
 ## [Unreleased]
 [unreleased]: https://github.com/danrayfr/unified/branch/development#diff
+[0.15.3]: https://github.com/ninjadanray/Ninja-Board/pull/19
+[0.15.2]: https://github.com/ninjadanray/Ninja-Board/pull/18
 [0.15.1]: https://github.com/ninjadanray/Ninja-Board/pull/17
 [0.15.0]: https://github.com/ninjadanray/Ninja-Board/pull/16
 [0.14.1]: https://github.com/ninjadanray/Ninja-Board/pull/15
