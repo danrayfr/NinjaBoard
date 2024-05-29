@@ -8,6 +8,7 @@ gem 'bootsnap', require: false
 gem 'devise', '~> 4.9'
 gem 'dotenv', groups: %i[development test]
 gem 'faker'
+gem 'font-awesome-sass', '~> 6.5.1'
 gem 'friendly_id', '~> 5.5'
 gem 'image_processing', '~> 1.2'
 gem 'importmap-rails'
@@ -38,7 +39,7 @@ gem 'view_component'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem "awesome_print"
+  gem 'awesome_print'
   gem 'debug', platforms: %i[mri windows]
 end
 

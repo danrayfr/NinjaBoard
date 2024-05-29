@@ -18,8 +18,7 @@ class ProgressesController < ApplicationController
   end
 
   # GET /progresses/1 or /progresses/1.json
-  def show
-  end
+  def show; end
 
   # GET /progresses/new
   def new
@@ -27,8 +26,7 @@ class ProgressesController < ApplicationController
   end
 
   # GET /progresses/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /progresses or /progresses.json
   def create
@@ -36,7 +34,7 @@ class ProgressesController < ApplicationController
 
     respond_to do |format|
       if @progress.save
-        format.html { redirect_to progress_url(@progress), notice: "Progress was successfully created." }
+        format.html { redirect_to progress_url(@progress), notice: 'Progress was successfully created.' }
         format.json { render :show, status: :created, location: @progress }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -49,7 +47,7 @@ class ProgressesController < ApplicationController
   def update
     respond_to do |format|
       if @progress.update(progress_params)
-        format.html { redirect_to progress_url(@progress), notice: "Progress was successfully updated." }
+        format.html { redirect_to progress_url(@progress), notice: 'Progress was successfully updated.' }
         format.json { render :show, status: :ok, location: @progress }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -63,19 +61,20 @@ class ProgressesController < ApplicationController
     @progress.destroy!
 
     respond_to do |format|
-      format.html { redirect_to progresses_url, notice: "Progress was successfully destroyed." }
+      format.html { redirect_to progresses_url, notice: 'Progress was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_progress
-      @progress = Progress.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def progress_params
-      params.require(:progress).permit(:name)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_progress
+    @progress = Progress.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def progress_params
+    params.require(:progress).permit(:name)
+  end
 end

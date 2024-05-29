@@ -41,6 +41,7 @@ class AssignedCoursesController < ApplicationController
 
   def assigned_course_params
     params.require(:assigned_course)
-          .permit(:user_id, :course_id, :progress_id, :pass, :assessment_score, :date_completed, :progress)
+          .permit(:user_id, :course_id, :progress_id, :pass,
+            :assessment_score, :date_completed, :progress)
   end
 end

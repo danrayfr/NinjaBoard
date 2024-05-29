@@ -26,4 +26,20 @@ module CoursesHelper
       'inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-transparent border-t border-b border-r border-gray-900 hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white'
     end
   end
+
+  # rubocop:disable Metrics/MethodLength
+  def course_enrolled_by_user(user, course)
+    if AssignedCourse.exists?(user:, course_id: course.id)
+      content_tag(:p, 'You have already enrolled this course.', class: 'text-md font-semibold')
+    else
+      form_tag assigned_courses_path(course_id: course.id), method: :post, class: 'inline-form',
+                                                            data: { turbo_frame: 'course-form' } do
+        button_tag 'Get Course',
+                   type: :submit,
+                   class: 'rounded-sm bg-black px-3.5 py-2.5 text-sm border-2 border-black
+        font-semibold text-white shadow-sm hover:bg-white hover:text-black hover:border-2 hover:border-black w-full'
+      end
+    end
+  end
+  # rubocop:enable Metrics/MethodLength
 end

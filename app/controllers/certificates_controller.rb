@@ -29,14 +29,13 @@ class CertificatesController < ApplicationController
       redirect_to certificates_path, notice: 'Certificate successfully updated.'
     else
       render :edit, status: :unprocessable_entity
-
     end
   end
 
   def destroy
-    if @certificate.destroy
-      redirect_to certificates_path, notice: 'Certificate successfully deleted.'
-    end
+    return unless @certificate.destroy
+
+    redirect_to certificates_path, notice: 'Certificate successfully deleted.'
   end
 
   private
@@ -46,6 +45,7 @@ class CertificatesController < ApplicationController
   end
 
   def certificate_params
-    params.require(:certificate).permit(%i[title source date_awarded user_id file])
+    params.require(:certificate)
+          .permit(%i[title source date_awarded user_id file])
   end
 end

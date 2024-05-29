@@ -16,12 +16,9 @@ export default class extends Controller {
   }
 
   onEnd(event) {
-    var sortableUpdateUrl = event.item.dataset.sortableUpdateUrl
-    var newIndex = event.newIndex
-    var sortableProgressId = event.to.dataset.sortableProgressId
-    console.log(sortableUpdateUrl)
-    console.log(newIndex)
-    console.log(sortableProgressId)
+    var sortableUpdateUrl = event.item.dataset.sortableUpdateUrl;
+    var newIndex = event.newIndex;
+    var sortableProgressId = event.to.dataset.sortableProgressId;
 
     // Retrieve the progress status from the dataset attribute of the item
     var progressStatus = event.item.dataset.sortableProgressStatus;

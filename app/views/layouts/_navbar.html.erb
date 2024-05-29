@@ -3,6 +3,7 @@
   <%= link_to root_path do %>
       <%= image_tag "https://assets-global.website-files.com/64149f79022d0c5fc8ce46e8/64149f79022d0cd45cce4719_Support%20Ninja%20%7C%20Full%20Logo.svg", class: "h-8", alt: "supportninja" %>
   <% end %>
+
   <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse z-50">
     <div @click.away="open = false" class="relative" x-data="{ open: false }">
       <button @click="open = !open" class="duration-300 ease-in-out focus:outline-none focus:shadow-none focus:text-orange/90 hover:text-lila-900 md:my-0 px-4 py-2 transform transition inline-flex items-center gap-3" data-action="click->dropdown#toggleAvatarDropdown">
@@ -45,7 +46,7 @@
           style="display: none;"
           data-dropdown-target="avatarMenu"
       >
-          <div class="py-1 bg-white rounded-xl divide-y divide-black font-light" role="none">
+          <div class="py-1 bg-white rounded-xl divide-y divide-black font-light capitalize" role="none">
               <%= link_to "Admin", admin_courses_path, class: "block text-left px-4 py-2 text-sm text-black hover:text-lila-800 w-full" if current_user.admin? %>
               <%= link_to "Edit Profile", edit_user_registration_path, class: "block text-left px-4 py-2 text-sm text-black hover:text-lila-800 w-full" %>
               <%= link_to "Certificates", certificates_path, class: "block text-left px-4 py-2 text-sm text-black hover:text-lila-800 w-full" %>
@@ -62,7 +63,7 @@
     </button>
   </div>
   <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-user" data-dropdown-target="menu">
-    <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white font-normal">
+    <ul class="flex flex-col font-normal p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white font-normal uppercase">
       <li>
         <%= link_to "Home", root_path, class: "block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-fern md:p-0" %>
       </li>
@@ -79,4 +80,3 @@
   </div>
   </div>
 </nav>
-

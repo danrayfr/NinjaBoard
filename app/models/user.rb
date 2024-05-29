@@ -39,13 +39,14 @@ class User < ApplicationRecord
 
   validates :email, presence: true, uniqueness: true
 
+  # Use devise-security instead.
   # Commented password validation for demo and pitch purpose
   # validates :password, presence: true, length: { minimum: 8 },
   #                      format: { with: /\A(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]) [A-Za-z\d@$!%*?&]+\z/,
   #                                message: 'Must contain at least one uppercase letter,
   #                      one lowercase letter, one special character, and one number' },
   #                      if: :password_required? && :not_omniauth_login?
-                        
+
   enum role: %i[ninja admin]
 
   after_create :build_user_skill_map_if_missing

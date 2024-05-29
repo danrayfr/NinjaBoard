@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 
   resources :courses, only: %i[index show]
 
-  authenticated :user, ->(user) { user.admin? } do
+  authenticated :user, -> (user) { user.admin? } do
     namespace :admin do
       resources :courses, except: %i[show]
       resources :role_skill_maps, path: 'role-skill-mapping'
@@ -34,7 +34,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     sessions: 'users/sessions',
-    omniauth_callbacks: 'users/omniauth_callbacks'
+    # omniauth_callbacks: 'users/omniauth_callbacks'
   }
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
