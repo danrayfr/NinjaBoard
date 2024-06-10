@@ -8,10 +8,11 @@ module Courses
 
       respond_to do |format|
         format.turbo_stream do
-          flash.now[:succes] = 'Course successfully unpublished!'
+          flash.now[:succes] = "Course successfully unpublished!"
           render turbo_stream: [
-            turbo_stream.update('publish-button', partial: 'courses/publish_button', locals: { course: @course.reload }),
-            turbo_stream.update('flash', partial: 'layouts/flash')
+            turbo_stream.update("publish-button", partial: "courses/publish_button",
+                                                  locals: { course: @course.reload }),
+            turbo_stream.update("flash", partial: "layouts/flash")
           ]
         end
       end

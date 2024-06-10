@@ -1,38 +1,38 @@
-require 'test_helper'
+require "test_helper"
 
 class CourseTest < ActiveSupport::TestCase
   def setup
     @user = users(:admin)
 
-    @course = @user.courses.build(title: '5 Core Values', category: 'work_ethics', impact: 0.5)
+    @course = @user.courses.build(title: "5 Core Values", category: "work_ethics", impact: 0.5)
   end
 
-  test 'course should be valid' do
+  test "course should be valid" do
     assert @course.valid?
   end
 
-  test 'course title should be present' do
-    @course.title = ''
+  test "course title should be present" do
+    @course.title = ""
     assert_not @course.valid?
   end
 
-  test 'course catalog title should not be greater than 50 characters' do
-    @course.title = 'a' * 51
+  test "course catalog title should not be greater than 50 characters" do
+    @course.title = "a" * 51
     assert_not @course.valid?
   end
 
-  test 'course catalog title should be unique' do
+  test "course catalog title should be unique" do
     duplicate_catalog = @course.dup
     @course.save
     assert_not duplicate_catalog.valid?
   end
 
-  test 'courses catalog impact should be greater than or equal to 0' do
+  test "courses catalog impact should be greater than or equal to 0" do
     @course.impact = -1
     assert_not @course.valid?
   end
 
-  test 'courses catalog impact should be less than or equal to 100' do
+  test "courses catalog impact should be less than or equal to 100" do
     @course.impact = 101
     assert_not @course.valid?
   end

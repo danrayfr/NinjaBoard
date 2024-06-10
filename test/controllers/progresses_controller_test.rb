@@ -1,45 +1,45 @@
-require 'test_helper'
+require "test_helper"
 
 class ProgressesControllerTest < ActionDispatch::IntegrationTest
   setup do
     @progress = progresses(:one)
   end
 
-  test 'should get index' do
+  test "should get index" do
     get progresses_url
     assert_response :success
   end
 
-  test 'should get new' do
+  test "should get new" do
     get new_progress_url
     assert_response :success
   end
 
-  test 'should create progress' do
-    assert_difference('Progress.count') do
+  test "should create progress" do
+    assert_difference("Progress.count") do
       post progresses_url, params: { progress: { name: @progress.name } }
     end
 
     assert_redirected_to progress_url(Progress.last)
   end
 
-  test 'should show progress' do
+  test "should show progress" do
     get progress_url(@progress)
     assert_response :success
   end
 
-  test 'should get edit' do
+  test "should get edit" do
     get edit_progress_url(@progress)
     assert_response :success
   end
 
-  test 'should update progress' do
+  test "should update progress" do
     patch progress_url(@progress), params: { progress: { name: @progress.name } }
     assert_redirected_to progress_url(@progress)
   end
 
-  test 'should destroy progress' do
-    assert_difference('Progress.count', -1) do
+  test "should destroy progress" do
+    assert_difference("Progress.count", -1) do
       delete progress_url(@progress)
     end
 

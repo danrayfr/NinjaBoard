@@ -34,6 +34,6 @@ class Certificate < ApplicationRecord
   def validate_file_content_type
     return unless file.attached? && !file.content_type.in?(%w[image/jpeg image/png])
 
-    errors.add(:file, 'must be a PNG or JPEG file.')
+    errors.add(:file, "must be a PNG or JPEG file.")
   end
 end

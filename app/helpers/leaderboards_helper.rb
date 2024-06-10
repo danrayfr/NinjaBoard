@@ -2,13 +2,13 @@ module LeaderboardsHelper
   def rankings_color(index)
     case index
     when 1
-      'bg-gold'
+      "bg-gold"
     when 2
-      'bg-darkStone'
+      "bg-darkStone"
     when 3
-      'bg-ivory'
+      "bg-ivory"
     else
-      'bg-indigo-800'
+      "bg-indigo-800"
     end
   end
 end

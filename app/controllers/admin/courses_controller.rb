@@ -20,7 +20,7 @@ module Admin
     def create
       @course = Course.new(course_params.merge(user: current_user))
       if @course.save
-        redirect_to admin_courses_path, notice: 'Course successfully created.'
+        redirect_to admin_courses_path, notice: "Course successfully created."
       else
         render :new, status: :unprocessable_entity
       end
@@ -34,7 +34,7 @@ module Admin
       @course = Course.friendly.find(params[:id])
 
       if @course.update(course_params)
-        redirect_to edit_admin_course_url(@course), notice: 'Course successfully updated.'
+        redirect_to edit_admin_course_url(@course), notice: "Course successfully updated."
       else
         render :edit, status: :unprocessable_entity
       end
@@ -44,7 +44,7 @@ module Admin
       @course = Course.friendly.find(params[:id])
 
       @course.destroy
-      redirect_to admin_courses_ur, notice: 'Course successfully deleted.'
+      redirect_to admin_courses_ur, notice: "Course successfully deleted."
     end
 
     private

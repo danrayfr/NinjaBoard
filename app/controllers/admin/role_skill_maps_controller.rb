@@ -18,7 +18,7 @@ module Admin
       @role_skill_map = RoleSkillMap.new(skill_map_params)
 
       if @role_skill_map.save
-        redirect_to admin_role_skill_maps_url, notice: 'Role skill map successfully created.'
+        redirect_to admin_role_skill_maps_url, notice: "Role skill map successfully created."
       else
         render :new, status: :unprocessable_entity
       end
@@ -28,7 +28,7 @@ module Admin
 
     def update
       if @role_skill_map.update(skill_map_params)
-        redirect_to edit_admin_role_skill_map_url(@role_skill_map), notice: 'Role skill map successfully updated.'
+        redirect_to edit_admin_role_skill_map_url(@role_skill_map), notice: "Role skill map successfully updated."
       else
         render :edit, status: :unprocessable_entity
       end
@@ -37,7 +37,7 @@ module Admin
     def destroy
       return unless @role_skill_map.destroy
 
-      redirect_to admin_role_skill_maps_url, notice: 'Role skill map successfully deleted.'
+      redirect_to admin_role_skill_maps_url, notice: "Role skill map successfully deleted."
     end
 
     private

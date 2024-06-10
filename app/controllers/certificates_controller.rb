@@ -16,7 +16,7 @@ class CertificatesController < ApplicationController
     @certificate = Certificate.new(certificate_params.merge(user: current_user))
 
     if @certificate.save
-      redirect_to certificates_path, notice: 'Certificate successfully added.'
+      redirect_to certificates_path, notice: "Certificate successfully added."
     else
       render :new, status: :unprocessable_entity
     end
@@ -26,7 +26,7 @@ class CertificatesController < ApplicationController
 
   def update
     if @certificate.update(certificate_params)
-      redirect_to certificates_path, notice: 'Certificate successfully updated.'
+      redirect_to certificates_path, notice: "Certificate successfully updated."
     else
       render :edit, status: :unprocessable_entity
     end
@@ -35,7 +35,7 @@ class CertificatesController < ApplicationController
   def destroy
     return unless @certificate.destroy
 
-    redirect_to certificates_path, notice: 'Certificate successfully deleted.'
+    redirect_to certificates_path, notice: "Certificate successfully deleted."
   end
 
   private

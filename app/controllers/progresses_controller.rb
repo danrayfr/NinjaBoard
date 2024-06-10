@@ -34,7 +34,7 @@ class ProgressesController < ApplicationController
 
     respond_to do |format|
       if @progress.save
-        format.html { redirect_to progress_url(@progress), notice: 'Progress was successfully created.' }
+        format.html { redirect_to progress_url(@progress), notice: "Progress was successfully created." }
         format.json { render :show, status: :created, location: @progress }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -47,7 +47,7 @@ class ProgressesController < ApplicationController
   def update
     respond_to do |format|
       if @progress.update(progress_params)
-        format.html { redirect_to progress_url(@progress), notice: 'Progress was successfully updated.' }
+        format.html { redirect_to progress_url(@progress), notice: "Progress was successfully updated." }
         format.json { render :show, status: :ok, location: @progress }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -61,7 +61,7 @@ class ProgressesController < ApplicationController
     @progress.destroy!
 
     respond_to do |format|
-      format.html { redirect_to progresses_url, notice: 'Progress was successfully destroyed.' }
+      format.html { redirect_to progresses_url, notice: "Progress was successfully destroyed." }
       format.json { head :no_content }
     end
   end

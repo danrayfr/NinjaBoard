@@ -9,7 +9,6 @@ AllCops:
     - app/controllers/accounts_controller.rb
     - app/models/user.rb
     - db/seeds/*
-  Style/MultilineTernaryOperator:
 Style/Documentation:
   Enabled: false
 Metrics/PerceivedComplexity:
@@ -20,4 +19,5 @@ Style/NumericPredicate:
   Enabled: false
 Style/MultilineTernaryOperator:
   Enabled: false
-  
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
