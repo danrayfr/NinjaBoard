@@ -26,7 +26,9 @@ class Course < ApplicationRecord
   extend FriendlyId
   friendly_id :title, use: :slugged
 
+  has_many :lessons, dependent: :destroy
   has_many :assigned_courses, dependent: :destroy
+  has_many :user_courses, dependent: :destroy
 
   has_rich_text :description
   has_one_attached :image do |attachable|
@@ -39,5 +41,23 @@ class Course < ApplicationRecord
 
   def draft?
     !published?
+  end
+
+  def first_lesson
+    lessons.order(:position).first
+  end
+
+  def next_lesson(current_user)
+    return lessons.order(:position).first if current_user.blank?
+
+    completed_lessons = current_user.user_lessons.includes(:lesson).where(completed: true).where(lessons: { course_id: id })
+    started_lessons = current_user.user_lessons.includes(:lesson).where(completed: false).where(lesson: { course_id: id }).order(:position)
+
+    return started_lessons.first.lesson if started_lessons.any?
+
+    lessons = self.lessons.where.not(id: completed_lessons.pluck(:lesson_id)).order(:position)
+    return self.lessons.order(:positon).first unless lessons.any?
+
+    lessons.first
   end
 end

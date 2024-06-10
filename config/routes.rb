@@ -2,8 +2,8 @@ Rails.application.routes.draw do
   # Routes for regular users
 
   resources :leaderboards, only: %i[index show]
-  resources :certificates, except: %i[show]
-  resources :progresses, path: 'progress', only: %i[index] do
+  resources :certificates, except: :show
+  resources :progresses, path: 'progress', only: :index do
     member do
       put :sort
     end
@@ -15,7 +15,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :courses, only: %i[index show]
+  resources :courses do
+    resources :lessons
+  end
 
   authenticated :user, -> (user) { user.admin? } do
     namespace :admin do
@@ -28,6 +30,9 @@ Rails.application.routes.draw do
   #   resources :publish, only: :update
   #   resources :unpublish, only: :update
   # end
+
+  resource :checkouts, only: :create
+  post '/webhook' => 'webhooks#stripe'
 
   root 'pages#home'
 

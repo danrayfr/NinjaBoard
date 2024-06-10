@@ -4,6 +4,7 @@ source "https://rubygems.org"
 
 ruby "3.3.0"
 
+gem 'acts_as_list', '~> 1.0'
 gem "bootsnap", require: false
 gem "devise", "~> 4.9"
 gem "dotenv", groups: %i[development test]
@@ -26,6 +27,7 @@ gem "redis", ">= 4.0.1"
 gem "requestjs-rails", "~> 0.0.11"
 gem "sprockets-rails"
 gem "stimulus-rails"
+gem "stripe", "~> 10.3"
 gem "tailwindcss-rails"
 gem "turbo-rails"
 gem "tzinfo-data", platforms: %i[windows jruby]

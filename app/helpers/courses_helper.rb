@@ -42,4 +42,8 @@ module CoursesHelper
     end
   end
   # rubocop:enable Metrics/MethodLength
+
+  def course_percentage(user_course_progresses, course)
+    user_course_progresses.find { |cp| cp[:course_id] == course.id } [:completed_percentage]
+  end
 end
