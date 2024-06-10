@@ -25,10 +25,13 @@
 class Course < ApplicationRecord
   extend FriendlyId
   friendly_id :title, use: :slugged
-  belongs_to :user
+
   has_many :assigned_courses, dependent: :destroy
 
   has_rich_text :description
+  has_one_attached :image do |attachable|
+    attachable.variant :thum, resize_to_limit: [100, 100]
+  end
 
   validates :title, presence: true, uniqueness: true, length: { maximum: 50 }
   validates :impact, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 10, allow_float: true }

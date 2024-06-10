@@ -31,7 +31,6 @@ class User < ApplicationRecord
 
   before_save :sanitize_email
   has_person_name
-  has_many :courses, dependent: :destroy
   has_many :assigned_courses, dependent: :destroy
   has_many :certificates, dependent: :destroy
   has_one :badge

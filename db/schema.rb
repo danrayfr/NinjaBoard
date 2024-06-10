@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_26_173213) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_10_112207) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -88,7 +88,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_26_173213) do
 
   create_table "courses", force: :cascade do |t|
     t.string "title"
-    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "slug"
@@ -97,7 +96,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_26_173213) do
     t.integer "category", default: 0
     t.float "impact", default: 0.0
     t.index ["slug"], name: "index_courses_on_slug", unique: true
-    t.index ["user_id"], name: "index_courses_on_user_id"
   end
 
   create_table "leaderboards", force: :cascade do |t|
@@ -188,7 +186,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_26_173213) do
   add_foreign_key "assigned_courses", "users"
   add_foreign_key "badges", "users"
   add_foreign_key "certificates", "users"
-  add_foreign_key "courses", "users"
   add_foreign_key "leaderboards", "assigned_courses"
   add_foreign_key "leaderboards", "user_skill_maps"
   add_foreign_key "trophies", "user_skill_maps"

@@ -1,32 +1,31 @@
-<div class="flex flex-col lg:flex-row lg:items-center justify-between border-2 h-full bg-gold rounded-2xl shadow-large gap-12 border-graphite p-8">
-    <div class="mt-8">
-        <span class="text-graphite uppercase">
-            <span class="inline-flex items-center board-tag-badge font-medium py-1 px-3 bg-paleFern text-offWhite rounded"><%= course.category %></span>
-            <span>&#8226;</span>
-            <%= pluralize course.impact, "Impact" %>
+<div id="<%= dom_id course %>">
+  <div class="flex flex-col flex-[1_0_0%] bg-white border rounded-lg">
+    <%- if course.image.present? %>
+      <%= image_tag course.image, class: 'w-full rounded-t' %>
+    <% else %>
+      <%= image_tag "https://via.placeholder.com/380x120", class: "w-full h-auto sm:rounded-se-none" %>
+    <% end %>
+
+    <div class="p-4 flex-2 md:p-5">
+      <div class="flex items-center space-x-1 rtl:space-x-reverse mb-2">
+        <h3 class="text-lg font-semibold text-gray-800 hover:text-green-700 text-left">
+          <%= link_to course.title, course %>
+        </h3>
+      </div>
+
+      <div class="flex items-center p-4 border-t sm:px-5 gap-x-3">
+        <span class="text-gray-500 text-xs">
+          <%= pluralize course.impact, "Impact" %>
+          <%= icon "fa-solid", "gift" %>
         </span>
-        <%= link_to course_path(course) do %>
-        <h1 class="mt-4 text-2xl font-medium text-graphite font-serif tracking-widest text-wrap">
-            <%= course.title %>
-        </h1>
-        <% end %>
-        <p class="mt-2 text-graphite text-wrap">
-            <%= course.description.to_plain_text.truncate(50) %>
+                
+        <p class="text-xs text-gray-500 ml-auto">
+          Added
+          <%= time_tag course.created_at, "data-local": "time-ago" %>
         </p>
-        <div class="flex items-center justify-between mt-4">
-            <div>
-                <a href="#" class="text-lg font-medium text-gray-700 hover:underline hover:text-gray-500 font-sister">
-                    by <%= course.author %>
-                </a>
-                <p class="text-sm text-lightGraphite text-wrap"><%#= course.url %></p>
-            </div>
-        </div>
-        <div class="mt-12">
-            <% if AssignedCourse.exists?(user: current_user, course_id: course.id) %>
-                <p class="text-sm font-medium">You have already enrolled in this course.</p>
-            <% else %>
-                <%= link_to "Enroll", course_path(course), class: "items-center inline-flex w-full focus:outline-disc bg-paleFern duration-500 focus:ring-2 focus:ring-paleFern focus:ring-offset-2 font-medium lg:w-auto h-12 hover:bg-graphite justify-center px-6 py-1 rounded text-offWhite border-2text-center text-sm" %>
-            <% end %>
-        </div>
+      </div>
+
     </div>
+  </div>
 </div>
+
