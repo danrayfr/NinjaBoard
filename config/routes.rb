@@ -9,23 +9,27 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :assigned_courses do
+  # resources :assigned_courses do
+  #   member do
+  #     put :sort
+  #   end
+  # end
+
+  resources :user_courses do
     member do
       put :sort
     end
   end
 
-  resources :courses, only: %i[index show update] do
+  resources :courses, only: %w[index show] do
     resources :lessons do
       post "update_watch_duration", on: :member
     end
   end
 
-  # post 'courses/:course_id/lessons/:id/update_watch_time', to: 'lessons#update_watch_time'
-
   authenticated :user, -> (user) { user.admin? } do
     namespace :admin do
-      resources :courses, except: %i[show]
+      resources :courses, except: :show
       resources :role_skill_maps, path: 'role-skill-mapping'
     end
   end

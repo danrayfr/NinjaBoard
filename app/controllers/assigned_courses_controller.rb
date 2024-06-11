@@ -11,7 +11,7 @@ class AssignedCoursesController < ApplicationController
   def new; end
 
   def create
-    @course = Course.find params[:course_id]
+    @course = Course.friendly.find(params[:course_id])
 
     # Default progress is todo when getting the course by user itself.
     default_progress = Progress.find_by(name: "Todo")

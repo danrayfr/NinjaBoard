@@ -36,9 +36,7 @@ class WebhooksController < ApplicationController
       user = User.find_by!(email: session.customer_email)
 
       UserCourse.create!(course:, user:)
-      UserLesson.
-
-        else
+    else
       puts "Unhandled event type #{event.type}"
     end
 

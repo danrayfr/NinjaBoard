@@ -4,7 +4,7 @@ class ProgressesController < ApplicationController
 
   # GET /progresses or /progresses.json
   def index
-    @progresses = Progress.rank(:row_order)
+    @progresses = Progress.rank :row_order
   end
 
   def sort
@@ -14,7 +14,7 @@ class ProgressesController < ApplicationController
   end
 
   def list
-    @assigned_courses = @progress.assigned_courses.rank(:row_order)
+    @user_courses = @progress.user_courses.rank :row_order
   end
 
   # GET /progresses/1 or /progresses/1.json

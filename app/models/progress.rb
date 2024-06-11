@@ -11,6 +11,7 @@
 
 class Progress < ApplicationRecord
   has_many :assigned_courses, dependent: :destroy
+  has_many :user_courses, dependent: :destroy
   validates :name, presence: true, uniqueness: true
 
   include RankedModel

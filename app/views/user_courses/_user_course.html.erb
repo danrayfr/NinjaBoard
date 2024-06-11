@@ -1,0 +1,38 @@
+<div id="<%= dom_id user_course %>" class="grid w-full bg-dark-secondary shadow-md rounded mt-3 cursor-move transform hover:-rotate-2 active:-rotate-3d pl-2 <%= completed_card_color(user_course)%>">
+  <div class="w-full items-center px-1 py-2">
+    <a class="font-medium tracking-wide font-sister">
+      <%= user_course.course.title %>
+    </a>
+  </div>
+  <div class="flex w-full flex-wrap">
+    <div class="flex w-full flex-wrap justify-start p-1 items-center text-xs bg-dark-secondary shadow-inner">
+      <div class="flex mr-0.5">
+        <div class="inline-flex justify-center items-center my-0.5 even:mx-1 w-auto board-badge-status">
+          <div class="inline-flex items-center w-full bbg-blue-300 text-black">
+            <div class="inline-flex items-center board-tag-badge font-medium py-1 px-3 bg-gold text-black rounded">
+              <p class="whitespace-nowrap text-center w-full text-xs tag-text uppercase">
+                <%= user_course.course.category %>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="grid w-full py-2 px-2 grid-flow-col-dense grid-cols-2">
+    <div class="w-full whitespace-nowrap hidden md:flex flex-wrap text-dark-gray pt-1 col-start-1">
+      <span class="text-sm w-full flex items-center <%= user_course.date_completed.nil? ? 'text-graphite' : 'text-gray-300' %>">
+        <span class="flex items-center capitalize">
+          <%= completed_svg(user_course) %>
+          <%= user_course.date_completed.nil? ? "Deadline" : time_tag(user_course.date_completed, "data-local": "time-ago") %>
+        </span>
+      </span>
+    </div>
+    <div class="flex ml-auto self-start justify-end col-start-2">
+      <svg class="w-4 h-4 text-gray-300 fill-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M21 11.25v8.25a1.5 1.5 0 0 1-1.5 1.5H5.25a1.5 1.5 0 0 1-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 1 0 9.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1 1 14.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z" />
+      </svg>
+      <span class="ml-1 leading-none"><%= user_course.course.impact %></span>
+    </div>
+  </div>
+</div>
