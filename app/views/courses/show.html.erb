@@ -27,11 +27,3 @@
     </div>
   </div>
 </div>
-
-<% if UserCourse.exists?(user: current_user, course_id: @course.id) %>
-  <p class="text-md font-semibold">You have already enrolled in this course.</p>
-<% else %>
-  <%= form_tag user_courses_path(course_id: @course.id), method: :post, class: "inline-form", data: { turbo_frame: "course-form" } do %>
-    <%= button_tag "Get Course", type: :submit, class: "rounded-sm bg-black px-3.5 py-2.5 text-sm border-2 border-black font-semibold text-white shadow-sm hover:bg-white hover:text-black hover:border-2 hover:border-black w-full" %>
-  <% end %>
-<% end %>

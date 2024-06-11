@@ -6,7 +6,7 @@ class UserCourse < ApplicationRecord
   include RankedModel
   ranks :row_order, with_same: :progress_id
 
-  enum progress_status: %w[todo daily in_progress completed]
+  enum progress_status: %i[todo daily in_progress completed]
   after_save :update_progress_status
 
   validate :unique_assignment_per_user_and_course, on: :create

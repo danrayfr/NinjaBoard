@@ -16,12 +16,12 @@ class LessonsController < ApplicationController
   def update
     @user_lesson = UserLesson.find_or_create_by(user: current_user, lesson: @lesson)
     @user_lesson.update!(completed: true)
-
     next_lesson = @course.lessons.where("position > ?", @lesson.position).order(:position).first
 
     if next_lesson
       redirect_to course_lesson_path(@course, next_lesson)
     else
+      check_and_update_user_course_completion(@user_lesson)
       redirect_to course_path(@course), notice: "You have completed the course."
     end
   end
@@ -38,6 +38,8 @@ class LessonsController < ApplicationController
                      else
                        course_path(@user_lesson.lesson.course)
                      end
+
+      check_and_update_user_course_completion(@user_lesson)
       render json: { completed: true, redirect_url: redirect_url, notice: "You have completed the course." }
     else
       render json: { completed: false }
@@ -66,6 +68,18 @@ class LessonsController < ApplicationController
       else
         redirect_to course_path(@course), notice: "You must purchase the full course to access the next lesson"
       end
+    end
+  end
+
+  def check_and_update_user_course_completion(user_lesson)
+    course = user_lesson.lesson.course
+    user_course = UserCourse.find_by(user: current_user, course: course)
+
+    completed_lesson_ids = current_user.user_lessons.where(lesson: course.lessons, completed: true).pluck(:lesson_id)
+    all_lesson_ids = course.lessons.pluck(:id)
+
+    if completed_lesson_ids.sort == all_lesson_ids.sort
+      user_course.update(date_completed: Time.now, progress_status: "completed")
     end
   end
 end
