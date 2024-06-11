@@ -30,10 +30,6 @@ class LessonsController < ApplicationController
     @user_lesson = UserLesson.find_or_create_by(user: current_user, lesson: @lesson)
     @user_lesson.update(watch_duration: params[:watch_duration])
 
-    if @user_lesson.watch_duration >= 3 # required watch time in seconds
-      @user_lesson.update(completed: true)
-    end
-
     if @user_lesson.watch_duration >= @lesson.video.blob.metadata[:duration] - 1 # required watch time in seconds
       @user_lesson.update(completed: true)
       next_lesson = @user_lesson.lesson.next_lesson
