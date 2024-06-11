@@ -15,9 +15,13 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :courses do
-    resources :lessons
+  resources :courses, only: %i[index show update] do
+    resources :lessons do
+      post "update_watch_duration", on: :member
+    end
   end
+
+  # post 'courses/:course_id/lessons/:id/update_watch_time', to: 'lessons#update_watch_time'
 
   authenticated :user, -> (user) { user.admin? } do
     namespace :admin do

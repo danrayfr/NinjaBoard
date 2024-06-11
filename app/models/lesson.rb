@@ -9,11 +9,22 @@ class Lesson < ApplicationRecord
   end
   has_rich_text :description
 
+  validates_presence_of :video
+  validate :validate_video_content_type
+
   def next_lesson
     course.lessons.where("position > ?", position).order(:position).first
   end
 
   def previous_lesson
     course.lessons.where("position < ?", position).order(:position).last
+  end
+
+  private
+
+  def validate_video_content_type
+    if video.attached? && !video.content_type.in?(%w[video/mp4 video/mpeg])
+      errors.add(:video, "must be a valid video format")
+    end
   end
 end

@@ -6,17 +6,17 @@ class WebhooksController < ApplicationController
   def stripe
     Stripe.api_key = stripe_secret_key
     payload = request.body.read
-    sig_header = request.env['HTTP_STRIPE_SIGNATURE']
+    sig_header = request.env["HTTP_STRIPE_SIGNATURE"]
     endpoint_secret = webhook
 
     event = nil
 
     begin
       event = Stripe::Webhook.construct_event(payload, sig_header, endpoint_secret)
-    rescue JSON::ParserError => e
+    rescue JSON::ParserError
       status 400
       return
-    rescue Stripe::SignatureVerificationError => e
+    rescue Stripe::SignatureVerificationError
       puts "Webhook signature verification failed."
       status 400
       return
@@ -35,9 +35,10 @@ class WebhooksController < ApplicationController
       course = Course.find(course_id)
       user = User.find_by!(email: session.customer_email)
 
-      UserCourse.create!(course: course, user: user)
+      UserCourse.create!(course:, user:)
+      UserLesson.
 
-    else
+        else
       puts "Unhandled event type #{event.type}"
     end
 

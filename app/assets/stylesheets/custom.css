@@ -1,0 +1,5 @@
+/* custom_styles.css */
+
+.lesson-not-completed video::-webkit-media-controls-timeline {
+  display: none;
+}

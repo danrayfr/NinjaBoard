@@ -3,47 +3,27 @@
 <div class="py-12">
   <div class="mx-auto max-w-7xl">
     <div class="mx-auto w-full">
-      
+      <% if notice.present? %>
+        <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+      <% end %>
+
       <%- if @course.lessons.any? && @course.lessons.first.video.present? %>
         <%= video_tag @course.lessons.first.video, controls: true, class: "w-full rounded mb-6" %>
+      <%- elsif @course.image.present? %>
+        <%= image_tag @course.image, class: 'w-full rounded-t' %>
+      <% else %>
+        <%= image_tag "https://via.placeholder.com/380x120", class: "w-full h-auto sm:rounded-se-none" %>
       <% end %>
 
       <div class="border p-6 rounded">
-        <div class="flex justify-start items-center flex-wrap w-full mb-2">
-          <div class="bg-indigo-100 text-indigo-800 text-sm font-semibold mt-2 mr-2 px-2.5 py-0.5 rounded"><%= @course.category %></div>
-        </div>
-        <span><%= pluralize @course.lessons.count, "lesson" %> </span>
+        <span><%= pluralize(@course.lessons.count, 'lesson') %> </span>
         <h1 class="text-7xl font-bold tracking-tighter"><%= @course.title %></h1>
         <p class="text-gray-950 mt-6 text-xl tracking-normal leading-relaxed"><%= @course.description %></p>
       </div>
-
     </div>
-  </div>
 
-  <div>
-    <%= render "sidebar" %>
-  </div>
-</div>
-
-
-<div class="mx-auto max-w-7xl">
-  <div class="mx-auto w-full">
-    <% if notice.present? %>
-      <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
-    <% end %>
-
-    <% if @course.lessons.any? && @course.lessons.first.video.present? %>
-      <%= video_tag @course.lessons.first.video, controls: true, class: "w-full rounded mb-6" %>
-    <% end %>
-
-    <div class="border p-6 rounded">
-      <span><%= pluralize(@course.lessons.count, 'lesson') %> </span>
-      <h1 class="text-7xl font-bold tracking-tighter"><%= @course.title %></h1>
-      <p class="text-gray-950 mt-6 text-xl tracking-normal leading-relaxed"><%= @course.description %></p>
+    <div>
+      <%= render "sidebar" %>
     </div>
-  </div>
-
-  <div>
-    <%= render "sidebar" %>
   </div>
 </div>

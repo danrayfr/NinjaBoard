@@ -31,7 +31,7 @@ module.exports = {
         'paleCoral': '#F9B4A4',
         'paleGold': '#FAD1A3',
         'offWhite': '#FFF8F5'
-      }
+      },
     }
   },
   plugins: [
