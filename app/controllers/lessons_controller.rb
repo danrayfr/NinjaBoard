@@ -46,6 +46,19 @@ class LessonsController < ApplicationController
     end
   end
 
+  def check_and_update_user_course_completion(user_lesson)
+    course = user_lesson.lesson.course
+    user_course = UserCourse.find_by(user: current_user, course: course)
+    completed_progress = Progress.find_by(name: "Completed")
+
+    completed_lesson_ids = current_user.user_lessons.where(lesson: course.lessons, completed: true).pluck(:lesson_id)
+    all_lesson_ids = course.lessons.pluck(:id)
+
+    return unless completed_lesson_ids.sort == all_lesson_ids.sort
+
+    user_course.update(date_completed: Time.now, progress_status: "completed", progress: completed_progress)
+  end
+
   private
 
   def set_course
@@ -68,18 +81,6 @@ class LessonsController < ApplicationController
       else
         redirect_to course_path(@course), notice: "You must purchase the full course to access the next lesson"
       end
-    end
-  end
-
-  def check_and_update_user_course_completion(user_lesson)
-    course = user_lesson.lesson.course
-    user_course = UserCourse.find_by(user: current_user, course: course)
-
-    completed_lesson_ids = current_user.user_lessons.where(lesson: course.lessons, completed: true).pluck(:lesson_id)
-    all_lesson_ids = course.lessons.pluck(:id)
-
-    if completed_lesson_ids.sort == all_lesson_ids.sort
-      user_course.update(date_completed: Time.now, progress_status: "completed")
     end
   end
 end

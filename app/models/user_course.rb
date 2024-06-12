@@ -9,7 +9,7 @@ class UserCourse < ApplicationRecord
   enum progress_status: %i[todo daily in_progress completed]
   after_save :update_progress_status
 
-  validate :unique_assignment_per_user_and_course, on: :create
+  # validate :unique_assignment_per_user_and_course, on: :create
   after_update :update_user_skill_map_if_completed
 
   # Override the setter method for the progress association

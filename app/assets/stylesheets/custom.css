@@ -3,3 +3,7 @@
 .lesson-not-completed video::-webkit-media-controls-timeline {
   display: none;
 }
+
+.allow-pointer-events {
+  pointer-events: auto;
+}

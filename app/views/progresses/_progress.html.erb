@@ -18,7 +18,7 @@
         data-sortable-id="<%= user_course.id %>"
         data-sortable-update-url="<%= sort_user_course_path(user_course) %>"
         data-sortable-progress-status="<%= user_course.progress_status %>"
-        <% if user_course.progress_status == 'completed' %>
+        <% if user_course.progress_status == "completed"%>
           class="pointer-events-none"
         <% end %>
         >

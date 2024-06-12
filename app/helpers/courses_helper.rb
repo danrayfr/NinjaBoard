@@ -46,4 +46,16 @@ module CoursesHelper
   def course_percentage(user_course_progresses, course)
     user_course_progresses.find { |cp| cp[:course_id] == course.id } [:completed_percentage]
   end
+
+  def user_already_enrolled?(course, user)
+    UserCourse.exists?(user:, course_id: course.id)
+  end
+
+  def enroll_form_for(course)
+    form_tag user_courses_path(course_id: course.id), method: :post, class: "inline-form",
+                                                      data: { turbo_frame: "course-form" } do
+      button_tag "Get Course", type: :submit,
+                               class: "rounded-sm bg-black px-3.5 py-2.5 text-sm border-2 border-black font-semibold text-white shadow-sm hover:bg-white hover:text-black hover:border-2 hover:border-black w-full"
+    end
+  end
 end

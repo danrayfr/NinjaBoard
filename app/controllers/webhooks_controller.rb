@@ -2,17 +2,17 @@
 
 class WebhooksController < ApplicationController
   skip_forgery_protection
+  before_action :set_stripe_api_key, only: :stripe
+  before_action :set_webhook, only: :stripe
 
   def stripe
-    Stripe.api_key = stripe_secret_key
     payload = request.body.read
     sig_header = request.env["HTTP_STRIPE_SIGNATURE"]
-    endpoint_secret = webhook
 
     event = nil
 
     begin
-      event = Stripe::Webhook.construct_event(payload, sig_header, endpoint_secret)
+      event = Stripe::Webhook.construct_event(payload, sig_header, @endpoint_secret)
     rescue JSON::ParserError
       status 400
       return
@@ -35,7 +35,15 @@ class WebhooksController < ApplicationController
       course = Course.find(course_id)
       user = User.find_by!(email: session.customer_email)
 
-      UserCourse.create!(course:, user:)
+      user_has_lesson = user.user_lessons.joins(:lesson).where(lessons: { course_id: course.id }).exists?
+
+      progress = if user_has_lesson
+                   Progress.find_by(name: "In Progress")
+                 else
+                   Progress.find_by(name: "Todo")
+                 end
+
+      UserCourse.create!(course:, user:, progress:)
     else
       puts "Unhandled event type #{event.type}"
     end
@@ -43,13 +51,17 @@ class WebhooksController < ApplicationController
     render json: { message: "success" }
   end
 
-  protected
+  private
+
+  def set_stripe_api_key
+    Stripe.api_key = stripe_secret_key
+  end
 
   def stripe_secret_key
     ENV["STRIPE_SECRET_KEY"]
   end
 
-  def webhook
-    ENV["WEBHOOK_SECRET"]
+  def set_webhook
+    @endpoint_secret = ENV["WEBHOOK_SECRET"]
   end
 end
