@@ -1,29 +1,105 @@
 <%= content_for(:title, @course.title) %>
 
-<div class="py-12">
-  <div class="mx-auto max-w-7xl">
-    <div class="mx-auto w-full">
-      <% if notice.present? %>
-        <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
-      <% end %>
+<section class="py-12 lg:py-28 bg-gray-100">
+  <div class="container mx-auto px-4 xl:px-0">
 
-      <%- if @course.lessons.any? && @course.lessons.first.video.present? %>
-        <%= video_tag @course.lessons.first.video, controls: true, class: "w-full rounded mb-6" %>
-      <%- elsif @course.image.present? %>
-        <%= image_tag @course.image, class: 'w-full rounded-t' %>
-      <% else %>
-        <%= image_tag "https://via.placeholder.com/380x120", class: "w-full h-auto sm:rounded-se-none" %>
-      <% end %>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-12">
+      <div>
+        <div class="flex-shrink-0">
+          <div class="max-w-2xl">
+            <div class="flex flex-row gap-3 items-center text-left mt-12">
+              <div>
+                <%- if current_user.avatar_url.nil? %>
+                  <%= image_tag "profile/ninja.jpeg", class: "inline-block w-16 border h-16 rounded-full shrink-0", alt: "#{@course.author}-avatar" %>
+                <% else %>
+                  <%= image_tag current_user.avatar_url, class: "inline-block w-16 border h-16 rounded-full shrink-0", alt: "#{@course.author}-avatar" %>
+                <% end %>
+              </div>
+              <div>
+                <p class="text-sm font-display text-slate-900"><%= @course.author || "Instructor" %></p>
+                <p class="text-slate-600 capitalize"><%= @course.category %></p>
+              </div>
+            </div>
+            <p class="text-4xl font-semibold font-display text-blue-950 mt-12"><%= @course.title %></p>
+            <p class="text-slate-600 mt-4 max-w-sm"><%= @course.description.to_plain_text.truncate(100) %></p>
+            <div class="mt-8 flex flex-col md:flex-row gap-2">
 
-      <div class="border p-6 rounded">
-        <span><%= pluralize(@course.lessons.count, 'lesson') %> </span>
-        <h1 class="text-7xl font-bold tracking-tighter"><%= @course.title %></h1>
-        <p class="text-gray-950 mt-6 text-xl tracking-normal leading-relaxed"><%= @course.description %></p>
+              <% if @course.paid %>
+                <%- unless current_user.user_courses.where(course_id: @course.id).exists? %>
+                  
+                  <%= form_tag checkouts_path(@course), method: :post, class: "" do %>
+                    <%= hidden_field_tag :course_id, @course.id %>
+                    <%= hidden_field_tag :stripeEmail, current_user.email %>
+                    <%= button_tag class: "items-center inline-flex w-full focus:outline-disc bg-green-500 duration-500 focus:ring-2 focus:ring-green-600 focus:ring-offset-2 font-medium h-12 hover:bg-green-600 justify-center px-6 py-1 gap-3 rounded-full text-white text-center text-sm md:w-auto" do %>
+                      Unlock full course
+                      <%= display_course_price(@course, current_user) %>
+                    <% end %>
+                  <% end %>
+                <% end %>
+              <% else %>
+
+                <% if user_already_enrolled?(@course, current_user) %>
+                  <% if @completed_lessons.count == @course.lessons.count %>
+                    <p class="rounded-lg bg-white px-2.5 py-2.5 text-sm border-2 border-black font-semibold text-gray-700 shadow-sm">
+                      You have completed this course. Congrats!
+                    </p>
+                  <% else %>
+                    <p class="rounded-lg bg-white px-2.5 py-2.5 text-sm border-2 border-black font-semibold text-gray-700 shadow-sm">You have already enrolled in this course.</p>
+                  <% end %>
+                <% else %>
+                  <%= enroll_form_for(@course) %>
+                <% end %>
+              <% end %>
+
+
+              <%- if user_signed_in? && @completed_lessons&.any? %>
+                <% if @completed_lessons.count == @course.lessons.count %>
+                
+                  <%= link_to course_lesson_path(@course, @course.first_lesson), class: "items-center inline-flex w-full focus:outline-disc bg-green-50 duration-200 focus:ring-2 focus:ring-green-60 focus:ring-offset-2 font-medium h-12 hover:bg-green-100 gap-3 justify-center px-6 py-1 rounded-full text-green-600 text-center text-sm md:w-auto" do %>
+                    Watch again
+                    <%= icon "fa-solid" , "circle-arrow-right" %>
+                  <% end %>
+                <% else %>
+                  <%= link_to course_lesson_path(@course, @course.next_lesson(current_user)), class: "items-center inline-flex w-full focus:outline-disc bg-green-50 duration-200 focus:ring-2 focus:ring-green-60 focus:ring-offset-2 font-medium h-12 hover:bg-green-100 gap-3 justify-center px-6 py-1 rounded-full text-green-600 text-center text-sm md:w-auto" do %>
+                    Continue Course
+                    <%= icon "fa-solid" , "circle-arrow-right" %>
+                  <% end %>
+                <% end %>
+              <% else %>
+                <%= link_to course_lesson_path(@course, @course.first_lesson), class: "items-center inline-flex w-full focus:outline-disc bg-green-50 duration-200 focus:ring-2 focus:ring-green-60 focus:ring-offset-2 font-medium h-12 hover:bg-green-100 gap-3 justify-center px-6 py-1 rounded-full text-green-600 text-center text-sm md:w-auto" do %>
+                    Start Course
+                  <%= icon "fa-solid" , "circle-arrow-right" %>
+                <% end %>
+              <% end %>
+
+            </div>
+            <ol role="list" class="mt-8 divide-y divide-slate-300/30 rounded-2xl bg-slate-50 px-6 py-3 text-base tracking-tight sm:px-8 sm:py-7">
+              <li class="flex justify-between py-3"><span class="font-medium text-blue-950" aria-hidden="true">Category</span><span class="font-display text-slate-600 capitalize" aria-hidden="true"><%= @course.category %></span></li>
+              <li class="flex justify-between py-3"><span class="font-medium text-blue-950" aria-hidden="true">Watch duration</span><span class="font-display text-slate-600" aria-hidden="true"><%= course_watch_duration(@course) %> </span></li>
+              <li class="flex justify-between py-3" aria-label="Setting up your first artboard on page 20">
+                <span class="font-medium text-blue-950" aria-hidden="true">Lesson</span><span class="font-display text-slate-600" aria-hidden="true"><%= @course.lessons.count %></span>
+              </li>
+              <li class="flex justify-between py-3" aria-label="Setting up your first artboard on page 20">
+                <span class="font-medium text-blue-950" aria-hidden="true">Videos</span><span class="font-display text-slate-600" aria-hidden="true"><%= @course.lessons.joins(:video_attachment).count %></span>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+      <div>
+        <%- if @course.lessons.any? && @course.lessons.first.video.present? %>
+          <%= video_tag @course.lessons.first.video, controls: true, class: "w-full rounded-lg mb-6" %>
+        <%- elsif @course.image.present? %>
+          <%= image_tag @course.image, class: 'w-full rounded-lg' %>
+        <% else %>
+          <%= image_tag "https://via.placeholder.com/380x120", class: "w-full h-auto sm:rounded-se-none" %>
+        <% end %>
       </div>
     </div>
 
-    <div>
-      <%= render "sidebar" %>
+    <div class="py-12">
+      <%= @course.description %>
     </div>
+
   </div>
-</div>
+</section>

@@ -1,6 +1,36 @@
 # frozen_string_literal: true
 
 module CoursesHelper
+  def course_watch_duration(course)
+    # Return "empty" if the course has no lessons
+    return "No lesson available" if course.lessons.empty?
+
+    # Calculate the total duration in seconds, ensuring we handle cases with missing videos or metadata
+    total_seconds = course.lessons.sum do |lesson|
+      if lesson.video.present? && lesson.video.blob.metadata[:duration]
+        lesson.video.blob.metadata[:duration]
+      else
+        0
+      end
+    end
+
+    # Return "empty" if no video durations are found
+    return "0 sec" if total_seconds.zero?
+
+    # Calculate hours, minutes, and seconds
+    hours = (total_seconds / 3600).floor
+    minutes = ((total_seconds % 3600) / 60).floor
+    seconds = (total_seconds % 60).floor
+
+    # Format the output
+    duration_str = ""
+    duration_str += "#{pluralize(hours, "hr")} " if hours > 0
+    duration_str += "#{pluralize(minutes, "min")} " if minutes > 0
+    duration_str += "#{pluralize(seconds, "sec")}" if seconds > 0
+
+    duration_str.strip # Remove any trailing spaces
+  end
+
   def active_tab_class
     'text-white bg-indigo-700 hover:bg-indigo-800 focus:outline-none focus:ring-4 focus:ring-indigo-300 font-medium rounded-full
     text-sm px-5 py-2.5 text-center mb-2'
@@ -55,7 +85,7 @@ module CoursesHelper
     form_tag user_courses_path(course_id: course.id), method: :post, class: "inline-form",
                                                       data: { turbo_frame: "course-form" } do
       button_tag "Get Course", type: :submit,
-                               class: "rounded-sm bg-black px-3.5 py-2.5 text-sm border-2 border-black font-semibold text-white shadow-sm hover:bg-white hover:text-black hover:border-2 hover:border-black w-full"
+                               class: "items-center inline-flex w-full focus:outline-disc bg-green-500 duration-500 focus:ring-2 focus:ring-green-600 focus:ring-offset-2 font-medium h-12 hover:bg-green-600 justify-center px-6 py-1 gap-3 rounded-full text-white text-center text-sm md:w-auto"
     end
   end
 end

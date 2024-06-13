@@ -1,5 +1,5 @@
 class CoursesController < ApplicationController
-  before_action :authenticate_user!
+  prepend_before_action :authenticate_user!
   before_action :set_course, only: :show
 
   def index
