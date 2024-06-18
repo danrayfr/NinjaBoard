@@ -1,7 +1,7 @@
 <div id="<%= dom_id user_course %>" class="grid w-full bg-dark-secondary shadow-md rounded mt-3 <%= user_course.progress_status == "completed" ? "cursor-not-allowed" : "cursor-move" %> transform hover:-rotate-2 active:-rotate-3d pl-2 <%= completed_card_color(user_course)%>">
   <div class="w-full items-center px-1 py-2">
     <a class="font-medium tracking-wide font-sister">
-      <%= link_to user_course.course.title, course_lesson_path(user_course.course, user_course.course.first_lesson) %>
+      <%= link_to user_course.course.title, course_path(user_course.course) %>
     </a>
   </div>
   <div class="flex w-full flex-wrap">

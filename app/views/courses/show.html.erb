@@ -51,12 +51,11 @@
                 <% end %>
               <% end %>
 
-
-              <%- if user_signed_in? && @completed_lessons&.any? %>
+              <% if user_signed_in? && @completed_lessons&.any? %>
                 <% if @completed_lessons.count == @course.lessons.count %>
                 
                   <%= link_to course_lesson_path(@course, @course.first_lesson), class: "items-center inline-flex w-full focus:outline-disc bg-green-50 duration-200 focus:ring-2 focus:ring-green-60 focus:ring-offset-2 font-medium h-12 hover:bg-green-100 gap-3 justify-center px-6 py-1 rounded-full text-green-600 text-center text-sm md:w-auto" do %>
-                    Watch again
+                    Take again
                     <%= icon "fa-solid" , "circle-arrow-right" %>
                   <% end %>
                 <% else %>

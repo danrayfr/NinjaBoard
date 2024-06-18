@@ -1,7 +1,9 @@
 <div id="courses">
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mt-20">
-    <%- @courses.each do |course| %>
-      <%= render "course", { course: course, user_started_courses: @user_started_courses, user_course_progresses: @user_course_progresses, user_unlocked_courses: @user_unlocked_courses } %>
+    <% @courses.each do |course| %>
+      <% if course.lessons.any? %>
+        <%= render "course", { course: course, user_started_courses: @user_started_courses, user_course_progresses: @user_course_progresses, user_unlocked_courses: @user_unlocked_courses } %>
+      <% end %>
     <% end %>
   </div>
 </div>

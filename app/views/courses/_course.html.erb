@@ -1,7 +1,7 @@
 <div id="<%= dom_id course %>">
   <div class="col-span-1 bg-white group">
     <div class="h-48 lg:h-64 w-full relative overflow-hidden">
-      <p class="absolute top-4 left-4 z-10 bg-white rounded-full px-2 py-1 text-xs font-normal text-slate-800 capitalize"><%= course.category %></p>
+      <p class="absolute top-4 left-4 z-10 bg-white rounded-md px-2 py-1 text-sm font-normal text-slate-800 capitalize"><%= course.category %></p>
       
       <%- if course.image.present? %>
         <%= image_tag course.image, class: "h-full w-full group-hover:scale-110 transition-all duration-500" %>
@@ -57,10 +57,12 @@
             </div>
           <% end %>
         <% else %>
-          <%= form_tag user_courses_path(course_id: course.id), method: :post, data: { turbo_frame: "course-form" }, 'turbo-confirm': "Are you sure you want to enroll in this course?" do %>
-            <%= button_tag type: "submit", class: "text-sm font-medium text-slate-600 hover:text-green-700 transition-all duration-300" do %>
-              <%= icon "fa-solid", "tag" %>
-              <span>Get Enrolled</span>
+          <% unless course.paid? %>
+            <%= form_tag user_courses_path(course_id: course.id), method: :post, data: { turbo_frame: "course-form" }, 'turbo-confirm': "Are you sure you want to enroll in this course?" do %>
+              <%= button_tag type: "submit", class: "text-sm font-medium text-slate-600 hover:text-green-700 transition-all duration-300" do %>
+                <%= icon "fa-solid", "tag" %>
+                <span>Get Enrolled</span>
+              <% end %>
             <% end %>
           <% end %>
         <% end %>
