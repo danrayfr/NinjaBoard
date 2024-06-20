@@ -126,6 +126,8 @@ GEM
       activerecord (>= 4.0.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
+    groupdate (6.4.0)
+      activesupport (>= 6.1)
     hashie (5.0.0)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
@@ -362,6 +364,7 @@ DEPENDENCIES
   faker
   font-awesome-sass (~> 6.5.1)
   friendly_id (~> 5.5)
+  groupdate (~> 6.4)
   image_processing (~> 1.2)
   importmap-rails
   jbuilder

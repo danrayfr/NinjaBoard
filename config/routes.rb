@@ -1,4 +1,21 @@
 Rails.application.routes.draw do
+  # Routes for super_admin users
+  devise_for :super_admins, skip: :registrations
+
+  authenticated :super_admin_user do
+    root to: "super_admin#index", as: :super_admin_root
+  end
+
+  get "super-admin" => "super_admin#index"
+  namespace :super_admin, path: 'super-admin' do
+    resources :users
+    resources :role_skill_maps, path: 'role-skill-mapping'
+    resources :courses do
+      resources :lessons
+    end
+  end
+
+  patch 'super-admin/courses/:course_id/lessons/:id/move' => 'super_admin/lessons#move'
   # Routes for regular users
 
   resources :leaderboards, only: %i[index show]
@@ -42,8 +59,6 @@ Rails.application.routes.draw do
   resource :checkouts, only: :create
   post '/webhook' => 'webhooks#stripe'
 
-  root 'pages#home'
-
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     sessions: 'users/sessions',
@@ -53,4 +68,5 @@ Rails.application.routes.draw do
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get 'up' => 'rails/health#show', as: :rails_health_check
+  root 'pages#home'
 end

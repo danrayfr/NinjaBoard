@@ -48,7 +48,7 @@ class User < ApplicationRecord
   #                      one lowercase letter, one special character, and one number' },
   #                      if: :password_required? && :not_omniauth_login?
 
-  enum role: %i[ninja admin]
+  enum role: %i[ninja admin moderator instructor]
 
   after_create :build_user_skill_map_if_missing
   after_create :build_user_badge_if_missing

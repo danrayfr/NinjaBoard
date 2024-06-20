@@ -11,6 +11,7 @@ gem "dotenv", groups: %i[development test]
 gem "faker"
 gem "font-awesome-sass", "~> 6.5.1"
 gem "friendly_id", "~> 5.5"
+gem 'groupdate', '~> 6.4'
 gem "image_processing", "~> 1.2"
 gem "importmap-rails"
 gem "jbuilder"

@@ -1,0 +1,17 @@
+<%= form_with(model: super_admin_course) do |form| %>
+  <% if super_admin_course.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(super_admin_course.errors.count, "error") %> prohibited this super_admin_course from being saved:</h2>
+
+      <ul>
+        <% super_admin_course.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

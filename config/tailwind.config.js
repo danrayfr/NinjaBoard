@@ -13,7 +13,8 @@ module.exports = {
       fontFamily: {
         sans_serif: ['Merriweather'],
         poppins: ['Poppins'],
-        mono: ['IBM Plex Mono']
+        mono: ['IBM Plex Mono'],
+        jetbrains: ['JetBrains Mono']
       },
       colors: {
         transparent: 'transparent',
