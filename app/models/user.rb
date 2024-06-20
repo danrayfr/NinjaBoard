@@ -31,25 +31,35 @@ class User < ApplicationRecord
 
   before_save :sanitize_email
   has_person_name
-  has_many :courses, dependent: :destroy
   has_many :assigned_courses, dependent: :destroy
   has_many :certificates, dependent: :destroy
   has_one :badge
   has_one :user_skill_map
+  has_many :user_lessons, dependent: :destroy
+  has_many :user_courses, dependent: :destroy
 
   validates :email, presence: true, uniqueness: true
 
+  # Use devise-security instead.
   # Commented password validation for demo and pitch purpose
   # validates :password, presence: true, length: { minimum: 8 },
   #                      format: { with: /\A(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]) [A-Za-z\d@$!%*?&]+\z/,
   #                                message: 'Must contain at least one uppercase letter,
   #                      one lowercase letter, one special character, and one number' },
   #                      if: :password_required? && :not_omniauth_login?
-                        
-  enum role: %i[ninja admin]
+
+  enum role: %i[ninja admin moderator instructor]
 
   after_create :build_user_skill_map_if_missing
   after_create :build_user_badge_if_missing
+
+  def user_completed_courses
+    user_lessons&.joins(:lesson)&.where(completed: true, lesson: { course: @course })&.pluck(:lesson_id)
+  end
+
+  def completed_course_by?(course)
+    user_lessons.joins(:lesson).where(lesson: { course: course }).all?(&:completed)
+  end
 
   def build_user_skill_map_if_missing
     build_association_if_missing(:user_skill_map)

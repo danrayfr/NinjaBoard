@@ -1,4 +1,4 @@
-require 'test_helper'
+require "test_helper"
 
 class AssignedCourseTest < ActiveSupport::TestCase
   def setup
@@ -7,7 +7,7 @@ class AssignedCourseTest < ActiveSupport::TestCase
     @assigned_course = AssignedCourse.new(user: @user, course: @course)
   end
 
-  test 'assigned course should be valid' do
+  test "assigned course should be valid" do
     assert @assigned_course.valid?
   end
 end

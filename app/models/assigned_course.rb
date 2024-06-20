@@ -43,14 +43,14 @@ class AssignedCourse < ApplicationRecord
     if value.is_a?(Progress)
       super(value)
     else
-      super(Progress.find_by(id: value) || Progress.find_by(name: 'Todo'))
+      super(Progress.find_by(id: value) || Progress.find_by(name: "Todo"))
     end
   end
 
   def update_user_skill_map_if_completed
-    if saved_change_to_progress_status? && progress_status == 'completed'
-      update_user_skill_map
-    end
+    return unless saved_change_to_progress_status? && progress_status == "completed"
+
+    update_user_skill_map
   end
 
   private
@@ -70,33 +70,33 @@ class AssignedCourse < ApplicationRecord
   def unique_assignment_per_user_and_course
     return unless AssignedCourse.exists?(user_id:, course_id:)
 
-    errors.add(:base, 'You have already been assigned this course.')
+    errors.add(:base, "You have already been assigned this course.")
   end
 
   def update_user_skill_map
     case course.category
-    when 'management'
+    when "management"
       user.user_skill_map.increment!(:management_skill, course.impact)
-      user.user_skill_map.trophies.find_by(name: 'management_skill').level.increment_points(50)
-    when 'technical'
+      user.user_skill_map.trophies.find_by(name: "management_skill").level.increment_points(50)
+    when "technical"
       user.user_skill_map.increment!(:technical_skill, course.impact)
-      user.user_skill_map.trophies.find_by(name: 'technical_skill').level.increment_points(50)
-    when 'communication'
+      user.user_skill_map.trophies.find_by(name: "technical_skill").level.increment_points(50)
+    when "communication"
       user.user_skill_map.increment!(:communication_skill, course.impact)
-      user.user_skill_map.trophies.find_by(name: 'communication_skill').level.increment_points(50)
-    when 'financial'
+      user.user_skill_map.trophies.find_by(name: "communication_skill").level.increment_points(50)
+    when "financial"
       user.user_skill_map.increment!(:financial_skill, course.impact)
-      user.user_skill_map.trophies.find_by(name: 'financial_skill').level.increment_points(50)
-    when 'analytical'
+      user.user_skill_map.trophies.find_by(name: "financial_skill").level.increment_points(50)
+    when "analytical"
       user.user_skill_map.increment!(:analytical_skill, course.impact)
-      user.user_skill_map.trophies.find_by(name: 'analytical_skill').level.increment_points(50)
-    when 'work_ethics'
+      user.user_skill_map.trophies.find_by(name: "analytical_skill").level.increment_points(50)
+    when "work_ethics"
       user.user_skill_map.increment!(:work_ethics, course.impact)
-      user.user_skill_map.trophies.find_by(name: 'work_ethics').level.increment_points(50)
+      user.user_skill_map.trophies.find_by(name: "work_ethics").level.increment_points(50)
     end
 
     # Update date_completed if progress status is completed
-    return unless progress_status == 'completed'
+    return unless progress_status == "completed"
 
     user.badge.level.increment_points(50)
 

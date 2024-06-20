@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_26_173213) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_18_065600) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -52,6 +52,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_26_173213) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "admins", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_admins_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+  end
+
   create_table "assigned_courses", force: :cascade do |t|
     t.boolean "pass", default: false, null: false
     t.float "assessment_score"
@@ -88,7 +100,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_26_173213) do
 
   create_table "courses", force: :cascade do |t|
     t.string "title"
-    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "slug"
@@ -96,8 +107,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_26_173213) do
     t.string "url"
     t.integer "category", default: 0
     t.float "impact", default: 0.0
+    t.boolean "paid", default: false
+    t.string "stripe_price_id"
+    t.text "premium_description"
     t.index ["slug"], name: "index_courses_on_slug", unique: true
-    t.index ["user_id"], name: "index_courses_on_user_id"
   end
 
   create_table "leaderboards", force: :cascade do |t|
@@ -107,6 +120,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_26_173213) do
     t.datetime "updated_at", null: false
     t.index ["assigned_course_id"], name: "index_leaderboards_on_assigned_course_id"
     t.index ["user_skill_map_id"], name: "index_leaderboards_on_user_skill_map_id"
+  end
+
+  create_table "lessons", force: :cascade do |t|
+    t.string "title"
+    t.bigint "course_id", null: false
+    t.integer "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "paid", default: false
+    t.index ["course_id"], name: "index_lessons_on_course_id"
   end
 
   create_table "levels", force: :cascade do |t|
@@ -141,12 +164,49 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_26_173213) do
     t.index ["slug"], name: "index_role_skill_maps_on_slug", unique: true
   end
 
+  create_table "super_admins", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_super_admins_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_super_admins_on_reset_password_token", unique: true
+  end
+
   create_table "trophies", force: :cascade do |t|
     t.string "name"
     t.bigint "user_skill_map_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_skill_map_id"], name: "index_trophies_on_user_skill_map_id"
+  end
+
+  create_table "user_courses", force: :cascade do |t|
+    t.bigint "course_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "date_completed"
+    t.integer "row_order"
+    t.integer "progress_status", default: 0
+    t.bigint "progress_id", null: false
+    t.index ["course_id"], name: "index_user_courses_on_course_id"
+    t.index ["progress_id"], name: "index_user_courses_on_progress_id"
+    t.index ["user_id"], name: "index_user_courses_on_user_id"
+  end
+
+  create_table "user_lessons", force: :cascade do |t|
+    t.bigint "lesson_id", null: false
+    t.bigint "user_id", null: false
+    t.boolean "completed"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "watch_duration"
+    t.index ["lesson_id"], name: "index_user_lessons_on_lesson_id"
+    t.index ["user_id"], name: "index_user_lessons_on_user_id"
   end
 
   create_table "user_skill_maps", force: :cascade do |t|
@@ -188,9 +248,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_26_173213) do
   add_foreign_key "assigned_courses", "users"
   add_foreign_key "badges", "users"
   add_foreign_key "certificates", "users"
-  add_foreign_key "courses", "users"
   add_foreign_key "leaderboards", "assigned_courses"
   add_foreign_key "leaderboards", "user_skill_maps"
+  add_foreign_key "lessons", "courses"
   add_foreign_key "trophies", "user_skill_maps"
+  add_foreign_key "user_courses", "courses"
+  add_foreign_key "user_courses", "progresses"
+  add_foreign_key "user_courses", "users"
+  add_foreign_key "user_lessons", "lessons"
+  add_foreign_key "user_lessons", "users"
   add_foreign_key "user_skill_maps", "users"
 end

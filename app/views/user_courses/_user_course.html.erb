@@ -1,0 +1,36 @@
+<div id="<%= dom_id user_course %>" class="grid w-full bg-dark-secondary shadow-md rounded mt-3 <%= user_course.progress_status == "completed" ? "cursor-not-allowed" : "cursor-move" %> transform hover:-rotate-2 active:-rotate-3d pl-2 <%= completed_card_color(user_course)%>">
+  <div class="w-full items-center px-1 py-2">
+    <a class="font-medium tracking-wide font-sister">
+      <%= link_to user_course.course.title, course_path(user_course.course) %>
+    </a>
+  </div>
+  <div class="flex w-full flex-wrap">
+    <div class="flex w-full flex-wrap justify-start p-1 items-center text-xs bg-dark-secondary shadow-inner">
+      <div class="flex mr-0.5">
+        <div class="inline-flex justify-center items-center my-0.5 even:mx-1 w-auto board-badge-status">
+          <div class="inline-flex items-center w-full bbg-blue-300 text-black">
+            <div class="inline-flex items-center board-tag-badge font-medium py-1 px-3 bg-gold text-black rounded">
+              <p class="whitespace-nowrap text-center w-full text-xs tag-text uppercase">
+                <%= user_course.course.category %>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="grid w-full py-2 px-2 grid-flow-col-dense grid-cols-2">
+    <div class="w-full whitespace-nowrap hidden md:flex flex-wrap text-dark-gray pt-1 col-start-1">
+      <span class="text-sm w-full flex items-center <%= user_course.date_completed.nil? ? 'text-graphite' : 'text-gray-300' %>">
+        <span class="flex items-center capitalize">
+          <%= completed_svg(user_course) %>
+          <%= user_course.date_completed.nil? ? "" : time_tag(user_course.date_completed, "data-local": "time-ago") %>
+        </span>
+      </span>
+    </div>
+    <div class="flex ml-auto self-start justify-end col-start-2 text-sm">
+      <%= icon "fa-solid", "star", class: "w-4 h-4 text-gray-300"%>
+      <span class="ml-1 leading-none"><%= user_course.course.impact %></span>
+    </div>
+  </div>
+</div>

@@ -1,25 +1,52 @@
 Rails.application.routes.draw do
+  # Routes for super_admin users
+  devise_for :super_admins, skip: :registrations
+
+  authenticated :super_admin_user do
+    root to: "super_admin#index", as: :super_admin_root
+  end
+
+  get "super-admin" => "super_admin#index"
+  namespace :super_admin, path: 'super-admin' do
+    resources :users
+    resources :role_skill_maps, path: 'role-skill-mapping'
+    resources :courses do
+      resources :lessons
+    end
+  end
+
+  patch 'super-admin/courses/:course_id/lessons/:id/move' => 'super_admin/lessons#move'
   # Routes for regular users
 
   resources :leaderboards, only: %i[index show]
-  resources :certificates, except: %i[show]
-  resources :progresses, path: 'progress', only: %i[index] do
+  resources :certificates, except: :show
+  resources :progresses, path: 'progress', only: :index do
     member do
       put :sort
     end
   end
 
-  resources :assigned_courses do
+  # resources :assigned_courses do
+  #   member do
+  #     put :sort
+  #   end
+  # end
+
+  resources :user_courses do
     member do
       put :sort
     end
   end
 
-  resources :courses, only: %i[index show]
+  resources :courses, only: %w[index show] do
+    resources :lessons do
+      post "update_watch_duration", on: :member
+    end
+  end
 
-  authenticated :user, ->(user) { user.admin? } do
+  authenticated :user, -> (user) { user.admin? } do
     namespace :admin do
-      resources :courses, except: %i[show]
+      resources :courses, except: :show
       resources :role_skill_maps, path: 'role-skill-mapping'
     end
   end
@@ -29,15 +56,17 @@ Rails.application.routes.draw do
   #   resources :unpublish, only: :update
   # end
 
-  root 'pages#home'
+  resource :checkouts, only: :create
+  post '/webhook' => 'webhooks#stripe'
 
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     sessions: 'users/sessions',
-    omniauth_callbacks: 'users/omniauth_callbacks'
+    # omniauth_callbacks: 'users/omniauth_callbacks'
   }
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get 'up' => 'rails/health#show', as: :rails_health_check
+  root 'pages#home'
 end

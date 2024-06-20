@@ -1,31 +1,72 @@
-<div class="flex flex-col lg:flex-row lg:items-center justify-between border-2 h-full bg-gold rounded-2xl shadow-large gap-12 border-graphite p-8">
-    <div class="mt-8">
-        <span class="text-graphite uppercase">
-            <span class="inline-flex items-center board-tag-badge font-medium py-1 px-3 bg-paleFern text-offWhite rounded"><%= course.category %></span>
-            <span>&#8226;</span>
-            <%= pluralize course.impact, "Impact" %>
-        </span>
-        <%= link_to course_path(course) do %>
-        <h1 class="mt-4 text-2xl font-medium text-graphite font-sister tracking-widest text-wrap">
-            <%= course.title %>
-        </h1>
-        <% end %>
-        <p class="mt-2 text-graphite text-wrap">
-            <%= course.description.to_plain_text.truncate(50) %>
-        </p>
-        <div class="flex items-center justify-between mt-4">
-            <div>
-                <a href="#" class="text-lg font-medium text-gray-700 hover:underline hover:text-gray-500 font-sister">
-                    by <%= course.author %>
-                </a>
-                <p class="text-sm text-lightGraphite text-wrap"><%#= course.url %></p>
-            </div>
-        </div>
-        <div class="mt-12">
-            <% if AssignedCourse.exists?(user: current_user, course_id: course.id) %>
-            <p class="text-sm font-medium">You have already enrolled in this course.</p>
-            <% else %> <%= link_to "Enroll", course_path(course), class: "items-center inline-flex w-full focus:outline-disc bg-paleFern duration-500 focus:ring-2 focus:ring-paleFern focus:ring-offset-2 font-medium lg:w-auto h-12
-            hover:bg-graphite justify-center px-6 py-1 rounded text-offWhite border-2text-center text-sm" %> <% end %>
-        </div>
+<div id="<%= dom_id course %>">
+  <div class="col-span-1 bg-white group">
+    <div class="h-48 lg:h-64 w-full relative overflow-hidden">
+      <p class="absolute top-4 left-4 z-10 bg-white rounded-md px-2 py-1 text-sm font-normal text-slate-800 capitalize"><%= course.category %></p>
+      
+      <%- if course.image.present? %>
+        <%= image_tag course.image, class: "h-full w-full group-hover:scale-110 transition-all duration-500" %>
+      <% else %>
+        <%= image_tag "https://via.placeholder.com/380x120", class: "h-full w-full group-hover:scale-110 transition-all duration-500" %>
+      <% end %>
+
     </div>
+    <div class="px-4 lg:px-8 py-4 lg:py-6 space-y-2">
+      <%= link_to course.title, course, class: "flex items-center justify text-lg font-semibold text-gray-800 hover:text-green-700 text-left" %>
+      <div class="flex items-center justify-between flex-wrap">
+        <p class="font-medium flex items-center gap-2">
+          <span class="text-gray-600 text-xs">
+            <%= pluralize course.impact, "impact" %>
+            <%= icon "fa-regular", "star" %>
+          </span>
+        </p>
+        <p class="font-medium flex items-center gap-2 text-gray-500 text-xs">
+          <i class="far fa-clock"></i>
+          <span class="text-xs lg:text-base text-slate-700">
+            <%= course_watch_duration(course) %>
+          </span>
+        </p>
+        <div class="flex items-start gap-1">
+          <!-- star rating -->
+        </div>
+      </div>
+      <div class="flex items-center gap-4 py-4 lg:py-8 border-b border-gray-200">
+        <%- if current_user.avatar_url.nil? %>
+          <%= image_tag "profile/ninja.jpeg", class: "h-14 w-14 rounded-full overflow-hidden", alt: "instructor-photo" %>
+        <% else %>
+          <%= image_tag current_user.avatar_url, class: "h-14 w-14 rounded-full overflow-hidden", alt: "instructor-photo" %>
+        <% end %>
+        <div class="flex-1">
+          <h5 class="text-base font-semibold text-slate-700">
+          <%= course&.author %></h5>
+          <p class="text-xs font-medium text-paleFern inline-block px-2.5 py-0.5">Instructor</p>
+        </div>
+      </div>
+      <div class="<%= user_already_enrolled?(course, current_user) ? "grid grid-cols-2" : "flex"%> justify-between items-center py-4">
+        <p class="text-sm font-medium text-slate-700"><span class="text-primary"><%= display_course_price(course, current_user) %></span></p>
+
+        <% if user_already_enrolled?(course, current_user) %>
+          <% if user_started_courses&.include? course.id %>
+            <% user_completed_percentage = user_course_progresses.find{ |cp| cp[:course_id] == course.id}[:completed_percentage] %>
+            <div class="h-4 relative rounded-full overflow-hidden">
+              <div class="w-full h-full bg-gray-200 absolute"></div>
+              <% if course_percentage(user_course_progresses, course) == 100 %>
+                <div class="h-full bg-paleFern relative text-white text-center text-xs" style="width:100%">Completed</div>
+              <% else %>
+                <div class="h-full bg-paleFern relative text-white text-center text-xs" style="width:<%= course_percentage(user_course_progresses, course) %>%"><%= course_percentage(user_course_progresses, course)%>%</div>
+              <% end %>
+            </div>
+          <% end %>
+        <% else %>
+          <% unless course.paid? %>
+            <%= form_tag user_courses_path(course_id: course.id), method: :post, data: { turbo_frame: "course-form" }, 'turbo-confirm': "Are you sure you want to enroll in this course?" do %>
+              <%= button_tag type: "submit", class: "text-sm font-medium text-slate-600 hover:text-green-700 transition-all duration-300" do %>
+                <%= icon "fa-solid", "tag" %>
+                <span>Get Enrolled</span>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>

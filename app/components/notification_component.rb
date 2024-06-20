@@ -21,27 +21,27 @@ class NotificationComponent < ViewComponent::Base
 
   def icon_class
     case @type
-    when 'success'
-      'fas fa-check'
-    when 'error'
-      'fas fa-exclamation'
-    when 'alert'
-      'fas fa-exclamation'
+    when "success"
+      "fas fa-check"
+    when "error"
+      "fas fa-exclamation"
+    when "alert"
+      "fas fa-exclamation"
     else
-      'fa fa-info'
+      "fa fa-info"
     end
   end
 
   def icon_color_class
     case @type
-    when 'success'
-      'text-green-400'
-    when 'error'
-      'text-red-400'
-    when 'alert'
-      'text-red-400'
+    when "success"
+      "text-green-400"
+    when "error"
+      "text-red-400"
+    when "alert"
+      "text-red-400"
     else
-      'text-gray-400'
+      "text-gray-400"
     end
   end
 end

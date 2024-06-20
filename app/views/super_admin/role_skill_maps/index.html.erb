@@ -1,0 +1,38 @@
+<%= content_for(:title, "Role Skill Map") %>
+
+<div class="px-4 sm:px-6 lg:px-8">
+  <div class="sm:flex sm:items-center">
+    <div class="sm:flex-auto">
+      <h1 class="text-base font-semibold leading-6 text-gray-900">Role skills mapping</h1>
+      <p class="mt-2 text-sm text-gray-700">List of available roles and their respective skills requirements</p>
+    </div>
+    <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
+      <%= link_to "Add new mapping", new_super_admin_role_skill_map_path, class: "cursor-pointer rounded-md bg-paleFern px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-graphite focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+      focus-visible:outline-indigo-600" %>
+    </div>
+  </div>
+
+  <!-- Breadcrumbs -->
+  <div class="flex gap-4 mt-2">
+    <ul class="flex px-5 py-3 text-gray-700 border border-gray-200 rounded-lg bg-gray-50">
+      <li class="leading-none text-dark">
+        <%= link_to super_admin_path, class: "inline-flex items-center text-orange-700" do %>
+          <span class="text-sm leading-none">Dashboard</span>
+        <% end %>
+      </li>
+      <li class="leading-none text-dark">
+        <span class="text-sm leading-none">/ Role Mappings</span>
+      </li>
+    </ul>
+  </div>
+
+<div class="flex flex-wrap justify-center mt-10">
+
+  <% @super_admin_role_skill_maps.each do |super_admin_role_skill_map| %>
+    <%= render "role_skill_map", super_admin_role_skill_map: super_admin_role_skill_map %>
+  <% end %>
+
+</div>
+
+</div>
+</div>

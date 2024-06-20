@@ -1,0 +1,9 @@
+<div class="flex flex-col justify-start items-center w-full">
+  <%= render "form", super_admin_lesson: @super_admin_lesson %>
+
+  <br>
+
+  <div>
+    <%= link_to "Back to lessons", super_admin_course_lessons_path(@super_admin_course) %>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+<tr id="<%= dom_id user %>">
+  <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500 w-0">
+    <div class="h-11 w-11 flex-shrink-0">
+      <%= link_to user.id, super_admin_user_path(user) %></td>
+    </div>
+  </td>
+  <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
+    <%= link_to super_admin_user_path(user) do %>
+    <div class="font-medium text-gray-900">
+      <% if user.name.nil? %>
+        <%= user.email %>
+      <% else %>
+        <%= user.name %> <span class="text-xs font-normal lowercase">(<%= user.email %>)</span>
+      <% end %>
+    </div>
+    <% end %>
+  </td>
+  <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500 capitalize"><%= user.role %></td>
+  <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500 capitalize"><%= time_tag(user.created_at, "data-local": "time-ago") %></td>
+  <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500 capitalize"><%= time_tag(user.updated_at, "data-local": "time-ago") %></td>
+  <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500"><%#= course.published? ? 'Published' : 'Unpublished' %></td>
+  <td class="text-right flex flex-right gap-x-2"">
+    <%= link_to icon('fa-solid', 'edit'), [:super_admin, user], method: :delete, data: {'turbo-confirm': "Are you sure? All their data will be deleted."}, class: "text-gray-600" %>
+    <%= button_to icon('fa-solid', 'trash-can'), [:super_admin, user], method: :delete, data: {'turbo-confirm': "Are you sure? All their data will be deleted."}, class: "text-red-700" %>
+  </td>
+</tr>

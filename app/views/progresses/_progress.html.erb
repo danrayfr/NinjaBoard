@@ -3,7 +3,7 @@
     <%= progress.name %>
   </h6>
   <span class="py-2 px-4 h-full bg-dark-secondary text-graphite ml-auto text-black font-medium text-center flex items-center text-lg">
-    (<%= pluralize(progress.assigned_courses.where(user: current_user).count, 'course') %>)
+    (<%= pluralize(progress.user_courses.where(user: current_user).count, 'course') %>)
   </span>
 </div>
 
@@ -13,16 +13,16 @@
     data-sortable-group-value="progress"
     data-sortable-progress-id="<%= progress.id %>"
   >
-    <% progress.assigned_courses.where(user: current_user).rank(:row_order).each do |assigned_course| %>
+    <% progress.user_courses.where(user: current_user).rank(:row_order).each do |user_course| %>
       <div
-        data-sortable-id="<%= assigned_course.id %>"
-        data-sortable-update-url="<%= sort_assigned_course_path(assigned_course) %>"
-        data-sortable-progress-status="<%= assigned_course.progress_status %>"
-        <% if assigned_course.progress_status == 'completed' %>
+        data-sortable-id="<%= user_course.id %>"
+        data-sortable-update-url="<%= sort_user_course_path(user_course) %>"
+        data-sortable-progress-status="<%= user_course.progress_status %>"
+        <% if user_course.progress_status == "completed"%>
           class="pointer-events-none"
         <% end %>
         >
-          <%= render assigned_course %>
+          <%= render user_course %>
       </div>  
     <% end %>
   </div>

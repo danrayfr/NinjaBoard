@@ -31,10 +31,10 @@ class UserSkillMap < ApplicationRecord
   def create_trophies_for_skills
     return unless trophies.empty?
 
-    attributes.except('id', 'user_id', 'created_at', 'updated_at').each_key do |skill|
+    attributes.except("id", "user_id", "created_at", "updated_at").each_key do |skill|
       Trophy.create(name: skill, user_skill_map: self)
 
-      break if skill == 'work_ethics' # Stop creating trophies after 'work_ethics'
+      break if skill == "work_ethics" # Stop creating trophies after 'work_ethics'
     end
   end
 end

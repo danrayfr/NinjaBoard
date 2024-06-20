@@ -11,8 +11,10 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sister: ['Love Ya Like A Sister','ui-sans-serif','system-ui,sans-serif',"Apple Color Emoji","Segoe UI Emoji",'Segoe UI Symbol',"Noto Color Emoji"],
-        outfit: ['Outfit,ui-sans-serif,system-ui,sans-serif,"Apple Color Emoji","Segoe UI Emoji",Segoe UI Symbol,"Noto Color Emoji"']
+        sans_serif: ['Merriweather'],
+        poppins: ['Poppins'],
+        mono: ['IBM Plex Mono'],
+        jetbrains: ['JetBrains Mono']
       },
       colors: {
         transparent: 'transparent',
@@ -30,7 +32,7 @@ module.exports = {
         'paleCoral': '#F9B4A4',
         'paleGold': '#FAD1A3',
         'offWhite': '#FFF8F5'
-      }
+      },
     }
   },
   plugins: [

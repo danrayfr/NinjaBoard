@@ -26,17 +26,17 @@ class Badge < ApplicationRecord
   after_create :create_level
 
   BADGES = {
-    ninja: 'badges/ninja.png',
-    master: 'badges/master.png',
-    sensei: 'badges/sensei.png',
-    legend: 'badges/legend.png'
+    ninja: "badges/ninja.png",
+    master: "badges/master.png",
+    sensei: "badges/sensei.png",
+    legend: "badges/legend.png"
   }.freeze
 
   AVATARS = {
-    ninja: 'avatars/ninja.png',
-    master: 'avatars/master.png',
-    sensei: 'avatars/sensei.png',
-    legend: 'avatars/legend.png'
+    ninja: "avatars/ninja.png",
+    master: "avatars/master.png",
+    sensei: "avatars/sensei.png",
+    legend: "avatars/legend.png"
   }.freeze
 
   def create_level
@@ -71,19 +71,19 @@ class Badge < ApplicationRecord
   end
 
   def ninja?
-    rank == 'ninja'
+    rank == "ninja"
   end
 
   def master?
-    rank == 'master'
+    rank == "master"
   end
 
   def sensei?
-    rank == 'sensei'
+    rank == "sensei"
   end
 
   def legend?
-    rank == 'legend'
+    rank == "legend"
   end
 
   private

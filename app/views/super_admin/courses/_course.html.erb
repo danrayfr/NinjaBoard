@@ -1,0 +1,20 @@
+<tr id="<%= dom_id course %>">
+  <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500 w-0">
+    <div class="h-11 w-11 flex-shrink-0">
+      <!-- image tag here -->
+    </div>
+  </td>
+  <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
+    <div class="font-medium text-gray-900"><%= course.title %></div>
+    <div class="mt-1 text-gray-500">by  <span class="font-semibold"><%= course.author%></span></div>
+    <div class="mt-1 text-gray-500"><%= link_to "#{root_url}/super-admin/courses/#{course.slug}", super_admin_course_path(course) %></div>
+  </td>
+  <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500 capitalize"><%= course.category %></td>
+  <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500 capitalize"><%= course&.lessons.count %></td>
+  <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500 capitalize"><%= course_watch_duration(course) %></td>
+  <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500"><%= course.impact %></td>
+  <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500"><%#= course.published? ? 'Published' : 'Unpublished' %></td>
+  <td class="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
+    <%= link_to 'Edit', edit_super_admin_course_path(course), class: "text-fern hover:text-lightFern" %>
+  </td>
+</tr>

@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org).
 
 ## [Unreleased]
 
+## [0.16.0] : 2024-20-06
+
+### Added
+
+- Added lesson, course, user_lesson, user_course
+- Added superadmin, [model controllers views]
+- Update the design for course & lessons
+
 ## [0.15.3] : 2024-07-03
 
 ### Update
@@ -137,6 +145,7 @@ and this project adheres to [Semantic Versioning](https://semver.org).
 
 ## [Unreleased]
 [unreleased]: https://github.com/danrayfr/unified/branch/development#diff
+[0.16.0]: https://github.com/ninjadanray/Ninja-Board/pull/20
 [0.15.3]: https://github.com/ninjadanray/Ninja-Board/pull/19
 [0.15.2]: https://github.com/ninjadanray/Ninja-Board/pull/18
 [0.15.1]: https://github.com/ninjadanray/Ninja-Board/pull/17

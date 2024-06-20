@@ -1,79 +1,55 @@
 <%= content_for(:title, "Courses") %>
 
-<section class="bg-cover bg-center">
-  <div class="w-full mx-auto px-8 p-24 text-left md:text-center bg-stone">
-    <p class="text-4xl lg:text-7xl tracking-tighter text-graphite font-medium">
-      <span>Explore our diverse</span>
-      <br>
-      <span class="font-sister uppercase hover:text-fern hover:font-medium tracking-normal hover:tracking-widest">course offerings</span>
-      <span class="lg:block"></span>
-    </p>
-    <p class="md:mt-4 tracking-wide text-graphite font-normal">
-      <span class="font-sister tracking-wide text-xl text-graphite">BUILD</span>
-      your skill on a learning journey tailored to your interest and projected role
-    </p>
+<section class="py-12 lg:py-28 bg-gray-100">
+  <div class="container mx-auto px-4 xl:px-0">
+    <div class="text-center space-y-4">
+      <h1 class="max-w-lg mx-auto text-2xl lg:text-5xl font-black text-slate-800">Course catalogue</h1>
+      <p class="max-w-xl mx-auto text-sm font-normal text-slate-500">These are the published courses available on the platform.</p>
+
+      <!-- Breadcrumbs -->
+      <div class="flex items-center justify-center gap-4">
+        <ul class="flex px-5 py-3 text-gray-700 border border-gray-200 rounded-lg bg-gray-50">
+          <li class="leading-none text-dark">
+            <%= link_to root_path, class: "inline-flex items-center text-orange-700" do %>
+              <svg class="mr-2" width="15" height="15" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M13.1769 15.0588H10.3533V9.41178H5.64744V15.0588H2.82391V6.58825H1.88274V16H14.118V6.58825H13.1769V15.0588ZM6.58862 15.0588V10.353H9.41215V15.0588H6.58862ZM15.8084 6.09225L15.2512 6.85178L8.00038 1.52472L0.749559 6.8499L0.192383 6.09131L8.00038 0.357666L15.8084 6.09225Z"
+                  fill="black"
+                ></path>
+              </svg>
+              <span class="text-sm leading-none">Home</span>
+            <% end %>
+          </li>
+          <li class="leading-none text-dark">
+            <span class="text-sm leading-none">/ Courses</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="flex flex-col lg:flex-row justify-between items-center gap-4 pt-20">
+      <div class="flex flex-col lg:flex-row items-center gap-4 lg:gap-10 w-full">
+        <span class="px-4 py-2 text-xs text-orange-700 hover:text-white border border-orange-700 hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg">
+          <%= pluralize @courses.count, "course" %>
+        </span>
+        <div class="relative w-full lg:w-auto">
+          <i class="fas fa-search absolute top-4 right-4 text-primary text-lg"></i>
+          <input type="email" class="h-12 text-slate-500 font-medium text-sm rounded-lg w-full lg:w-72 bg-white pl-3 pr-10 placeholder-gray-400 focus:outline-none" placeholder="Search your course">
+        </div>
+        <!--p class="text-slate-500 font-normal text-base">Showing 1 – 9 of 20</p-->
+      </div>
+
+      <div class="flex gap-4">
+        <a href="#" class="bg-white hover:bg-primary px-4 py-2 rounded-md text-center text-primary hover:text-white text-xl transition-all duration-500"><i class="fas fa-list-ul"></i></a>
+        <a href="#" class="bg-white hover:bg-primary px-4 py-2 rounded-md text-center text-primary hover:text-white text-xl transition-all duration-500"><i class="fas fa-grip-horizontal"></i></a>
+      </div>
+    </div>
+
+    <%= render "courses" %>
+
+    <div class="text-center mt-10">
+      <!-- pagination -->
+    </div>
+    
   </div>
 </section>
-
-<section class="bg-white" data-controller="tabs dropdown" data-tabs-default-tab-value="all">
-    <div class="container px-6 py-10 mx-auto">
-        <div class="flex items-center justify-between">
-            <div class="space-y-6">
-                <h1 class="text-2xl font-semibold text-gray-800 lg:text-3xl font-sister uppercase tracking-widest">All Courses(<%= @courses.count %>)</h1>
-
-                <button
-                    class="text-white bg-graphite hover:bg-paleFern focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center"
-                    type="button"
-                    data-action="dropdown#toggle click@window->dropdown#hide"
-                >
-                    Filter by category
-                    <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
-                    </svg>
-                </button>
-
-                <!-- Dropdown menu -->
-                <div id="dropdownHover" class="absolute z-10 w-auto mt-2 origin-top-right rounded-lg bg-white ring-2 ring-black focus:outline-none" data-dropdown-target="menu">
-                    <ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdownDividerButton">
-                        <% @courses_by_category.each do |category, courses| %>
-                        <li>
-                            <button id="<%= category %>" data-tabs-target="btn" data-action="click->tabs#select dropdown#toggle" class="block px-4 py-2 hover:bg-gray-100 capitalize hover:font-medium">
-                                <%= category %>
-                            </button>
-                        </li>
-                        <% end %>
-                    </ul>
-                    <div class="py-2">
-                        <button id="all" data-tabs-target="btn" data-action="click->tabs#select dropdown#toggle" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">All Courses</button>
-                    </div>
-                </div>
-            </div>
-            <button class="focus:outline-none">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600 transition-colors duration-300 transform hover:text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
-            </button>
-        </div>
-
-        <hr class="my-8 border-gray-200" />
-
-        <div data-tabs-target="tab" id="all">
-            <div class="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
-                <% @courses.each do |course| %>
-                    <%= render "course", course: course %>
-                <% end %>
-            </div>
-        </div>
-
-        <% @courses_by_category.each do |category, courses| %>
-            <div data-tabs-target="tab" id="<%= category %>">
-                <div class="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
-                    <% courses.each do |course| %> 
-                        <%= render "course", course: course %>
-                    <% end %>
-                </div>
-            </div>
-        <% end %>
-    </div>
-</section>
-

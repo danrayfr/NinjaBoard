@@ -4,7 +4,7 @@ class ProgressesController < ApplicationController
 
   # GET /progresses or /progresses.json
   def index
-    @progresses = Progress.rank(:row_order)
+    @progresses = Progress.rank :row_order
   end
 
   def sort
@@ -14,12 +14,11 @@ class ProgressesController < ApplicationController
   end
 
   def list
-    @assigned_courses = @progress.assigned_courses.rank(:row_order)
+    @user_courses = @progress.user_courses.rank :row_order
   end
 
   # GET /progresses/1 or /progresses/1.json
-  def show
-  end
+  def show; end
 
   # GET /progresses/new
   def new
@@ -27,8 +26,7 @@ class ProgressesController < ApplicationController
   end
 
   # GET /progresses/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /progresses or /progresses.json
   def create
@@ -69,13 +67,14 @@ class ProgressesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_progress
-      @progress = Progress.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def progress_params
-      params.require(:progress).permit(:name)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_progress
+    @progress = Progress.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def progress_params
+    params.require(:progress).permit(:name)
+  end
 end

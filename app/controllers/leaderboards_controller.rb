@@ -7,7 +7,7 @@ class LeaderboardsController < ApplicationController
     @skill_total_rankings = Leaderboard.rank_users_by_total_skill_score
     @total_impact_rankings = Leaderboard.rank_users_by_total_impact
     @skill_rankings_by_category = calculate_skill_rankings_by_category
-    @category = 'total_skill'
+    @category = "total_skill"
   end
 
   def show
