@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org).
 
 ## [Unreleased]
 
+## [0.17.1] : 2024-25-06
+
+### Update
+
+- Update the forgot your password links to login page.
+
 ## [0.17.0] : 2024-25-06
 
 ### Added
@@ -153,6 +159,7 @@ and this project adheres to [Semantic Versioning](https://semver.org).
 
 ## [Unreleased]
 [unreleased]: https://github.com/danrayfr/unified/branch/development#diff
+[0.17.1]: https://github.com/ninjadanray/Ninja-Board/pull/22
 [0.17.0]: https://github.com/ninjadanray/Ninja-Board/pull/21
 [0.16.0]: https://github.com/ninjadanray/Ninja-Board/pull/20
 [0.15.3]: https://github.com/ninjadanray/Ninja-Board/pull/19
