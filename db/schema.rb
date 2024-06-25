@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_25_013728) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_25_025553) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -140,6 +140,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_25_013728) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["levelable_type", "levelable_id"], name: "index_levels_on_levelable"
+  end
+
+  create_table "old_passwords", force: :cascade do |t|
+    t.string "encrypted_password", null: false
+    t.string "password_archivable_type", null: false
+    t.integer "password_archivable_id", null: false
+    t.string "password_salt"
+    t.datetime "created_at"
+    t.index ["password_archivable_type", "password_archivable_id"], name: "index_password_archivable"
   end
 
   create_table "progresses", force: :cascade do |t|

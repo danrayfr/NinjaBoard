@@ -27,6 +27,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :validatable, :lockable,
+         :password_archivable,
          :omniauthable, omniauth_providers: [:google_oauth2]
 
   before_save :sanitize_email
@@ -39,11 +40,11 @@ class User < ApplicationRecord
   has_many :user_courses, dependent: :destroy
 
   validates :email, presence: true, uniqueness: true
-  validates :password, presence: true, length: { minimum: 8, maximum: 128 },
-                       format: { with: /\A(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]) [A-Za-z\d@$!%*?&]+\z/,
-                                 message: 'Must contain at least one uppercase letter,
-                       one lowercase letter, one special character, and one number' },
-                       if: :password_required? && :not_omniauth_login?
+  # validates :password, presence: true, length: { minimum: 8, maximum: 128 },
+  #                      format: { with: /\A(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]) [A-Za-z\d@$!%*?&]+\z/,
+  #                                message: 'Must contain at least one uppercase letter,
+  #                      one lowercase letter, one special character, and one number' },
+  #                      if: :password_required? && :not_omniauth_login?
 
   enum role: %i[ninja admin moderator instructor]
 
