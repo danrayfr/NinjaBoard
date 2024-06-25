@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org).
 
 ## [Unreleased]
 
+## [0.17.0] : 2024-25-06
+
+### Added
+
+- Added security pack including the ff:
+- confirmable, lockable, password archivable,
+- password complexity, and managing sessions.
+
 ## [0.16.0] : 2024-20-06
 
 ### Added
@@ -145,6 +153,7 @@ and this project adheres to [Semantic Versioning](https://semver.org).
 
 ## [Unreleased]
 [unreleased]: https://github.com/danrayfr/unified/branch/development#diff
+[0.17.0]: https://github.com/ninjadanray/Ninja-Board/pull/21
 [0.16.0]: https://github.com/ninjadanray/Ninja-Board/pull/20
 [0.15.3]: https://github.com/ninjadanray/Ninja-Board/pull/19
 [0.15.2]: https://github.com/ninjadanray/Ninja-Board/pull/18
