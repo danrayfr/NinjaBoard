@@ -105,20 +105,16 @@
                 <th class="py-2 px-4">Course title</th>
                 <th class="py-2 px-4">Course Impact</th>
                 <th class="py-2 px-4">Course category</th>
-                <th class="py-2 px-4">Result</th>
-                <th class="py-2 px-4">Assessment Score</th>
                 <th class="py-2 px-4">Date Completed</th>
               </tr>
             </thead>
             <tbody>
               <!-- Your table rows go here -->
-              <% current_user.assigned_courses.where(progress_status: 'completed').each do |assigned_course|%>
+              <% current_user.user_courses.where(progress_status: 'completed').each do |assigned_course|%>
               <tr>
                 <td class="py-2 px-4"><%= assigned_course.course.title %></td>
                 <td class="py-2 px-4"><%= assigned_course.course.impact %></td>
                 <td class="py-2 px-4 text-sm capitalize"><%= assigned_course.course.category %></td>
-                <td class="py-2 px-4"><%= !assigned_course.pass? ? "Pass" : "Fail" %></td>
-                <td class="py-2 px-4"><%= assigned_course.assessment_score %></td>
                 <td class="py-2 px-4">
                   <% unless assigned_course.nil? %>
                     <%= time_tag(assigned_course.date_completed, "data-local": "time-ago") %>

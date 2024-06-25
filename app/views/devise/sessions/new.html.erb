@@ -26,9 +26,16 @@
                   <% end %>
                 </div>
                 <div class="text-sm">
-                  <a href="/forgot" class="text-black lg:text-2xl hover:text-black">
+                  <div class="flex">
+                    <a href="/forgot" class="text-black lg:text-2xl hover:text-black">
                     Forgot your password?
                   </a>
+                  </div>
+                  <div>
+                    <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
+                      <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name), class: "text-black lg:text-2xl hover:text-black"%><br />
+                    <% end %>
+                  </div>
                 </div>
               </div>
               <div class="flex-col flex gap-3 mt-10">
