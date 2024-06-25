@@ -31,6 +31,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :logins, only: %i[index destroy], path: "active-sessions"
+
   # resources :assigned_courses do
   #   member do
   #     put :sort
@@ -67,6 +69,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     sessions: 'users/sessions',
+    confirmations: 'users/confirmations',
     # omniauth_callbacks: 'users/omniauth_callbacks'
   }
 

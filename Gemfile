@@ -6,6 +6,7 @@ ruby "3.3.0"
 
 gem "acts_as_list", "~> 1.0"
 gem "bootsnap", require: false
+gem "device_detector"
 gem "devise", "~> 4.9"
 gem "devise-security"
 gem "dotenv", groups: %i[development test]

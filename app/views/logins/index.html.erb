@@ -1,0 +1,23 @@
+<h1>
+  Logins:
+  <%= @logins.size %>
+</h1>
+
+<% @logins.order(updated_at: :desc).each do |login| %>
+  <div class="border">
+    <%= device_description(login.user_agent) %>
+
+    Last login at:
+    <%= login.updated_at %>
+
+    IP address:
+    <%= login.ip_address %>
+
+    <% if login.device_id == session[:device_id] %>
+      current session
+    <% else %>
+      <%= button_to 'Disconnect', login_path(login), method: :delete %>
+    <% end %>
+
+  </div>
+<% end %>

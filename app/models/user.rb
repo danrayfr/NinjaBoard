@@ -38,6 +38,7 @@ class User < ApplicationRecord
   has_one :user_skill_map, dependent: :destroy
   has_many :user_lessons, dependent: :destroy
   has_many :user_courses, dependent: :destroy
+  has_many :logins, dependent: :destroy
 
   validates :email, presence: true, uniqueness: true
   validates :password, presence: true, length: { minimum: 8, maximum: 128 }, password_complexity: true

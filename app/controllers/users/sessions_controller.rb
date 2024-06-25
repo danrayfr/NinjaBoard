@@ -19,6 +19,17 @@ module Users
     #   super
     # end
 
+    def create
+      super do |resource|
+        create_login if resource.persisted? && request.path.start_with?('/users/')
+      end
+    end
+
+    def destroy
+      destroy_login
+      super
+    end
+
     # protected
 
     # If you have extra params to permit, append them to the sanitizer.

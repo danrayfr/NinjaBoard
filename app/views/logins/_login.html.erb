@@ -1,0 +1,27 @@
+<div id="<%= dom_id login %>">
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Device:</strong>
+    <%= login.device_id %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Ip address:</strong>
+    <%= login.ip_address %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">User agent:</strong>
+    <%= login.user_agent %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">User:</strong>
+    <%= login.user_id %>
+  </p>
+
+  <% if action_name != "show" %>
+    <%= link_to "Show this login", login, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to "Edit this login", edit_login_path(login), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+    <hr class="mt-6">
+  <% end %>
+</div>
