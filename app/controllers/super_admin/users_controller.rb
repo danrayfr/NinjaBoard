@@ -2,7 +2,7 @@
 
 class SuperAdmin::UsersController < SuperAdminController
   before_action :set_query_params, only: :index
-  before_action :set_user, only: %w[show destroy]
+  before_action :set_user, only: %w[show destroy ban unban]
 
   def index
     @super_admin_users = User.all.order(updated_at: :desc, created_at: :desc) unless @query.present?
@@ -21,6 +21,16 @@ class SuperAdmin::UsersController < SuperAdminController
     else
       redirect_to super_admin_users_path, alert: "Failed to destroy the user."
     end
+  end
+
+  def ban
+    @super_admin_user.ban!
+    redirect_to super_admin_users_path, notice: "User has been banned."
+  end
+
+  def unban
+    @super_admin_user.unban!
+    redirect_to super_admin_users_path, notice: "User has been unbanned."
   end
 
   private

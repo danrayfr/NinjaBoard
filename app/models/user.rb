@@ -53,6 +53,18 @@ class User < ApplicationRecord
   after_create :build_user_skill_map_if_missing
   after_create :build_user_badge_if_missing
 
+  def active_for_authentication?
+    super && !banned?
+  end
+
+  def ban!
+    update(banned: true)
+  end
+
+  def unban!
+    update(banned: false)
+  end
+
   def user_completed_courses
     user_lessons&.joins(:lesson)&.where(completed: true, lesson: { course: @course })&.pluck(:lesson_id)
   end

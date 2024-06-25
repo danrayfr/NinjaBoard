@@ -8,7 +8,12 @@ Rails.application.routes.draw do
 
   get "super-admin" => "super_admin#index"
   namespace :super_admin, path: 'super-admin' do
-    resources :users
+    resources :users do
+      member do
+        patch :ban
+        patch :unban
+      end
+    end
     resources :role_skill_maps, path: 'role-skill-mapping'
     resources :courses do
       resources :lessons

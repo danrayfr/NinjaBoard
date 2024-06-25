@@ -21,6 +21,11 @@
   <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500"><%#= course.published? ? 'Published' : 'Unpublished' %></td>
   <td class="text-right flex flex-right gap-x-2"">
     <%= link_to icon('fa-solid', 'edit'), [:super_admin, user], method: :delete, data: {'turbo-confirm': "Are you sure? All their data will be deleted."}, class: "text-gray-600" %>
-    <%= button_to icon('fa-solid', 'trash-can'), [:super_admin, user], method: :delete, data: {'turbo-confirm': "Are you sure? All their data will be deleted."}, class: "text-red-700" %>
+    <%#= button_to icon('fa-solid', 'trash-can'), [:super_admin, user], method: :delete, data: {'turbo-confirm': "Are you sure? All their data will be deleted."}, class: "text-red-700" %>
+    <% if user.banned? %>
+        <%= link_to 'Unban', unban_super_admin_user_path(user), data: { turbo_method: :patch, turbo_confirm: "Are you sure? This user will be unbanned." } %>
+      <% else %>
+        <%= link_to 'Ban', ban_super_admin_user_path(user), data: { turbo_method: :patch, turbo_confirm: "Are you sure? This user will be banned." } %>
+      <% end %>
   </td>
 </tr>
