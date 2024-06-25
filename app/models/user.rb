@@ -33,20 +33,17 @@ class User < ApplicationRecord
   has_person_name
   has_many :assigned_courses, dependent: :destroy
   has_many :certificates, dependent: :destroy
-  has_one :badge
-  has_one :user_skill_map
+  has_one :badge, dependent: :destroy
+  has_one :user_skill_map, dependent: :destroy
   has_many :user_lessons, dependent: :destroy
   has_many :user_courses, dependent: :destroy
 
   validates :email, presence: true, uniqueness: true
-
-  # Use devise-security instead.
-  # Commented password validation for demo and pitch purpose
-  # validates :password, presence: true, length: { minimum: 8 },
-  #                      format: { with: /\A(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]) [A-Za-z\d@$!%*?&]+\z/,
-  #                                message: 'Must contain at least one uppercase letter,
-  #                      one lowercase letter, one special character, and one number' },
-  #                      if: :password_required? && :not_omniauth_login?
+  validates :password, presence: true, length: { minimum: 8, maximum: 128 },
+                       format: { with: /\A(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]) [A-Za-z\d@$!%*?&]+\z/,
+                                 message: 'Must contain at least one uppercase letter,
+                       one lowercase letter, one special character, and one number' },
+                       if: :password_required? && :not_omniauth_login?
 
   enum role: %i[ninja admin moderator instructor]
 
