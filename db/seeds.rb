@@ -7,22 +7,21 @@
 
 def create_users
   puts("Creating users")
-  User.create!(email: "ninjaboard-admin@gmail.com", password: "!MM3rs!v3", password_confirmation: "!MM3rs!v3",
+  User.create!(email: "ninjaboard-admin@gmail.com", password: "password", password_confirmation: "password",
                role: "admin", username: "Ninja Admin")
 
-  User.create!(email: "ninjaboard-moderator@gmail.com", password: "!MM3rs!v3",
-               password_confirmation: "!MM3rs!v3", role: "admin", username: "Ninja Moderator")
+  User.create!(email: "ninjaboard-moderator@gmail.com", password: "password",
+               password_confirmation: "password", role: "admin", username: "Ninja Moderator")
 
-  User.create!(email: "ninja@gmail.com", password: "!MM3rs!v3", password_confirmation: "!MM3rs!v3",
-               role: "ninja", username: "Ninja")
+  User.create!(email: "ninja@gmail.com", password: "password", password_confirmation: "password", role: "ninja", username: "Ninja")
 
-  master = User.create!(email: "master@gmail.com", password: "!MM3rs!v3", password_confirmation: "!MM3rs!v3",
+  master = User.create!(email: "master@gmail.com", password: "password", password_confirmation: "password",
                         role: "ninja", username: "master Ninja")
 
-  sensei = User.create!(email: "sensei@gmail.com", password: "!MM3rs!v3", password_confirmation: "!MM3rs!v3",
+  sensei = User.create!(email: "sensei@gmail.com", password: "password", password_confirmation: "password",
                         role: "ninja", username: "Sensei Ninja")
 
-  legend = User.create!(email: "legend@gmail.com", password: "!MM3rs!v3", password_confirmation: "!MM3rs!v3",
+  legend = User.create!(email: "legend@gmail.com", password: "password", password_confirmation: "password",
                         role: "ninja", username: "Legendary Ninja")
 
   puts("user created.")
@@ -164,6 +163,14 @@ def impacts
 end
 
 # update_courses
+#
+
+create_users
+incerement_user_points
+generate_progresses
+generate_role_maps
+generate_courses
+
 
 User.find_each(&:build_user_skill_map_if_missing)
 

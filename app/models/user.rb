@@ -41,7 +41,7 @@ class User < ApplicationRecord
   has_many :logins, dependent: :destroy
 
   validates :email, presence: true, uniqueness: true
-  validates :password, presence: true, length: { minimum: 8, maximum: 128 }, password_complexity: true
+  validates :password, presence: true, length: { minimum: 8, maximum: 128 }
   # validates :password, presence: true, length: { minimum: 8, maximum: 128 },
   #                      format: { with: /\A(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]) [A-Za-z\d@$!%*?&]+\z/,
   #                                message: 'Must contain at least one uppercase letter,
