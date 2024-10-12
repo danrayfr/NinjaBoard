@@ -52,7 +52,7 @@ NinjaBoard
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]]()
+[![Product Name Screen Shot][product-screenshot]](https://www.youtube.com/watch?v=ZSmCFUZnvMc)
 
 NinjaBoard is a gamified learning management system and dashboard presented to
 the Idea Program 2024, and won 1st Place. The goal of the project is to a
